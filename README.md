@@ -18,7 +18,7 @@ support and additional features.
 At the time of publishing, GRAV offers two plugins to create and run online shops inside of a GRAV website and the only native
 solution that does not require third party services is the former mentioned shoppingcart plugin that provides a good starting 
 point for developers but not for site owners and administrators as it comes without many of the most basic features expected, e.g.
-stock management, country restriction, single product, service vs. shippable product, etc. The incomplete list of features comprised in the Shoppingcart Personlizer Add-on includes
+stock management, country restriction, single product, service vs. shippable product, etc. The incomplete list of features comprised in the Shoppingcart Personalizer Add-on includes
 
 * stock configuration
 * maximum quantity of a product allowed in cart
