@@ -1,0 +1,11 @@
+{
+    "name": "saveva/grav-plugin-shoppingcart-personalizer",
+    "description": "Personlizer Plugin for Grav Shopping Cart",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Uli Hake",
+            "email": "uli.hake@gmail.com"
+        }
+    ]
+}

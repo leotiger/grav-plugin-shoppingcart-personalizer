@@ -1,0 +1,142 @@
+/* 
+    Created on : Jun 27, 2018, 3:36:30 PM
+    Author     : uli hake
+*/
+
+.cart-product-price, 
+.cart-product-total, 
+.cart-shipping-calculated td,
+.total-line td,
+.cart-taxes-calculated td {
+    text-align: right;
+}
+.cart-product-quantity,
+.cart-product-remove-button,
+.cart-proceed-to-checkout,
+.cart-needs-minimum {
+    text-align: center;
+}
+
+td.cart-calc-labels {
+    text-align: left;
+}
+
+
+.shoppingcart-products div.shoppingcart-details {
+    width: 100% !important;
+    padding-left: 0 !important;
+}
+
+.product-actions {
+    display: inline-block;
+    width: 33%;
+    height: 60px;
+    margin: 0;
+    padding: 2px;
+    font-size: 0.8em;
+    vertical-align: middle;
+    
+} 
+.product-actions .button {    
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 50px;
+    font-size: inherit;
+    overflow: hidden;
+    vertical-align: middle;
+} 
+
+.shoppingcart-thumb .shoppingcart-price {
+    top: -50px;
+    right: -50px;
+    background: #852732;    
+}
+
+.shoppingcart-price {
+    margin-top: 6px;
+}
+
+.shoppingcart-price #js__shoppingcart__quantity {
+    width: 30%;
+    height: 30px;
+}
+
+
+
+.shoppingcart-container.js__checkout__block .form-field input,
+.shoppingcart-container.js__checkout__block .form-field select,
+.shoppingcart-container.js__checkout__block .form-field textarea,
+.shoppingcart-container.js__checkout__block .buttons button,
+.modal-dialog .form-field input,
+.modal-dialog .form-field select,
+.modal-dialog .form-field textarea
+{
+    width: 100%;
+}
+
+.shoppingcart-details input[type=number],
+.shoppingcart-price input[type=number] {
+    color: #333;
+}
+
+.shoppingcart-container.js__checkout__block .form-field textarea {
+    min-height: 140px;
+}
+.shoppingcart-container.js__checkout__block .form-field input[type=checkbox],
+.shoppingcart-container.js__checkout__block .form-field input[type=radio]
+{
+    width: initial;
+}
+
+.shoppingcart-details button.js__shoppingcart__button-allow-quote {
+	margin-left: 6px;
+}
+
+a.js__shoppingcart__continue-shopping, 
+a.js__shoppingcart__continue-shopping:visited, 
+.shoppingcart-breadcrumbs a, 
+.shoppingcart-breadcrumbs a:visited, 
+button.js__shoppingcart__continue-shopping {
+	color: #fff;
+        margin-right: 6px;
+}
+
+.shoppingcart-item .shoppingcart-thumb-index,
+.shoppingcart-details .box-btn-show-details span {
+  margin: 0 auto;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.shoppingcart-breadcrumbs {
+    margin: 25px 0;
+}
+
+/* screenwidth less than 768px - mobile/smaller tablets
+--------------------------------------------------------------- */
+@media only screen and (max-width: 767px) {
+    .shoppingcart-products .shoppingcart-thumb img {
+        min-width: 200px;
+    }
+}
+
+/* screenwidth less than or equal 480px - mobile wide
+--------------------------------------------------------------- */
+@media only screen and (max-width: 480px) {
+    .shoppingcart-products .shoppingcart-thumb img {
+        min-width: 150px;
+    }
+}

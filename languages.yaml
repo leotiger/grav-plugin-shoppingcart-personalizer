@@ -1,0 +1,119 @@
+en:
+    PLUGIN_SHOPPINGCART:
+        PERSONALIZE_SOLD: Sold
+        PERSONALIZE_TERMS: Terms and conditions
+        PERSONALIZE_BILLING_VAT_NUMBER: Your VAT number
+        PERSONALIZE_SHIPPING_ADDRESS: Shipping address
+        PERSONALIZE_CHECKOUT_HEADLINE_SHIPPING_ADDRESS: "## Shipping Address"
+        PERSONALIZE_CHECKOUT_HEADLINE_BILLING_ADDRESS: "Billing Address"
+        PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Please use country selector to define cost of delivery
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Equalize image container size
+        PERSONALIZE_SHOP_PAGE: Shop
+        PERSONALIZE_USE_BREADCRUMB: Show breadcrumb
+        PERSONALIZE_SHOP_TEST_MODE: Shop in test mode
+        PERSONALIZE_ALLOW_QUOTE: Your offer
+        PERSONALIZE_ALLOW_QUOTE_SEND: Send your offer
+        PERSONALIZE_ALLOW_QUOTE_CLOSE: Close
+        PERSONALIZE_MODAL_CLOSE: Close
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Place your offer 
+        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Offer message'
+        PERSONALIZE_PLACE_OFFER_NAME: 'Your name'
+        PERSONALIZE_CAPTCHA_NOT_VALID: 'Captcha not valid!'
+        PERSONALIZE_PLACE_OFFER_THANKS: 'Thank you for placing an offer.'
+        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Send your offer'
+        PERSONALIZE_PLACE_OFFER_PRODUCT: 'Product'
+        PERSONALIZE_PLACE_OFFER_PRODUCT_URL: 'Url'
+        PERSONALIZE_BILLING_DATA: 'Billing data'
+        PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: 'Address continued'
+        PERSONALIZE_CHECKOUT_INDICATIONS: Notes and indications
+        PERSONALIZE_HEADLINE_MODAL_TERMS: Terms and conditions
+    
+de:
+    PLUGIN_SHOPPINGCART:
+        PERSONALIZE_SOLD: Sold
+        PERSONALIZE_TERMS: Allgemeine Geschäftsbedingungen
+        PERSONALIZE_BILLING_VAT_NUMBER: Ihre Steuernummer
+        PERSONALIZE_SHIPPING_ADDRESS: Versandaddresse
+        PERSONALIZE_CHECKOUT_HEADLINE_SHIPPING_ADDRESS: "## Versandaddresse"
+        PERSONALIZE_CHECKOUT_HEADLINE_BILLING_ADDRESS: "Rechnungsanschrift"
+        PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Die Länderauswahl konfiguriert die Versandkosten
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Equalize image container size
+        PERSONALIZE_SHOP_PAGE: Shop
+        PERSONALIZE_USE_BREADCRUMB: Ariadnafaden anzeigen
+        PERSONALIZE_SHOP_TEST_MODE: Online-Shop im Testmodus
+        PERSONALIZE_ALLOW_QUOTE: Ihr Angebot
+        PERSONALIZE_ALLOW_QUOTE_SEND: Senden Sie Ihr Angebot
+        PERSONALIZE_ALLOW_QUOTE_CLOSE: Schliessen
+        PERSONALIZE_MODAL_CLOSE: Schliessen
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Angebot zusenden 
+        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Angebotsnachricht'
+        PERSONALIZE_PLACE_OFFER_NAME: 'Ihr Name'
+        PERSONALIZE_CAPTCHA_NOT_VALID: 'Captcha nicht gültig!'
+        PERSONALIZE_PLACE_OFFER_THANKS: 'Danke für Ihr Angebot.'
+        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Angebot senden'
+        PERSONALIZE_PLACE_OFFER_PRODUCT: 'Produkt'
+        PERSONALIZE_PLACE_OFFER_PRODUCT_URL: 'Url'
+        PERSONALIZE_BILLING_DATA: 'Rechnungsdaten'
+        PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: 'Addresse kompletieren'
+        PERSONALIZE_CHECKOUT_INDICATIONS: Notizen
+        PERSONALIZE_HEADLINE_MODAL_TERMS: Allgemeine Geschäftsbedingungen
+
+ca:
+    PLUGIN_SHOPPINGCART:
+        PERSONALIZE_SOLD: Venut
+        PERSONALIZE_TERMS: Terminis i condicions
+        PERSONALIZE_BILLING_VAT_NUMBER: El vostre número d'IVA
+        PERSONALIZE_SHIPPING_ADDRESS: Adreça d'enviament
+        PERSONALIZE_CHECKOUT_HEADLINE_SHIPPING_ADDRESS: "## Adreça d'enviament"
+        PERSONALIZE_CHECKOUT_HEADLINE_BILLING_ADDRESS: "Adreça de facturació"
+        PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Feu servir el selector de país per definir el cost del lliurament.
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Igualar la mida del contenidor de la imatge
+        PERSONALIZE_SHOP_PAGE: Botiga
+        PERSONALIZE_USE_BREADCRUMB: Mostrar la ruta de navegació
+        PERSONALIZE_SHOP_TEST_MODE: Botiga en prova
+        PERSONALIZE_ALLOW_QUOTE: Oferir
+        PERSONALIZE_ALLOW_QUOTE_SEND: Enviar la vostra oferta
+        PERSONALIZE_ALLOW_QUOTE_CLOSE: Tancar
+        PERSONALIZE_MODAL_CLOSE: Tancar
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Emetre la vostra oferta
+        PERSONALIZE_PLACE_OFFER_MESSAGE: "Missatge de oferta"
+        PERSONALIZE_PLACE_OFFER_NAME: "El teu nom"
+        PERSONALIZE_CAPTCHA_NOT_VALID: "Captcha no és vàlid!"
+        PERSONALIZE_PLACE_OFFER_THANKS: "Gràcies la oferta."
+        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar la oferta"
+        PERSONALIZE_PLACE_OFFER_PRODUCT: "Producte"
+        PERSONALIZE_PLACE_OFFER_PRODUCT_URL: "Url"
+        PERSONALIZE_BILLING_DATA: "Dades de facturació"
+        PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: "L'adreça continuada"
+        PERSONALIZE_CHECKOUT_INDICATIONS: Notes i indicacions
+        PERSONALIZE_HEADLINE_MODAL_TERMS: Termes i condicions      
+
+es:
+    PLUGIN_SHOPPINGCART:
+        PERSONALIZE_SOLD: Vendido
+        PERSONALIZE_TERMS: Términos y condiciones
+        PERSONALIZE_BILLING_VAT_NUMBER: Su número de IVA
+        PERSONALIZE_SHIPPING_ADDRESS: Dirección de envío
+        PERSONALIZE_CHECKOUT_HEADLINE_SHIPPING_ADDRESS: "## Dirección de envio"
+        PERSONALIZE_CHECKOUT_HEADLINE_BILLING_ADDRESS: "Dirección de facturación"
+        PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Utilizar el selector del país para definir método de envio y coste
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Igualar la mida del contenidor de la imatge
+        PERSONALIZE_SHOP_PAGE: Tienda
+        PERSONALIZE_USE_BREADCRUMB: Mostrar la ruta de navegación
+        PERSONALIZE_SHOP_TEST_MODE: Tienda en modo de prueba
+        PERSONALIZE_ALLOW_QUOTE: Ofrecer
+        PERSONALIZE_ALLOW_QUOTE_SEND: Envie su oferta
+        PERSONALIZE_ALLOW_QUOTE_CLOSE: Cerrar
+        PERSONALIZE_MODAL_CLOSE: Cerrar
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Enviar su oferta
+        PERSONALIZE_PLACE_OFFER_MESSAGE: "Mensaje de oferta"
+        PERSONALIZE_PLACE_OFFER_NAME: "Su nombre"
+        PERSONALIZE_CAPTCHA_NOT_VALID: "Captcha no es válido!"
+        PERSONALIZE_PLACE_OFFER_THANKS: "Gracies por su oferta."
+        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar la oferta"
+        PERSONALIZE_PLACE_OFFER_PRODUCT: "Producto"
+        PERSONALIZE_PLACE_OFFER_PRODUCT_URL: "Url"
+        PERSONALIZE_BILLING_DATA: "Datos de facturación"
+        PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: "Calle continuada"
+        PERSONALIZE_CHECKOUT_INDICATIONS: Notas e indicaciones
+        PERSONALIZE_HEADLINE_MODAL_TERMS: Términos i condiciones      

@@ -1,0 +1,13 @@
+{% if stock > 0 %}
+    {% set formatted_price = price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+    {% if (formatted_price ends with '.00' or formatted_price ends with ',00') and config.plugins.shoppingcart.ui.remove_cents_if_zero %}
+        {% set formatted_price = price|number_format(0) %}
+    {% endif %}
+    {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+        {{ formatted_price|e }} {{ currency_symbol|e }}
+    {% else %}
+        {{ currency_symbol|e }} {{ formatted_price|e }}
+    {% endif %}
+{% else %}
+    {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SOLD'|t|e }}
+{% endif %}

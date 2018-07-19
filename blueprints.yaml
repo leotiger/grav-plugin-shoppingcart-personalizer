@@ -1,0 +1,255 @@
+name: Shopping Cart Personalizer Addon
+version: 0.1.1
+description: "Personlize Grav Shopping Cart Plugin for Studio"
+icon: shopping-cart
+author:
+  name: Uli Hake
+  email: uli.hake@gmail.com
+  url: https://www.saveva.com
+homepage: https://www.saveva.com
+keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock management
+license: MIT
+
+testing: false
+
+dependencies:
+  - { name: shoppingcart, version: '~1.1' }
+  
+  
+form:
+  validation: loose
+  
+  fields:
+
+    tabs:
+      type: tabs
+      active: 1
+
+      fields:
+        -
+          type: tab
+          title: General
+
+          fields:
+            enabled:
+              type: toggle
+              label: PLUGIN_ADMIN.PLUGIN_STATUS
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            cart.display_remove_option:
+              label: Display remove option in checkout cart
+              type: toggle
+              highlight: 1
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+                
+            ui.use_breadcrumbs:
+              type: toggle
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_USE_BREADCRUMB
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            ui.currency_decimal_comma:
+              label: Display comma as decimal separator
+              help: Display comma instead of dot as decimal separator
+              type: toggle
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            ui.short_labels_breakpoint:
+              label: Viewport width breakpoint to use short labels
+              help: Determines the maximum value of viewport width for short labels. Expressed in pixels
+              type: text
+              default: 480
+              validate:
+                type: int
+                
+            ui.image_container_square:
+              type: toggle
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_IMAGE_EQUALIZER
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+                
+            ui.testmode:
+              type: toggle
+              label: Shop in test mode
+              highlight: 1
+              default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+                
+            urls.shop_url:
+              label: Visualize Shop URL
+              type: text
+              default: '/shop'
+              help: The shop visualization page URL. Change if conflicting with another route
+              validate:
+                type: string
+                
+            urls.terms_url:
+              label: Visualize Terms URL
+              type: text
+              default: '/shop-terms-and-conditions'
+              help: The shop terms visualization page URL. Change if conflicting with another route
+              validate:
+                type: string
+
+            urls.placeoffer_url:
+              label: Offer form url
+              type: text
+              help: Url to retrieve the place offer form
+              default: '/shop-place-offer'
+              validate:
+                type: string
+
+        -
+          type: tab
+          title: Placeoffer Form
+
+          fields:
+
+            placeoffer_form.fields:
+              type: list
+              array: true
+              style: vertical
+
+              fields:
+
+                .type:
+                  label: Type
+                  help:
+                  type: select
+                  default: text
+                  options:
+                    text: text
+                    display: display
+                    select: select
+                    checkbox: checkbox
+                    email: email
+                    toggle: toggle
+                    textarea: textarea
+                    captcha: captcha
+                    spacer: spacer
+                  validate:
+                    type: string
+
+                .validate:
+                  toggleable: true
+                  type: array
+                  label: Validate
+                  help:
+                  placeholder_key: value
+                  placeholder_value: label
+
+                .name:
+                  toggleable: true
+                  label: Name
+                  help:
+                  type: text
+
+                .label:
+                  toggleable: true
+                  label: Label
+                  help:
+                  type: text
+                  
+                .title:
+                  toggleable: true
+                  label: Title
+                  help: Only for spacer
+                  type: text
+                  
+                .underline:
+                  toggleable: true
+                  label: Underline
+                  help: Only for spacer
+                  default: 1
+                  type: bool
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED                  
+                  validate:
+                      bool
+
+                .help:
+                  toggleable: true
+                  label: Help
+                  help:
+                  type: text
+
+                .ignore:
+                  label: Ignore
+                  type: toggle
+                  highlight: 0
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+
+                .classes:
+                  toggleable: true
+                  label: Classes
+                  help:
+                  type: text
+
+                .id:
+                  toggleable: true
+                  label: Id
+                  help:
+                  type: text
+
+                .outerclasses:
+                  toggleable: true
+                  label: Outer classes
+                  help:
+                  type: text
+
+                .content:
+                  toggleable: true
+                  label: Content
+                  help:
+                  type: text
+
+                .markdown:
+                  toggleable: true
+                  label: Content includes Markdown?
+                  help:
+                  type: text
+
+                .options:
+                  toggleable: true
+                  type: array
+                  label: Options
+                  help:
+                  placeholder_key: value
+                  placeholder_value: label

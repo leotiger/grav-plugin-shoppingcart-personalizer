@@ -1,0 +1,19 @@
+{# Include this Twig in the head of the base template file to correctly show the cart on external pages #}
+<script>
+    if (typeof addStudioLoadEvent === 'undefined') {
+        var addStudioLoadEvent = function addStudioLoadEvent(func) {
+          var oldonload = window.onload;
+          if (typeof window.onload != 'function') {
+            window.onload = func;
+          } else {
+            window.onload = function() {
+              if (oldonload) {
+                oldonload();
+              }
+              func();
+            }
+          }
+        };
+    }
+</script>
+

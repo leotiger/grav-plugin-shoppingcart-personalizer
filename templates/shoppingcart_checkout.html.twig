@@ -1,0 +1,44 @@
+{% extends 'partials/shoppingcart_core_base.html.twig' %}
+
+{% block content %}
+    {% include 'partials/shoppingcart_core_cart.html.twig' %}
+    <div id="shoppingcart-checkout-notifications">
+    </div>
+    <div class="shoppingcart-container js__checkout__block">
+        <h1>{{ 'PLUGIN_SHOPPINGCART.CHECKOUT_PAGE_TITLE'|t|e }}</h1>
+        {{ page.content|raw }}
+        {% set form = config.plugins.shoppingcart.checkout_form %}
+        {% include 'forms/default/form.html.twig' %}
+    </div>
+
+    {% if config.plugins.shoppingcart.urls.terms_url %}
+    * 
+    <a class="js__shoppingcart__button-get-terms" href="{{ config.plugins.shoppingcart.urls.terms_url }}">
+        {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_TERMS'|t|e }}
+    </a>                    
+    <div class="modal fade" id="checkoutterms" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_HEADLINE_MODAL_TERMS'|t|e }} <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_MODAL_CLOSE'|t|e }}</button></h5>
+          </div>
+          <div id="" class="modal-body">
+
+          </div>
+          <div id="" class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_MODAL_CLOSE'|t|e }}</button>  
+          </div>
+
+        </div>
+      </div>
+    </div>                    
+    {% endif %}
+    <script>
+        (function() {
+            addStudioLoadEvent(function() {
+                ShoppingCart.checkout_form_fields = {{ json_encode(config.plugins.shoppingcart.checkout_form.fields)|raw }};                            
+            });
+        }());
+    </script>
+
+{% endblock %}

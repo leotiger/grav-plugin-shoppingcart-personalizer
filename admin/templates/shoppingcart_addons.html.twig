@@ -1,0 +1,46 @@
+{% extends 'shoppingcart_base.html.twig' %}
+
+{% block content %}
+    <style>
+        #admin-main .admin-block p {
+            padding: 0 3rem 0.5rem;
+            margin: 0 0 1rem;
+        }
+    </style>
+
+    <h1>Addons</h1>
+    <p>List of the available ShoppingCart Plugin Addons</p>
+
+    <div class="gpm-item-info">
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2"><strong>Payment Processing Addons</strong></td>
+                </tr>
+
+                <tr>
+                    <td>PayPal</td>
+                    <td>
+                        <a href="https://github.com/flaviocopes/grav-plugin-shoppingcart-paypal" target="_blank">Link to GitHub</a></a>
+                    </td>
+                    <td>Free Addon</td>
+                </tr>
+                <tr>
+                    <td>Stripe</td>
+                    <td>
+                        <a href="https://github.com/flaviocopes/grav-plugin-shoppingcart-stripe" target="_blank">Link to GitHub</a></a>
+                    </td>
+                    <td>Free Addon</td>
+                </tr>
+                <tr>
+                    <td>Notifier</td>
+                    <td>
+                        <a href="https://www.saveva.com/products/grav-plugin-shoppingcart-notifier" target="_blank">Link to Notifier</a></a>
+                    </td>
+                    <td>Payed Addon</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

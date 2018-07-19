@@ -1,0 +1,16 @@
+<div class="js__shoppingcart-cart">
+  {% if config.plugins.shoppingcart.ui.testmode %}
+      {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_TEST_MODE'|t|e }}
+  {% endif %}
+  <h3 class="js__shoppingcart-cart__title" style="display: none"></h3>
+  <table class="table js__shoppingcart-cart__table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+  {% if config.plugins.breadcrumbs.enabled %}
+    {% include 'partials/shoppingcart_core_breadcrumbs.html.twig' ignore missing %}
+  {% endif %}
+  <div>
+
+  </div>
+</div>

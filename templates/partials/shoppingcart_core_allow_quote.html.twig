@@ -1,0 +1,21 @@
+{% set price = product.price|number_format(2, '.', '') %}
+{% set image_size_cart = config.plugins.shoppingcart.ui.image_size_cart %}
+
+{{ shoppingcart_output_page_product_before_add_to_cart|raw }}
+
+<button type="button" data-toggle="modal" data-target="#letsask" class="button js__shoppingcart__button-allow-quote" data-id="{{product.id|e}}">
+    <!--<i class="fa fa-shopping-cart"></i>--> {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_ALLOW_QUOTE'|t|e }}
+</button>
+
+<div class="modal fade" id="letsask" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_ALLOW_QUOTE_TITLE'|t|e }} <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_ALLOW_QUOTE_CLOSE'|t|e }}</button></h5>
+      </div>
+      <div id="" class="modal-body">        
+        {% include 'forms/default/form.html.twig' %}        
+      </div>
+    </div>
+  </div>
+</div>

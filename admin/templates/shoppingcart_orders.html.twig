@@ -1,0 +1,87 @@
+{% extends 'shoppingcart_base.html.twig' %}
+
+{% block content %}
+    <style>
+        th { background: #d9d9d9; }
+
+        tr, td { text-align: left;}
+        .details { flex: 1.5 }
+
+        .center {
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+
+    <h1>Latest Orders</h1>
+
+    <div class="admin-block">
+        <table>
+            <tbody class="js__orders-container">
+                <tr class="h">
+                    <th class="date">Date</th>
+                    <th class="amount">Amount</th>
+                    <th class="details">Details</th>
+                    <th class="products">Products</th>
+                </tr>
+                {% for order in grav.twig.orders.orders %}
+                    <tr>
+                        <td class="date">{{order.created_on|slice(0, 4)}}/{{order.created_on|slice(4, 2)}}/{{order.created_on|slice(6, 2)}}</td>
+                        <td class="amount">
+                            {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                {{ order.amount }}{{ currency_symbol }}
+                            {% else %}
+                                {{ currency_symbol }}{{ order.amount }}
+                            {% endif %}
+                        </td>
+                        <td class="details">
+                            {% for index, item in (order.data ?: [])|merge(order.address ?: []) %}
+                                {% set the_field = '' %}
+                                {% for field in config.plugins.shoppingcart.checkout_form.fields %}
+                                    {% if field.name == index %}
+                                        {% set the_field = field %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if not the_field.ignore %}
+                                    <strong>{{ the_field.label|t|e }}</strong>:
+                                    {{ item|e }}
+                                    <br>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="products">
+                            {% for product in order.products %}
+                                <strong>Item</strong>: {{product.product.title}} -
+                                <strong>Quantity</strong>: {{product.quantity}} -
+                                <strong>Price</strong>:
+
+                                {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                    {{ product.product.price }}{{ currency_symbol }}
+                                {% else %}
+                                    {{ currency_symbol }}{{ product.product.price }}
+                                {% endif %}
+
+                                <br>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p class="center">
+            <br>
+            Showing <span class="totalRetrieved">{{grav.twig.orders.totalRetrieved}}</span> orders of <span class="totalAvailable">{{grav.twig.orders.totalAvailable}}</span>
+            <br>
+            <br>
+            {% if (grav.twig.orders.page > 1) %}
+                <a class="button center" href="{{ config.plugins.admin.route }}/shoppingcart/page:{{ (grav.twig.orders.page - 1) }}">Prev</a>
+            {% endif %}
+
+            {% if (grav.twig.orders.page * grav.twig.orders.totalRetrieved) < grav.twig.orders.totalAvailable %}
+                <a class="button center" href="{{ config.plugins.admin.route }}/shoppingcart/page:{{ (grav.twig.orders.page + 1) }}">Next</a>
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}

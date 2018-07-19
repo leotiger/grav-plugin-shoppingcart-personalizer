@@ -1,0 +1,11 @@
+title: Shop
+'@extends':
+    type: exposition
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      fields:
+        content:
+          type: tab

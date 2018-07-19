@@ -1,0 +1,117 @@
+{% set shoppingcart_image_file = page.header.default_photo ? page.header.default_photo : (page.media.images|first).uri.filename %}
+{% set shoppingcart_image = page.header.show_all_media ? false : page.media.images|first %}
+{% for page_media in page.media.images if page_media.uri.filename == shoppingcart_image_file %}
+    {% set shoppingcart_image = page_media %}
+{% endfor %}
+
+{% set image_size_product = config.plugins.shoppingcart.ui.image_size_product %}
+{% set image_size_cart = config.plugins.shoppingcart.ui.image_size_cart %}
+
+{% include 'partials/shoppingcart_core_cart.html.twig' %}
+
+<div id="shoppingcart-detail" class="shoppingcart-product-container block-group">
+    
+    <div class="shoppingcart-info block">
+        {% if page.media.images and page.header.show_all_media %}
+            {% for catalogue_image in page.media.images %}
+            {% if config.plugins.shoppingcart.ui.image_container_square %}
+            <div class="shoppingcart-thumb" style="text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
+            {% else %}
+            <div class="shoppingcart-thumb">    
+            {% endif %}    
+                <a data-fancybox="gallery" href="{{ catalogue_image.url }}">
+                {{ catalogue_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+                </a>
+            </div>
+            <br><br>
+            {% endfor %}
+        {% elseif shoppingcart_image %}
+            {% if config.plugins.shoppingcart.ui.image_container_square %}
+            <div class="shoppingcart-thumb" style="text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
+            {% else %}
+            <div class="shoppingcart-thumb">    
+            {% endif %}    
+            <a data-fancybox="gallery" href="{{ shoppingcart_image.url }}">
+            {{ shoppingcart_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+            </a>
+            </div>
+            
+        {% else %}
+            <br><br><br>
+        {% endif %}
+    </div>
+    <div class="shoppingcart-details block">
+        <h2>{{ page.header.title|e }}</h2>
+        <p>
+        {% if not singleview is defined and page.header.slider and page.content matches '{<p>[\+]{3}<\/p>}m' %}
+              {% set studiocontent = page.content|slice(page.summary|length) %}
+              {% set studioheader = studiocontent|split('<p>+++</p>', 2)|first %}
+              {{ studioheader }}
+        {% endif %}           
+        {% if page.content matches '{<p>[\+]{3}<\/p>}m' %}
+              {% set content = page.content|split('<p>+++</p>', 2)|last %}
+              {{ content|raw }}
+        {% else %}
+              {{ page.content|raw }}
+        {% endif %}
+        </p>
+        {% set product = { 'title': page.header.title, 'id': page.header.product_id, 'stock': page.header.stock, 'price': page.header.price, 'image': shoppingcart_image, 'url': page.url } %}
+        {% if page.header.stock > 0 %}
+            {% set price = product.price|number_format(2, '.', '') %}
+            {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+            <div class="shoppingcart-price">
+            {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}                
+            </div>
+            {% set stock = page.header.stock %}
+            {% if page.header.cartmax is defined and page.header.cartmax and page.header.cartmax <= stock %}
+            {% set stock = page.header.cartmax %}
+            {% endif %}
+            {% if stock > 1 %}
+                <br>
+                {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
+                <input type="number" class="small" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1">
+                <br>
+                <br>
+            {% else %}
+               <input type="hidden" id="js__shoppingcart__quantity" placeholder="1" value="1" />
+            {% endif %}
+            
+            {% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { product: product } %}
+            <script>
+                (function() {
+                    var currentProduct = {
+                        title: "{{ product.title|e }}",
+                        id: "{{ product.id|e }}",
+                        formatted_price: "{{ formatedprice|e }}",
+                        price: "{{ price|e }}",
+                        stock: "{{ stock }}",
+                        image: "{{ product.image.cropResize(image_size_cart, image_size_cart).url|raw }}",
+                        url: "{{ product.url|raw }}",
+                        mdpath: "{{ page.filePath }}",
+                        path: "{{ page.path }}",
+                        bgcolor: "{{ page.header.product_bgcolor }}",
+                        size_cart: "{{ image_size_cart }}",
+                        service_product: "{{ page.header.service_product }}"
+                    };
+
+                    addStudioLoadEvent(function() {
+                        ShoppingCart.currentProduct = currentProduct;
+                    });
+                }());
+            </script>
+                
+        {% endif %}
+        {% if page.header.allowquote %}
+            {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
+        {% endif %}
+
+        {% include 'partials/social.html.twig' with {'socialshare':true} %}			                            
+
+        {% include 'partials/comments.html.twig' with {'page': page} %}
+        
+        {% if config.plugins.relatedpages is defined and config.plugins.relatedpages.enabled and related_pages|length > 0 %}
+        {% include 'partials/relatedpages.html.twig' %}
+        {% endif %}
+        
+    </div>
+</div>

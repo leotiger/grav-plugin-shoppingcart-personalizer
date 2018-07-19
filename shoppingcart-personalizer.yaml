@@ -1,0 +1,59 @@
+enabled: true
+placeoffer_form:
+    name: placeoffer    
+    fields:
+        -
+            name: name
+            type: text
+            label: PLUGIN_SHOPPINGCART.PERSONALIZE_PLACE_OFFER_NAME
+            classes: placeoffer-firstname
+            style: vertical
+            validate:
+                required: true
+
+        -
+            name: email
+            type: email
+            label: PLUGIN_SHOPPINGCART.CHECKOUT_EMAIL
+            classes: placeoffer-email
+            style: vertical
+            validate:
+                required: true
+                
+        -
+            name: message
+            label: PLUGIN_SHOPPINGCART.PERSONALIZE_PLACE_OFFER_MESSAGE
+            type: textarea
+            style: vertical
+            outerclasses: placeoffer-message
+            validate:
+                required: true
+
+        -
+            name: g-recaptcha-response
+            label: Captcha
+            type: captcha
+            recaptcha_not_validated: PLUGIN_SHOPPINGCART.PERSONALIZE_CAPTCHA_NOT_VALID
+            validate:
+              required: true
+              
+    buttons:
+        - 
+            type: submit
+            classes: btn btn-primary
+            outerclasses: modal-footer
+            value: PLUGIN_SHOPPINGCART.PERSONALIZE_PLACE_OFFER_SUBMIT            
+            
+    process:
+        -
+            email:
+                subject: '[{{form.value.name|e}} offers Tessa] {{ form.value.subject|e }}'
+                body: '{% include ''forms/data.html.twig'' %}'
+        -
+            save:
+                fileprefix: placeoffer-
+                dateformat: Ymd-His-u
+                extension: txt
+                body: '{% include ''forms/data.txt.twig'' %}'
+        -
+            message: PLUGIN_SHOPPINGCART.PERSONALIZE_PLACE_OFFER_THANKS

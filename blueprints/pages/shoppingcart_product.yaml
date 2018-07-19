@@ -1,0 +1,120 @@
+title: Product
+'@extends':
+    type: exposition
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      fields:
+        content:
+          type: tab
+
+          fields:
+
+            product:
+              type: section
+              title: Product
+              underline: true
+
+              fields:
+                header.price:
+                  type: text
+                  label: Price
+                  default: '10'
+                  validate:
+                    type: string
+                    
+                header.product_id:
+                  type: text
+                  label: Product ID
+                  default: ''
+                  validate:
+                    type: string
+
+                header.stock:
+                  type: text
+                  label: Stock
+                  default: 1
+                  validate:
+                    type: int
+                    min: 0
+
+                header.cartmax:
+                  type: text
+                  label: Maximum allowed in cart
+                  help: Maximum allowed in cart if stock is greater 1
+                  default: 0
+                  validate:
+                    type: int
+                    min: 0
+                         
+                header.service_product:
+                  type: toggle
+                  label: Service product
+                  help: Service products have free shipping, they are digital or local
+                  highlight: 0
+                  default: 0
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+                                    
+                header.index_photo:
+                  type: pagemediaselect
+                  label: Index Image
+                  preview_images: true
+                  help: Used in shop index pages
+                  
+                header.index_bgcolor:
+                  type: colorpicker
+                  label: Background color for index thumbnail
+                  help: Background color for index thumbnail
+                  default: 'rgba(255, 255, 255, 0.00)'
+
+                header.default_photo:
+                  type: pagemediaselect
+                  label: Default Image
+                  preview_images: true
+                  help: Used as the main product image
+                  
+                header.product_bgcolor:
+                  type: colorpicker
+                  label: Background color for thumbnails
+                  help: Background color for product thumbnails
+                  default: 'rgba(255, 255, 255, 0.00)'
+
+                header.show_all_media:
+                  type: toggle
+                  label: Display all page media
+                  help: Display all existing page media in details page.
+                  highlight: 0
+                  default: 0
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+         
+                header.lastSale:
+                  type: text
+                  default: 0
+                  readonly: true  
+                  classes: hide
+                  help: The last sales timestamp (Read-only)
+                  validate:
+                    number
+                                    
+                header.allowquote:
+                  type: toggle
+                  label: Allow quote
+                  help: Allow price quote contact
+                  highlight: 0
+                  default: 0
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+                  

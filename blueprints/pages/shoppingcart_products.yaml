@@ -1,0 +1,81 @@
+title: Products List
+'@extends':
+    type: exposition
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      fields:
+        content:
+          type: tab
+
+          fields:
+
+            product:
+              type: section
+              title: Products options
+              underline: true
+
+              fields:
+                header.category:
+                  type: text
+                  label: Product Category
+                  help: Enter in a product categroy
+                               
+                header.content.order.by:
+                  type: select
+                  label: PLUGIN_ADMIN.ORDER_BY
+                  default: title
+                  options:
+                    folder: PLUGIN_ADMIN.FOLDER
+                    title: PLUGIN_ADMIN.TITLE
+                    date: PLUGIN_ADMIN.DATE
+                    default: PLUGIN_ADMIN.DEFAULT
+
+                header.content.order.dir:
+                  type: select
+                  label: PLUGIN_ADMIN.ORDER
+                  default: asc
+                  options:
+                    asc: PLUGIN_ADMIN.ASCENDING
+                    desc: PLUGIN_ADMIN.DESCENDING              
+                
+                header.display_add_to_cart:
+                  type: toggle
+                  label: Display Add To Cart Button
+                  help: Display "Add to Cart"-button instead of "Details"-button on each product.
+                  highlight: 1
+                  default: 0
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+
+                header.display_details_button:
+                  type: toggle
+                  label: Display Product Details Button
+                  help: Display "Details"-button on each product.
+                  highlight: 1
+                  default: 1
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+
+                header.category_bgcolor:
+                  toggleable: true
+                  type: colorpicker
+                  label: Background color for thumbnails
+                  help: Background color for the category thumbnails
+                  default: '#ffffff'
+
+                header.hideNoStockAfter:
+                  label: Hide out of stock
+                  type: text
+                  default: 0
+                  help: Hide of stock products after n days
+                  validate:
+                    int

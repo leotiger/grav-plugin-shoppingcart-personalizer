@@ -1,0 +1,78 @@
+{% set shoppingcart_image_file = page.header.index_photo ? page.header.index_photo : (page.header.default_photo ? page.header.default_photo : (page.media.images|first).uri.filename) %}
+{% set shoppingcart_image = page.media.images|first %}
+
+{% for page_media in page.media.images if page_media.uri.filename == shoppingcart_image_file %}
+    {% set shoppingcart_image = page_media %}
+{% endfor %}
+{% set image_size_cart = config.plugins.shoppingcart.ui.image_size_cart %}
+
+<div class="shoppingcart-item shoppingcart-product-container block" >
+    <h3><a href="{{ page.url|raw }}">{{ page.header.title|e }}</a></h3>
+    {% if config.plugins.shoppingcart.ui.image_container_square %}
+    
+    <div class="shoppingcart-thumb shoppingcart-thumb-index" style="text-align:center;width:200px;height:200px;background-color:{{ page.header.index_bgcolor ? page.header.index_bgcolor : page.header.product_bgcolor }}">    
+    {% else %}
+    <div class="shoppingcart-thumb">    
+    {% endif %}    
+        {% if shoppingcart_image %}
+        <a href="{{ page.url|raw }}">{{ shoppingcart_image.cropResize(200,200).html(page.header.title,'shoppingcart-thumb-image')|raw }}</a>
+        {% else %}
+        <br><br><br>
+        {% endif %}
+
+    </div>
+    <div class="shoppingcart-price">
+        {% set stock = page.header.stock %}
+        {% if page.header.cartmax is defined and page.header.cartmax and page.header.cartmax <= stock %}
+        {% set stock = page.header.cartmax %}
+        {% endif %}
+        
+        {% if display_add_to_cart and stock > 0 %}
+            {% if stock > 1 %}
+                <input type="number" id="js__shoppingcart__quantity" min="1" title="{{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}" max="{{  stock }}" value="1">
+            {% else %}
+                <input type="hidden" class="small" id="js__shoppingcart__quantity" placeholder="1" value="1" />
+            {% endif %}
+        {% endif %}
+        
+        {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}
+    </div>
+    <div class="shoppingcart-details shoppingcart-products">
+        <p>
+            {% if display_add_to_cart and page.header.stock > 0 %}
+                {% set product = { 'title': page.header.title, 'id': page.header.product_id, 'stock': page.header.stock, 'price': page.header.price, 'image': shoppingcart_image, 'url': page.url } %}
+                {% set price = product.price|number_format(2, '.', '') %}
+                {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+                <div class="product-actions box-add-to-cart">                    
+                    {% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { page: page, product: product } %}
+                </div>
+            {% endif %}
+            {% if display_details_button %}
+                <div class="product-actions box-btn-show-details">
+                    <a href="{{ page.url|raw }}"
+                        class="button button-small">
+                        <span><!--<i class="fa fa-info-circle"></i>--> {{ 'PLUGIN_SHOPPINGCART.DETAILS'|t|e }}</span>
+                    </a>
+                </div>
+            {% endif %}
+            <script>
+                var currentProduct = {
+                    title: "{{ product.title|e }}",
+                    id: "{{ product.id|e }}",
+                    formatted_price: "{{ formatedprice|e }}",
+                    price: "{{ price|e }}",
+                    stock: "{{ stock }}",
+                    image: "{{ product.image.cropResize(image_size_cart, image_size_cart).url|raw }}",
+                    url: "{{ product.url|raw }}",
+                    mdpath: "{{ page.filePath }}",
+                    path: "{{ page.path }}",
+                    bgcolor: "{{ page.header.product_bgcolor }}",
+                    size_cart: "{{ image_size_cart }}",
+                    service_product: "{{ page.header.service_product }}"
+                };
+
+                window.currentProducts.push(currentProduct);
+            </script>
+        </p>
+    </div>
+</div>
