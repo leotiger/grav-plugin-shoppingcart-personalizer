@@ -1,0 +1,1 @@
+# grav-plugin-shoppingcart-personalizer
