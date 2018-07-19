@@ -1,16 +1,18 @@
 name: Shopping Cart Personalizer Addon
 version: 0.1.1
-description: "Personlize Grav Shopping Cart Plugin for Studio"
+description: "Personlizer for the Grav Shopping Cart Plugin"
 icon: shopping-cart
 author:
   name: Uli Hake
   email: uli.hake@gmail.com
   url: https://www.saveva.com
-homepage: https://www.saveva.com
+homepage: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer
+demo: https://www.tessa.es
 keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock management
+bugs: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/issues
 license: MIT
 
-testing: false
+testing: true
 
 dependencies:
   - { name: shoppingcart, version: '~1.1' }
@@ -100,6 +102,18 @@ form:
               label: Shop in test mode
               highlight: 1
               default: 1
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+                
+            ui.fancybox:
+              type: toggle
+              label: Activate fancybox support
+              help: Allow images to be displayed with fancybox overlay on click
+              highlight: 0
+              default: 0
               options:
                 1: PLUGIN_ADMIN.ENABLED
                 0: PLUGIN_ADMIN.DISABLED
