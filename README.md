@@ -1,4 +1,4 @@
-# [Grav](http://getgrav.org) Shoppingcart Personlizer
+# [Grav](http://getgrav.org) Shoppingcart Personalizer
 
 **If you encounter any issues, please don't hesitate
 to [report
