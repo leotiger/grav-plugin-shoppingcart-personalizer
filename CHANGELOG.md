@@ -3,6 +3,8 @@
 
 1. [](#new)
     * Support for fancybox
+    
+1. [](#improved)    
     * Decoupled from Studio Theme
 
 # v0.1.0
