@@ -1,3 +1,9 @@
+# v0.1.2
+## 19-07-2018
+
+1. [](#bugfix)
+    * Update detail item template to support fancybox correctly
+
 # v0.1.1
 ## 19-07-2018
 
