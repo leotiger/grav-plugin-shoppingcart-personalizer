@@ -26,7 +26,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * mark product as service product (service products need no shipping)
 * editable product id in admin
 * show remove button in checkout cart if desired
-* display terms and conditions link and load in modal if gravstrap / bootstrap support is available in the theme
+* display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
 * option to equalize image sizes
