@@ -86,6 +86,10 @@ installation or use the install option provided in the tools section of the GRAV
 
 Apart from this basic instructions you can find more help on the GRAV [Shoppingcart website](https://gravcart.com/).
 
+## Demo
+
+You can see both add-ons (Personalizer and Notify) in action on [Tessa](https://www.tessa.es).
+
 ## Credits
 
 Thanks to @flaviocopes for the shoppingcart plugin. 
