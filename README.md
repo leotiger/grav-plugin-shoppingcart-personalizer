@@ -82,6 +82,10 @@ archive](https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/archi
 from GitHub and extract it to the `user/plugins` directory in your Grav
 installation or use the install option provided in the tools section of the GRAV admin plugin. If GRAV approves the plugin, it may appear on the GRAV plugin site with automated installation support through cli and/or the Plugins section in the admin interface.
 
+## Help
+
+Apart from this basic instructions you can find more help on the GRAV [Shoppingcart website](https://gravcart.com/).
+
 ## Credits
 
 Thanks to @flaviocopes for the shoppingcart plugin. 
