@@ -25,7 +25,8 @@ stock management, country restriction, single product, service vs. shippable pro
 * support for unique products (nice for artists, etc.)
 * mark product as service product (service products need no shipping)
 * editable product id in admin
-* option to add remove button in checkout cart
+* show remove button in checkout cart if desired
+* display terms and conditions link and load in modal if gravstrap / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
 * option to equalize image sizes
@@ -53,6 +54,17 @@ The Shoppingcart-Notify Add-on allows you to:
 * automizes stock management with multi-language support
 * digital downloads
 * etc.
+
+The Shoppingcart-Notify plugin will be soon available online and it will show up in the add-on section.
+
+## Theme support tested
+
+The plugin was tested with the antimatter and the quark theme. It also works on our propietary theme Studio.
+
+## Complementary plugins
+
+* [Breadcrumbs](https://github.com/getgrav/grav-plugin-breadcrumbs) 
+* [Bootstrapper](https://github.com/getgrav/grav-plugin-bootstrapper)
 
 ## Further customization
 
