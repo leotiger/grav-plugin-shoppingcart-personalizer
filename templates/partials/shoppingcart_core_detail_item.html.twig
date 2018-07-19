@@ -19,7 +19,7 @@
             {% else %}
             <div class="shoppingcart-thumb">    
             {% endif %}    
-                <a data-fancybox="gallery" href="{{ catalogue_image.url }}">
+                <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ catalogue_image.url }}">
                 {{ catalogue_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
                 </a>
             </div>
@@ -31,7 +31,7 @@
             {% else %}
             <div class="shoppingcart-thumb">    
             {% endif %}    
-            <a data-fancybox="gallery" href="{{ shoppingcart_image.url }}">
+            <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ shoppingcart_image.url }}">
             {{ shoppingcart_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
             </a>
             </div>
@@ -91,7 +91,8 @@
                         path: "{{ page.path }}",
                         bgcolor: "{{ page.header.product_bgcolor }}",
                         size_cart: "{{ image_size_cart }}",
-                        service_product: "{{ page.header.service_product }}"
+                        service_product: "{{ page.header.service_product }}",
+                        cartmax: "{{ page.header.cartmax }}"
                     };
 
                     addStudioLoadEvent(function() {
@@ -105,13 +106,5 @@
             {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
         {% endif %}
 
-        {% include 'partials/social.html.twig' with {'socialshare':true} %}			                            
-
-        {% include 'partials/comments.html.twig' with {'page': page} %}
-        
-        {% if config.plugins.relatedpages is defined and config.plugins.relatedpages.enabled and related_pages|length > 0 %}
-        {% include 'partials/relatedpages.html.twig' %}
-        {% endif %}
-        
     </div>
 </div>
