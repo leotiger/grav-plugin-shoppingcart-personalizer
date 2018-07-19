@@ -84,7 +84,7 @@ installation or use the install option provided in the tools section of the GRAV
 
 ## Help
 
-Apart from this basic instructions you can find more help on the GRAV [Shoppingcart website](https://gravcart.com/).
+Apart from these basic instructions you can find more help on the GRAV [Shoppingcart website](https://gravcart.com/).
 
 ## Demo
 
