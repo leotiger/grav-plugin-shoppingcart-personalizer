@@ -93,5 +93,5 @@ This plugin includes the [Jquery Fancybox](http://fancyapps.com/fancybox/3/) plu
 
 ## Known Issues
 
-Hopefully this plugin will obtain some feedback and suggestions. I will try to enhance the plugin with additional
+Hopefully this plugin will obtain some feedback and suggestions. As of version 0.1.1 this is marked for testing and issues are probable. I will try to enhance the plugin with additional
 basic features in the future as I believe that GRAV needs better support for online shops.
