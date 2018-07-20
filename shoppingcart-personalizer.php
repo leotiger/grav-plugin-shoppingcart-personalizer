@@ -228,6 +228,10 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $twig = $this->grav['twig'];            
             $twig->twig_vars['terms_url'] = $this->config->get('plugins.shoppingcart.urls.terms_url');
         }
+        if ($this->config->get('plugins.shoppingcart.ui.fancybox', false)) {
+            $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/jquery.fancybox.js');
+            $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/jquery.fancybox.css');        
+        }
         
         $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/shoppingcart-personalizer.js');
         $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/shoppingcart-personalizer.css');        
