@@ -1,3 +1,9 @@
+# v0.1.3
+## 20-07-2018
+
+1. [](#bugfix)
+    * Support for fancybox was incomplete
+
 # v0.1.2
 ## 19-07-2018
 
