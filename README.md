@@ -80,7 +80,7 @@ If you copy templates to your theme in most cases it's sufficient to copy only t
 Download the [ZIP
 archive](https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/archive/master.zip)
 from GitHub and extract it to the `user/plugins` directory in your Grav
-installation or use the install option provided in the tools section of the GRAV admin plugin. If GRAV approves the plugin, it may appear on the GRAV plugin site with automated installation support through cli and/or the Plugins section in the admin interface.
+installation or use the install option provided in the tools section of the GRAV admin plugin. Assure that the plugin folder name is shoppingcart-personalizer. If GRAV approves the plugin, it may appear on the GRAV plugin site with automated installation support through cli and/or the Plugins section in the admin interface.
 
 ## Help
 
