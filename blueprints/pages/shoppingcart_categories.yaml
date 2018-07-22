@@ -1,6 +1,6 @@
 title: Shop
 '@extends':
-    type: exposition
+    type: default
     context: blueprints://pages
 
 form:
