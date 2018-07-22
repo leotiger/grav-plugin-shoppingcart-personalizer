@@ -1,6 +1,6 @@
 title: Products List
 '@extends':
-    type: exposition
+    type: default
     context: blueprints://pages
 
 form:
