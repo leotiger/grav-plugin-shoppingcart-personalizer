@@ -5,6 +5,11 @@
     {% set shoppingcart_image = page_media %}
 {% endfor %}
 {% set image_size_cart = config.plugins.shoppingcart.ui.image_size_cart %}
+{% set variationgroups = [] %}
+{% if page.header.groups is defined and (page.header.groups|first).variations is defined and (page.header.groups|first).variations|length > 0 %}
+{% set variationgroups = page.header.groups %}
+{% endif %}
+
 
 <div class="shoppingcart-item shoppingcart-product-container block" >
     <h3><a href="{{ page.url|raw }}">{{ page.header.title|e }}</a></h3>
@@ -21,28 +26,33 @@
         {% endif %}
 
     </div>
+    
     <div class="shoppingcart-price">
         {% set stock = page.header.stock %}
         {% if page.header.cartmax is defined and page.header.cartmax and page.header.cartmax <= stock %}
         {% set stock = page.header.cartmax %}
         {% endif %}
         
-        {% if display_add_to_cart and stock > 0 %}
+        {% if display_add_to_cart and stock > 0 and variationgroups|length == 0 %}
             {% if stock > 1 %}
                 <input type="number" id="js__shoppingcart__quantity" min="1" title="{{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}" max="{{  stock }}" value="1">
             {% else %}
-                <input type="hidden" class="small" id="js__shoppingcart__quantity" placeholder="1" value="1" />
+                <input type="hidden" class="input-sl" id="js__shoppingcart__quantity" placeholder="1" value="1" />
             {% endif %}
+            {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}
+            
+        {% elseif variationgroups|length > 0 %}
+            {% include 'partials/shoppingcart_core_pricelowest.html.twig' with { price: page.header.price, stock: page.header.stock, cartmax: page.header.cartmax, variationgroups: variationgroups } %}
         {% endif %}
         
-        {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}
+        
     </div>
     <div class="shoppingcart-details shoppingcart-products">
         <p>
-            {% if display_add_to_cart and page.header.stock > 0 %}
-                {% set product = { 'title': page.header.title, 'id': page.header.product_id, 'stock': page.header.stock, 'price': page.header.price, 'image': shoppingcart_image, 'url': page.url } %}
-                {% set price = product.price|number_format(2, '.', '') %}
-                {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+            {% set product = { 'title': page.header.title, 'id': page.header.product_id, 'stock': page.header.stock, 'price': page.header.price, 'image': shoppingcart_image, 'url': page.url } %}
+            {% set price = product.price|number_format(2, '.', '') %}
+            {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+            {% if display_add_to_cart and page.header.stock > 0 and variationgroups|length == 0 %}
                 <div class="product-actions box-add-to-cart">                    
                     {% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { page: page, product: product } %}
                 </div>
@@ -55,11 +65,13 @@
                     </a>
                 </div>
             {% endif %}
+            
             <script>
                 var currentProduct = {
                     title: "{{ product.title|e }}",
                     id: "{{ product.id|e }}",
                     formatted_price: "{{ formatedprice|e }}",
+                    baseprice: "{{ price|e }}",
                     price: "{{ price|e }}",
                     stock: "{{ stock }}",
                     image: "{{ product.image.cropResize(image_size_cart, image_size_cart).url|raw }}",
@@ -68,7 +80,9 @@
                     path: "{{ page.path }}",
                     bgcolor: "{{ page.header.product_bgcolor }}",
                     size_cart: "{{ image_size_cart }}",
-                    service_product: "{{ page.header.service_product }}"
+                    service_product: "{{ page.header.service_product }}",
+                    cartmax: "{{ page.header.cartmax }}",
+                    removeonadd: "{{ page.header.remove_on_add ? page.header.remove_on_add : 1 }}"
                 };
 
                 window.currentProducts.push(currentProduct);

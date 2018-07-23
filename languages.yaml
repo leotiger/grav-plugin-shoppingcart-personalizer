@@ -27,6 +27,11 @@ en:
         PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: 'Address continued'
         PERSONALIZE_CHECKOUT_INDICATIONS: Notes and indications
         PERSONALIZE_HEADLINE_MODAL_TERMS: Terms and conditions
+        PERSONALIZE_PRICEFROM: From
+        PERSONALIZE_OFFER_SUBJECTID: Query
+        PERSONALIZE_VARIATION_REMARK: Your remarks
+        PERSONALIZE_CART_VARIATIONS_HEADLINE: Variations and configurations
+        PERSONALIZE_CART_VARIATIONS_BASEPRICE: Baseprice
     
 de:
     PLUGIN_SHOPPINGCART:
@@ -57,6 +62,11 @@ de:
         PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: 'Addresse kompletieren'
         PERSONALIZE_CHECKOUT_INDICATIONS: Notizen
         PERSONALIZE_HEADLINE_MODAL_TERMS: Allgemeine Geschäftsbedingungen
+        PERSONALIZE_PRICEFROM: Ab
+        PERSONALIZE_OFFER_SUBJECTID: Anfrage
+        PERSONALIZE_VARIATION_REMARK: Ihre Angaben
+        PERSONALIZE_CART_VARIATIONS_HEADLINE: Variationen und Konfiguration
+        PERSONALIZE_CART_VARIATIONS_BASEPRICE: Grundpreis
 
 ca:
     PLUGIN_SHOPPINGCART:
@@ -87,6 +97,11 @@ ca:
         PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: "L'adreça continuada"
         PERSONALIZE_CHECKOUT_INDICATIONS: Notes i indicacions
         PERSONALIZE_HEADLINE_MODAL_TERMS: Termes i condicions      
+        PERSONALIZE_PRICEFROM: Des de
+        PERSONALIZE_OFFER_SUBJECTID: Consulta
+        PERSONALIZE_VARIATION_REMARK: Observacions
+        PERSONALIZE_CART_VARIATIONS_HEADLINE: Variacions i configuracions
+        PERSONALIZE_CART_VARIATIONS_BASEPRICE: Preu base
 
 es:
     PLUGIN_SHOPPINGCART:
@@ -116,4 +131,9 @@ es:
         PERSONALIZE_BILLING_DATA: "Datos de facturación"
         PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED: "Calle continuada"
         PERSONALIZE_CHECKOUT_INDICATIONS: Notas e indicaciones
-        PERSONALIZE_HEADLINE_MODAL_TERMS: Términos i condiciones      
+        PERSONALIZE_HEADLINE_MODAL_TERMS: Términos i condiciones  
+        PERSONALIZE_PRICEFROM: Desde
+        PERSONALIZE_OFFER_SUBJECTID: Consulta
+        PERSONALIZE_VARIATION_REMARK: Observaciones
+        PERSONALIZE_CART_VARIATIONS_HEADLINE: Variaciones y configuraciones
+        PERSONALIZE_CART_VARIATIONS_BASEPRICE: Precio base

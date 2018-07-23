@@ -20,19 +20,19 @@
             {% endif %}
             <!--<i class="{{ divider }}"></i>-->
         {% else %}
-			{% if crumb.url == home_url %}
-				{% if breadcrumbs_config.link_trailing %}
-				<a href="{{ crumb.url }}" itemprop="url" class="btn btn-success"><span itemprop="title">{{ config.site.title }}</span></a>                    
-				{% else %}
-					<span itemprop="title">{{ config.site.title }}</span>
-				{% endif %}
-			{% else %}
-				{% if breadcrumbs_config.link_trailing %}
-					<a href="{{ crumb.url }}" class="btn btn-success" itemprop="url"><span itemprop="title">{{ crumb.menu }}</span></a>
-				{% else %}
-					<span itemprop="title">{{ crumb.menu }}</span>
-				{% endif %}
-			{% endif %}
+            {% if crumb.url == home_url %}
+                {% if breadcrumbs_config.link_trailing %}
+                <a href="{{ crumb.url }}" itemprop="url" class="btn btn-success"><span itemprop="title">{{ config.site.title }}</span></a>                    
+                {% else %}
+                <span itemprop="title">{{ config.site.title }}</span>
+                {% endif %}
+            {% else %}
+                {% if breadcrumbs_config.link_trailing %}
+                <a href="{{ crumb.url }}" class="btn btn-success" itemprop="url"><span itemprop="title">{{ crumb.menu }}</span></a>
+                {% else %}
+                <span itemprop="title">{{ crumb.menu }}</span>
+                {% endif %}
+            {% endif %}
 		
         {% endif %}
     {% endfor %}

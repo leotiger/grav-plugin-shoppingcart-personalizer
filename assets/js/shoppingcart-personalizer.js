@@ -6,6 +6,10 @@
 (function(ShoppingCart) {
     
     jQuery( ".js__shoppingcart__remove-from-cart" ).off();    
+    jQuery( ".js__shoppingcart__quantity-box-cart" ).off();    
+    
+    jQuery(document).off('keydown', '.js__shoppingcart__quantity-box-cart');
+    jQuery(document).off('keydown', '#js__shoppingcart__quantity');
     /***********************************************************/
     /* Handle removing a product from the cart
     /* #event
@@ -15,6 +19,194 @@
         ShoppingCart.removeProduct(element_id);
     });
     
+    /***********************************************************/
+    /* Handle variation config changes
+    /* #event
+    /***********************************************************/
+    jQuery(document).on('keyup change', '.js__shoppingcart__variationconfig', function() {
+        ShoppingCart.calcVariations(ShoppingCart.currentProduct);
+    });
+
+    jQuery(document).on('click', '.js__display_product_variations', function() {
+       $variantblock = jQuery(this).data('variantblock');
+       if (jQuery('.' + $variantblock).length) {
+           jQuery('.' + $variantblock).toggle();
+       }
+    });
+    /***********************************************************/
+    /* Update variation interface and handle variation config
+    /* #event
+    /***********************************************************/
+    jQuery(document).on('change', '.group-variations-sel', function() {
+        
+        var $varsel = jQuery(this);        
+        var $asinput = $varsel.data('groupasinput');
+        var $selected = $varsel.find('option:selected');
+        var $groupid = $varsel.data('groupid');
+        var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null; 
+        var $interface = '';
+        
+        if ($varsel.val()) {
+            $varprice = $selected.data('varprice'); 
+            $varid = $selected.data('varid');
+            $varmin = $selected.data('handlemin');
+            $varmax = $selected.data('handlemax');
+            $variation = $selected.data('variation');            
+            if ($asinput) {
+                
+                if ($varmin < $varmax) {
+                    $interface = '<br>'
+                        + '<div class="variation-description">' + $variation['description'] + '</div>'
+                        + '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
+                        + '<br>';
+                    
+                } else {
+                    $interface += '<input type="hidden" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" value="' + $varmin + '" />';
+                }
+            }
+            if ($variation['freetext']) {
+                $interface += '<br><div class="variation-freetext">';
+                $interface += '<input type="text" placeholder="' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_REMARK.replace('"',"'") + '" id="freetext-' + $groupid + '-' + $varid + '" class="js__shoppingcart__variationfreetext" value="" />';
+                $interface += '</div>';
+            }
+        }
+        jQuery('#grouphandler-' + $groupid).html($interface);
+        ShoppingCart.calcVariations(ShoppingCart.currentProduct);
+        
+    });
+    
+    
+    
+    /***********************************************************/
+    /* Handle change the quantity box in the cart
+    /* #event
+    /***********************************************************/
+    jQuery(document).on('keyup change', '.js__shoppingcart__quantity-box-cart', function() {
+        var element_id = jQuery(this).data('id');
+        var new_quantity = jQuery(this).val();
+        var isInt = function isInt(n) {
+            return n % 1 == 0;
+        };
+
+        if (!isInt(new_quantity)) {
+            alert(window.PLUGIN_SHOPPINGCART.translations.VALUE_NOT_ACCEPTABLE);
+            jQuery(this).val(ShoppingCart.items[element_id].quantity);
+            return;
+        }
+
+        if (ShoppingCart.settings.cart.maximum_total_quantity_value && (parseInt(new_quantity) > ShoppingCart.settings.cart.maximum_total_quantity_value)) {
+            alert(window.PLUGIN_SHOPPINGCART.translations.QUANTITY_EXCEEDS_MAX_ALLOWED_VALUE + ': ' + ShoppingCart.settings.cart.maximum_total_quantity_value);
+            jQuery(this).val(ShoppingCart.items[element_id].quantity);
+            return;
+        }
+
+        ShoppingCart.items[element_id].quantity = new_quantity;
+        ShoppingCart._saveCartToLocalstorage();
+        ShoppingCart.renderCart();
+
+        jQuery(".js__shoppingcart__quantity-box-cart[data-id='" + element_id + "']").focus().val(jQuery(".js__shoppingcart__quantity-box-cart[data-id='" + element_id + "']").val()); //this is to avoid browser auto-selecting text
+    });
+    
+    /***********************************************************/
+    /* Calc variations
+    /***********************************************************/
+    ShoppingCart.resetVariations = function resetVariations() {
+        jQuery('.group-variations-sel').each(function() {            
+            var $varsel = jQuery(this);        
+            var $asinput = $varsel.data('groupasinput');
+            var $selected = $varsel.find('option:selected');
+            var $groupid = $varsel.data('groupid');
+            var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null; 
+            var $interface = '';
+
+            if ($varsel.val()) {
+                $varprice = $selected.data('varprice'); 
+                $varid = $selected.data('varid');
+                $varmin = $selected.data('handlemin');
+                $varmax = $selected.data('handlemax');
+                $variation = $selected.data('variation');            
+                if ($asinput) {
+
+                    if ($varmin < $varmax) {
+                        $interface = '<br>'
+                            + '<div class="variation-description">' + $variation['description'] + '</div>'
+                            + '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
+                            + '<br>';
+
+                    } else {
+                        $interface += '<input type="hidden" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" value="' + $varmin + '" />';
+                    }
+
+                }       
+                if ($variation['freetext']) {
+                    $interface += '<br><div class="variation-freetext">';
+                    $interface += '<input type="text" placeholder="' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_REMARK.replace('"',"'") + '" id="freetext-' + $groupid + '-' + $varid + '" class="js__shoppingcart__variationfreetext input-lg" value="" />';
+                    $interface += '</div>';
+                }
+            }
+            jQuery('#grouphandler-' + $groupid).html($interface);
+            ShoppingCart.calcVariations(ShoppingCart.currentProduct);
+            
+        });
+    }
+    
+    /***********************************************************/
+    /* Calc variations
+    /***********************************************************/
+    ShoppingCart.calcVariations = function calcVariations(product) {
+        if (jQuery('.shoppingcart-variation-handler').length) {            
+            //var quantity = jQuery('.shoppingcart-variation-handler').closest('.shoppingcart-product-container').find('#js__shoppingcart__quantity').val() || 1;
+            var newPrice = parseFloat(ShoppingCart.currentProduct.baseprice);
+            var variants = [];
+            jQuery('.js__shoppingcart__variationconfig').each(function() {
+                newPrice = newPrice + (parseFloat(jQuery(this).data('varprice')) * parseInt(jQuery(this).val()));
+                
+                var $groupid = jQuery(this).data('groupid');
+                var $varid = jQuery(this).data('varid');
+                var $variation = jQuery('#varopt-' + $groupid + '-' + $varid).data('variation');
+                variants.push({
+                    groupid: $groupid,
+                    varid: $varid,
+                    vardata: $variation,
+                    varprice: jQuery(this).data('varprice'),
+                    varmultiplier: jQuery(this).val(),
+                    varbaseprice: ShoppingCart.currentProduct.baseprice,
+                    varstepprice: newPrice,
+                    varfreetext: (jQuery('#freetext-' + jQuery(this).data('groupid') + '-' + jQuery(this).data('varid')).length ? jQuery('#freetext-' + jQuery(this).data('groupid') + '-' + jQuery(this).data('varid')).val() : ''),
+                });
+            });
+            jQuery('.group-variations-sel').each(function() {
+                var $varsel = jQuery(this);        
+                var $asinput = $varsel.data('groupasinput');
+                if (!$asinput && $varsel.val()) {
+                    var $selected = $varsel.find('option:selected');
+                    var $groupid = $varsel.data('groupid');
+                    var $varprice = $selected.data('varprice'); 
+                    var $varid = $selected.data('varid');
+                    var $varmin = $selected.data('handlemin');
+                    var $variation = $selected.data('variation');
+                    newPrice = newPrice + (parseFloat($varprice) * parseInt($varmin));
+                    variants.push({
+                        groupid: $groupid,
+                        varid: $varid,
+                        vardata: $variation,
+                        varprice: $varprice,
+                        varmultiplier: $varmin,
+                        varbaseprice: ShoppingCart.currentProduct.baseprice,
+                        varstepprice: newPrice,
+                        varfreetext: (jQuery('#freetext-' + $groupid + '-' + $varid).length ? jQuery('#freetext-' + $groupid + '-' + $varid).val() : ''),
+                    });
+                }
+            });
+            
+            ShoppingCart.currentProduct.price = parseFloat(newPrice).toFixed(2);
+            ShoppingCart.currentProduct.formatted_price = ShoppingCart.formattedPrice(newPrice);   
+            ShoppingCart.currentProduct.variants = variants;
+            jQuery('.shoppingcart-variation-handler .shoppingcart-price').html(ShoppingCart.renderPriceWithCurrency(newPrice));  
+            return ShoppingCart.currentProduct;
+        }
+        return product;
+    }
     
     /***********************************************************/
     /* Add a product to the cart
@@ -23,9 +215,12 @@
         var onBeforeAddProductToCart;
         jQuery(document).trigger(onBeforeAddProductToCart = jQuery.Event('onBeforeAddProductToCart', { product: product, quantity: quantity }));
         if (onBeforeAddProductToCart.result === false) {
-            return;
+            return false;
         }
-
+        
+        // calc variations
+        product = ShoppingCart.calcVariations(product);
+        
         var existingProducts = jQuery(ShoppingCart.items).filter(function(index, item) { if (product.title == item.product.title) return true; }).toArray();
 
         var existingProduct = existingProducts[0];
@@ -210,12 +405,15 @@
             }
 
             if (item.product.url) {
-                row += '<a href="' + item.product.url + '" class="cart-product-name">' + item.product.title + '</a>';
+                row += '<div class="cart-product-card"><a href="' + item.product.url + '" class="cart-product-name">' + item.product.title + '</a>';
             } else {
-                row += item.product.title;
+                row += '<div class="cart-product-card"><span class="cart-product-name">' + item.product.title + '</span>';
+            }
+            if (typeof item.product.variants !== 'undefined' && item.product.variants.length) {                
+                row += '<div class="cart-product-config"><button class="js__display_product_variations" data-variantblock="item-variants-' + item.product.id + '">' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_CART_VARIATIONS_HEADLINE + '</button></div>';
             }
 
-            row += '</td>';
+            row += '</div></td>';
 
             if (!ShoppingCart.isMobile()) {
                 /***********************************************************/
@@ -235,8 +433,9 @@
                 if (item.product.cartmax && parseInt(item.product.cartmax) > 0 && parseInt(item.product.cartmax) <= parseInt(item.product.stock)) {
                     istock = item.product.cartmax;
                 }                    
-                if (ShoppingCart.currentPageIsProductOrProductsOrCartOrExternal() && istock > 1) {
-                    row += '<input type="number" max="' + istock + '" min="1" value="' + item.quantity + '" class="input-mini js__shoppingcart__quantity-box-cart" data-id="' + i + '" />';
+
+                if (ShoppingCart.currentPageIsProductOrProductsOrCartOrExternal() && istock > 1 && (typeof item.product.variants === 'undefined' || item.product.variants.length == 0)) {
+                    row += '<input type="number" max="' + istock + '" min="1" value="' + item.quantity + '" class="input-sl js__shoppingcart__quantity-box-cart" data-id="' + i + '" />';
                 } else {
                     row += item.quantity;
                 }
@@ -248,7 +447,7 @@
             /***********************************************************/
             /* Total
             /***********************************************************/
-            row += '<td class="cart-product-total">';
+            row += '<td class="cart-product-total">';            
             row += ShoppingCart.renderPriceWithCurrency(ShoppingCart.cartSubtotalPrice(item));
             row += '</td>';
 
@@ -260,6 +459,51 @@
 
             row += '</tr>';
 
+            if (typeof item.product.variants !== 'undefined' && item.product.variants.length) {                
+                row += '<tr class="item-variants-' + item.product.id + '" style="display:none;">';
+                row += '<td class="cart-product">';
+                row += '<div class="shoppingcart-thumb">';
+                row += '&nbsp;';
+                row += '</div> ';                        
+                row += '<div class="cart-product-card">';
+                row += '<span class="cart-product-name">' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_CART_VARIATIONS_BASEPRICE + '</span>';
+                row += '</div>';
+                row += '</td>';
+                row += '<td class="cart-product-price">';
+                row += ShoppingCart.renderPriceWithCurrency(item.product.variants[0].varbaseprice);
+                row += '</td>';
+                row += '<td class="cart-product-quantity">';
+                row += item.quantity;
+                row += '</td>';
+                row += '<td class="cart-product-total">';            
+                row += ShoppingCart.renderPriceWithCurrency(parseFloat(item.product.variants[0].varbaseprice) * parseInt(item.quantity));
+                row += '</td>';
+                row += '</tr>';
+                
+                
+                for (var v = 0; v < item.product.variants.length; v++) {
+                    var variant = item.product.variants[v];
+                    row += '<tr class="item-variants-' + item.product.id + '" style="display:none;">';
+                    row += '<td class="cart-product">';
+                    row += '<div class="shoppingcart-thumb">';
+                    row += '&nbsp;';
+                    row += '</div> ';                        
+                    row += '<div class="cart-product-card">';
+                    row += '<span class="cart-product-name">' + variant.vardata.title + '</span>';
+                    row += '</div>';
+                    row += '</td>';
+                    row += '<td class="cart-product-price">';
+                    row += ShoppingCart.renderPriceWithCurrency(variant.varprice);
+                    row += '</td>';
+                    row += '<td class="cart-product-quantity">';
+                    row += variant.varmultiplier + ' x ' + item.quantity;
+                    row += '</td>';
+                    row += '<td class="cart-product-total">';            
+                    row += ShoppingCart.renderPriceWithCurrency(parseFloat(variant.varprice) * parseInt(variant.varmultiplier) * parseInt(item.quantity));
+                    row += '</td>';
+                    row += '</tr>';
+                }
+            }
             rows_html += row;
         }
 
@@ -454,17 +698,29 @@
     /***********************************************************/
     /* Generate the selected shipping price
     /* #event
+     * @todo add update for existing products 
+     */
     /***********************************************************/
-    jQuery(document).on('onBeforeAddProductToCart', function(event) {        
-        var existingProducts = jQuery(ShoppingCart.items).filter(function(index, item) { if (item.product.id == event.product.id) return true; }).toArray();
-        var existingProduct = existingProducts[0];
+    jQuery(document).on('onBeforeAddProductToCart', function(event) {                
+        var existingProducts = jQuery(ShoppingCart.items).filter(function(index, item) { if (item.product.id == event.product.id) {
+                item.cartindex = index;
+                return true;
+            }
+        }).toArray();
+        var existingProduct = existingProducts[0];        
         if (!existingProduct) {
+            
             return true;
         } else {
+            
             if (typeof event.product.stock === 'undefined' || event.product.stock === null || event.product.stock === '' || parseInt(existingProduct.quantity) >= parseInt(event.product.stock)) {
                 return false;
             }
+            if (event.product.removeonadd) {
+                ShoppingCart.removeProduct(existingProduct.cartindex);
+            }
         }
+        return true;
     });
 
     jQuery(document).on('onAfterRemoveProductFromCart', function(event) {                
@@ -554,6 +810,24 @@
         }
         
     };
+
+    /***********************************************************/
+    /* Render a correctly parsed price with the currency at the right position
+    /***********************************************************/
+    ShoppingCart.formattedPrice = function formattedPrice(price) {
+        price = parseFloat(price).toFixed(2);
+
+        if (ShoppingCart.settings.ui.remove_cents_if_zero) {
+            if (price  % 1 == 0) {
+                price  = parseInt(price , 10);
+            }
+        }
+        if (ShoppingCart.settings.ui.currency_decimal_comma) {
+            price  = price.toString().replace(".", ",");
+        }
+        return price;
+    };
+    
     
     /***********************************************************/
     /* Render a correctly parsed price with the currency at the right position
@@ -568,9 +842,8 @@
                 price  = parseInt(price , 10);
             }
         }
-        
         if (ShoppingCart.settings.ui.currency_decimal_comma) {
-            price  = price.replace(".", ",");
+            price  = price.toString().replace(".", ",");
         }
 
         if (ShoppingCart.showCurrencyBeforePrice()) {

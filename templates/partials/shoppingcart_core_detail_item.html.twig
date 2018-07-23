@@ -6,6 +6,10 @@
 
 {% set image_size_product = config.plugins.shoppingcart.ui.image_size_product %}
 {% set image_size_cart = config.plugins.shoppingcart.ui.image_size_cart %}
+{% set variationgroups = [] %}
+{% if page.header.groups is defined and (page.header.groups|first).variations is defined and (page.header.groups|first).variations|length > 0 %}
+{% set variationgroups = page.header.groups %}
+{% endif %}
 
 {% include 'partials/shoppingcart_core_cart.html.twig' %}
 
@@ -43,22 +47,13 @@
     <div class="shoppingcart-details block">
         <h2>{{ page.header.title|e }}</h2>
         <p>
-        {% if not singleview is defined and page.header.slider and page.content matches '{<p>[\+]{3}<\/p>}m' %}
-              {% set studiocontent = page.content|slice(page.summary|length) %}
-              {% set studioheader = studiocontent|split('<p>+++</p>', 2)|first %}
-              {{ studioheader }}
-        {% endif %}           
-        {% if page.content matches '{<p>[\+]{3}<\/p>}m' %}
-              {% set content = page.content|split('<p>+++</p>', 2)|last %}
-              {{ content|raw }}
-        {% else %}
-              {{ page.content|raw }}
-        {% endif %}
+        {{ page.content|raw }}
         </p>
+        
         {% set product = { 'title': page.header.title, 'id': page.header.product_id, 'stock': page.header.stock, 'price': page.header.price, 'image': shoppingcart_image, 'url': page.url } %}
-        {% if page.header.stock > 0 %}
+        {% if page.header.stock > 0 and variationgroups|length == 0 %}
             {% set price = product.price|number_format(2, '.', '') %}
-            {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+            {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}            
             <div class="shoppingcart-price">
             {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}                
             </div>
@@ -69,7 +64,7 @@
             {% if stock > 1 %}
                 <br>
                 {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
-                <input type="number" class="small" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1">
+                <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1">
                 <br>
                 <br>
             {% else %}
@@ -77,6 +72,9 @@
             {% endif %}
             
             {% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { product: product } %}
+            {% if page.header.allowquote %}
+                {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
+            {% endif %}            
             <script>
                 (function() {
                     var currentProduct = {
@@ -92,19 +90,21 @@
                         bgcolor: "{{ page.header.product_bgcolor }}",
                         size_cart: "{{ image_size_cart }}",
                         service_product: "{{ page.header.service_product }}",
-                        cartmax: "{{ page.header.cartmax }}"
+                        cartmax: "{{ page.header.cartmax }}",
+                        removeonadd: "{{ page.header.remove_on_add ? page.header.remove_on_add : 1 }}"                        
                     };
 
                     addStudioLoadEvent(function() {
                         ShoppingCart.currentProduct = currentProduct;
+                        //ShoppingCart.currentVariations = {# variations|json_encode() #};
                     });
                 }());
-            </script>
+            </script>            
+        {% elseif variationgroups|length > 0 %}            
+            {% include 'partials/shoppingcart_core_detail_item_variations.html.twig' with { page: page, product: product, variationgroups: variationgroups } %}
+        {% endif %}
                 
-        {% endif %}
-        {% if page.header.allowquote %}
-            {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
-        {% endif %}
+        
 
     </div>
 </div>

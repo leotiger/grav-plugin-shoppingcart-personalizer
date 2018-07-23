@@ -16,6 +16,8 @@ use RocketTheme\Toolbox\File\File;
 use RocketTheme\Toolbox\Event\Event;
 use RocketTheme\Toolbox\Session\Session;
 use Grav\Plugin\Shortcodes\BlockShortcode;
+use Grav\Common\Filesystem\Folder;
+use Grav\Common\Data\Blueprints;
 
 
 
@@ -40,6 +42,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             'onGetPageBlueprints'     => ['onGetPageBlueprints', 0],
             'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],            
             'onGetPageTemplates'      => ['onGetPageTemplates', 0],
+            'onBlueprintCreated' => ['onBlueprintCreated', 1000],
         ];
     }
 
@@ -131,7 +134,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             'PERSONALIZE_CHECKOUT_ADDRESS_CONTINUED',
             'PERSONALIZE_CHECKOUT_INDICATIONS',
             'PERSONALIZE_HEADLINE_MODAL_TERMS',
-            
+            'PERSONALIZE_VARIATION_REMARK',
+            'PERSONALIZE_CART_VARIATIONS_HEADLINE',
+            'PERSONALIZE_CART_VARIATIONS_BASEPRICE',
         ];
     }    
     
@@ -149,13 +154,10 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      */
     public function onPluginsInitialized()
     {
-        // Create ShoppingCart.
-
         require_once(realpath(__DIR__ . '/../shoppingcart/classes/shoppingcart.php'));
-        $this->shoppingcart = new ShoppingCart\ShoppingCart();
-        
+        $this->shoppingcart = new ShoppingCart\ShoppingCart();        
         if (!$this->isAdmin()) {
-            $this->mergeShoppingCartPluginConfig();
+            $this->mergeShoppingCartPluginConfig();            
             // Add translations needed in JavaScript code
             $this->enable([
                 'onPageInitialized'                       => ['onPageInitialized', -1000],
@@ -164,6 +166,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         } else {
             $this->enable([
                 'onTwigTemplatePaths'                        => ['onTwigAdminTemplatePaths', 1000],
+                'onAdminSave' => ['onAdminSave', 1000],	
             ]);
         }
     }
@@ -218,23 +221,20 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         if ($page->template() == "shoppingcart_checkout" && !isset($page->header()->form)) {
             $checkoutForm = $this->config->get('plugins.shoppingcart.checkout_form');
             $page->header()->form = $checkoutForm;
-        }        
+        } 
         if ($terms_url = $this->config->get('plugins.shoppingcart.urls.terms_url', false)) {
             $twig = $this->grav['twig'];            
             $twig->twig_vars['terms_url'] = $this->config->get('plugins.shoppingcart.urls.terms_url');
         }
         
-        if ($terms_url = $this->config->get('plugins.shoppingcart.urls.terms_url', false)) {
-            $twig = $this->grav['twig'];            
-            $twig->twig_vars['terms_url'] = $this->config->get('plugins.shoppingcart.urls.terms_url');
-        }
-        if ($this->config->get('plugins.shoppingcart.ui.fancybox', false)) {
+        if ($this->config->get('plugins.shoppingcart.ui.loadfancybox', false)) {
             $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/jquery.fancybox.js');
             $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/jquery.fancybox.css');        
         }
         
-        $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/shoppingcart-personalizer.js');
+        $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/shoppingcart-personalizer.js');        
         $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/shoppingcart-personalizer.css');        
+        
         // Add translations needed in JavaScript code
         $this->addTranslationsToFrontend();
     }        
@@ -247,5 +247,52 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         $this->grav['twig']->twig_paths[] = __DIR__ . '/admin/templates';
     }
     
+    /**
+     * Extend page blueprints with configuration options.
+     *
+     * @param Event $event
+     *
+     */
+    public function onBlueprintCreated(Event $event)
+    {
+        $blueprint = $event['blueprint'];
+        $testblueprints = ['shoppingcart_product', 'shoppingcart_products', 'shoppingcart_categories'];
+        $bluetest = $this->config->get('plugins.shoppingcart-personalizer.ui.' . $event['type'] . '_blueprint', 'default');
+        if (!in_array($event['type'], $testblueprints)) {
+            return;
+        }
+        $available = Pages::types();
+        $blueprints = new Blueprints(Pages::getTypes());
+        if (array_key_exists($bluetest, $available)) {
+            $extents = $blueprints->get($bluetest);                    
+        } else {                    
+            $extents = $blueprints->get('default');
+        }
+        $blueprint->extend($extents);                
+    }
     
+    /**
+     * Called when a page is saved from the admin plugin.
+     * Assure consistent ids for groups and variations
+     */
+    public function onAdminSave($event)
+    {
+        $page = $event['object'];
+
+        if (!$page instanceof Page || $page->template() !== 'shoppingcart_product') {
+            return false;
+        }
+        array_walk($page->header()->groups, function(&$group, $key, &$groupids) {            
+            if (in_array($group['groupid'], $groupids)) {
+                $group['groupid'] = $group['groupid'] . '-' . $key;                
+            }
+            array_walk($group['variations'], function(&$variation, $varkey, &$varids) {            
+                if (in_array($variation['variationid'], $varids)) {
+                    $variation['variationid'] = $variation['variationid'] . '-' . $varkey;                
+                }
+                $varids[] = $variation['variationid'];
+            }, []);
+            $groupids[] = $group['groupid'];
+        }, []);
+    }    
 }

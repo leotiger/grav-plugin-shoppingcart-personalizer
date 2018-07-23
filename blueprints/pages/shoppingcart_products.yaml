@@ -1,7 +1,4 @@
 title: Products List
-'@extends':
-    type: default
-    context: blueprints://pages
 
 form:
   fields:
@@ -53,10 +50,22 @@ form:
                   validate:
                        type: bool
 
+                header.display_add_to_cart:
+                  type: toggle
+                  label: Display Add To Cart Button
+                  help: Display "Add to Cart"-button for each product.
+                  highlight: 0
+                  default: 0
+                  options:
+                      1: Yes
+                      0: No
+                  validate:
+                       type: bool
+
                 header.display_details_button:
                   type: toggle
                   label: Display Product Details Button
-                  help: Display "Details"-button on each product.
+                  help: Display "Details"-button for each product.
                   highlight: 1
                   default: 1
                   options:

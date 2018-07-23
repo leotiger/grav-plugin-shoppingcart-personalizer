@@ -1,120 +1,282 @@
+rules:
+  productids:
+    pattern: "[a-z][a-z0-9_\-]+"
+    min: 3
+    max: 25
+    
 title: Product
-'@extends':
-    type: default
-    context: blueprints://pages
 
 form:
   fields:
     tabs:
       fields:
-        content:
+        product:
           type: tab
-
+          ordering@: 3
+          title: Product
           fields:
+              product:
+                type: section
+                title: Product
+                underline: true
 
-            product:
-              type: section
-              title: Product
-              underline: true
+                fields:
+                  header.price:
+                    type: text
+                    label: Price
+                    default: 10
+                    validate:
+                      type: number
 
-              fields:
-                header.price:
-                  type: text
-                  label: Price
-                  default: '10'
-                  validate:
-                    type: string
-                    
-                header.product_id:
-                  type: text
-                  label: Product ID
-                  default: ''
-                  validate:
-                    type: string
+                  header.product_id:
+                    type: text
+                    label: Product ID
+                    default: ''
+                    validate:
+                      rule: productids
+                      required: true
+                  header.stock:
+                    type: text
+                    label: Stock
+                    default: 1
+                    validate:
+                      type: int
+                      min: 0
 
-                header.stock:
-                  type: text
-                  label: Stock
-                  default: 1
-                  validate:
-                    type: int
-                    min: 0
+                  header.cartmax:
+                    type: text
+                    label: Maximum allowed in cart
+                    help: Maximum allowed in cart if stock is greater than this, 0 deactivates the option
+                    default: 0
+                    validate:
+                      type: int
+                      min: 0
 
-                header.cartmax:
-                  type: text
-                  label: Maximum allowed in cart
-                  help: Maximum allowed in cart if stock is greater 1
-                  default: 0
-                  validate:
-                    type: int
-                    min: 0
+                  header.service_product:
+                    type: toggle
+                    label: Service product
+                    help: Service products have free shipping, they are digital or local
+                    highlight: 0
+                    default: 0
+                    options:
+                        1: Yes
+                        0: No
+                    validate:
+                         type: bool
+
+                  header.index_photo:
+                    type: pagemediaselect
+                    label: Index Image
+                    preview_images: true
+                    help: Used in shop index pages
+
+                  header.index_bgcolor:
+                    type: colorpicker
+                    label: Background color for index thumbnail
+                    help: Background color for index thumbnail
+                    default: 'rgba(255, 255, 255, 0.00)'
+
+                  header.default_photo:
+                    type: pagemediaselect
+                    label: Default Image
+                    preview_images: true
+                    help: Used as the main product image
+
+                  header.product_bgcolor:
+                    type: colorpicker
+                    label: Background color for thumbnails
+                    help: Background color for product thumbnails
+                    default: 'rgba(255, 255, 255, 0.00)'
+
+                  header.show_all_media:
+                    type: toggle
+                    label: Display all page media
+                    help: Display all existing page media in details page.
+                    highlight: 0
+                    default: 0
+                    options:
+                        1: Yes
+                        0: No
+                    validate:
+                         type: bool
+
+                  header.lastSale:
+                    type: text
+                    default: 0
+                    readonly: true  
+                    classes: hide
+                    help: The last sales timestamp (Read-only)
+                    validate:
+                      number
+
+                  header.allowquote:
+                    type: toggle
+                    label: Allow quote
+                    help: Allow price quote contact
+                    highlight: 0
+                    default: 0
+                    options:
+                        1: Yes
+                        0: No
+                    validate:
+                         type: bool
                          
-                header.service_product:
-                  type: toggle
-                  label: Service product
-                  help: Service products have free shipping, they are digital or local
-                  highlight: 0
-                  default: 0
-                  options:
-                      1: Yes
-                      0: No
-                  validate:
-                       type: bool
-                                    
-                header.index_photo:
-                  type: pagemediaselect
-                  label: Index Image
-                  preview_images: true
-                  help: Used in shop index pages
-                  
-                header.index_bgcolor:
-                  type: colorpicker
-                  label: Background color for index thumbnail
-                  help: Background color for index thumbnail
-                  default: 'rgba(255, 255, 255, 0.00)'
+                  header.remove_on_add:
+                    type: toggle
+                    label: Remove product if in cart before add
+                    help: Remove previous product from cart if added again
+                    highlight: 1
+                    default: 1
+                    options:
+                        1: Yes
+                        0: No
+                    validate:
+                         type: bool
 
-                header.default_photo:
-                  type: pagemediaselect
-                  label: Default Image
-                  preview_images: true
-                  help: Used as the main product image
-                  
-                header.product_bgcolor:
-                  type: colorpicker
-                  label: Background color for thumbnails
-                  help: Background color for product thumbnails
-                  default: 'rgba(255, 255, 255, 0.00)'
+              variationgroups:
+                  type: section
+                  title: Product configurations and variations
+                  underline: true
 
-                header.show_all_media:
-                  type: toggle
-                  label: Display all page media
-                  help: Display all existing page media in details page.
-                  highlight: 0
-                  default: 0
-                  options:
-                      1: Yes
-                      0: No
-                  validate:
-                       type: bool
-         
-                header.lastSale:
-                  type: text
-                  default: 0
-                  readonly: true  
-                  classes: hide
-                  help: The last sales timestamp (Read-only)
-                  validate:
-                    number
-                                    
-                header.allowquote:
-                  type: toggle
-                  label: Allow quote
-                  help: Allow price quote contact
-                  highlight: 0
-                  default: 0
-                  options:
-                      1: Yes
-                      0: No
-                  validate:
-                       type: bool
-                  
+                  fields:
+                    header.groups:
+                      type: list
+                      style: vertical
+                      btnLabel: 'Add Variation Groups'
+
+                      fields:
+                        .groupid:
+                          type: text
+                          label: Group Id
+                          validate:
+                            rule: productids
+                            required: true
+                        .grouptitle:
+                          type: text
+                          label: Group title
+                          validate:
+                            type: string                                                     
+                            required: true  
+                        .groupdescription:
+                          type: text
+                          label: Group description
+                          validate:
+                            type: string                                                      
+                        .groupprice:
+                          type: text
+                          label: Default Price
+                          default: 0
+                          validate:
+                            type: number
+                        .groupmin:
+                          type: text
+                          label: Default Min
+                          default: 0
+                          validate:
+                            type: int  
+                        .groupmax:
+                          type: text
+                          label: Default Max
+                          default: 0
+                          validate:
+                            type: number                            
+                        .groupmedia:
+                          type: pagemediaselect
+                          label: Default Group Image
+                          preview_images: true
+                          help: Set default image for variation group
+                        .grouprequired:
+                          type: toggle
+                          label: Selection required
+                          help: Customer has to select a variation / configuration
+                          highlight: 0
+                          default: 0
+                          options:
+                              1: Yes
+                              0: No
+                          validate:
+                               type: bool
+                        .groupasinput:
+                          type: toggle
+                          label: Handle with stock input
+                          help: Allow variation stock
+                          highlight: 0
+                          default: 0
+                          options:
+                              1: Yes
+                              0: No
+                          validate:
+                               type: bool
+                               
+                        .variations:  
+                          type: list
+                          label: Variations
+                          btnLabel: 'Add Variation'    
+                          collapsed: true
+                          fields:
+                            .variationid:
+                              type: text
+                              label: VariationID
+                              default: ''
+                              validate:
+                                rule: productids
+                                required: true
+                            .title:
+                              type: text
+                              label: Title                  
+                              validate:
+                                type: string
+                                required: true
+                            .description:
+                              type: text
+                              label: Description
+                            .price:
+                              type: text
+                              label: Price
+                              default: 0
+                              validate:
+                                type: number
+                            .varmin:
+                              type: text
+                              label: Min required
+                              help: If used for input configuration, minimum value, else used for cartmax
+                              default: 0
+                              validate:
+                                type: int
+                                min: 0                                
+                            .varmax:
+                              type: text
+                              label: Max allowed
+                              help: If used for input configuration, maximum value, else treated as stock
+                              default: 1
+                              validate:
+                                type: int
+                                min: 0
+                            .media:
+                              type: pagemediaselect
+                              label: Variaton Image
+                              preview_images: true
+                              help: Display image for variation
+                            .freetext:
+                              type: toggle
+                              label: Allow customer text
+                              help: Add text field for customer input
+                              highlight: 0
+                              default: 0
+                              options:
+                                1: Yes
+                                0: No
+                              validate:
+                                type: bool
+                            .fileupload:
+                              type: toggle
+                              label: File upload
+                              help: Allow file upload
+                              highlight: 0
+                              default: 0
+                              options:
+                                1: Yes
+                                0: No
+                              validate:
+                                type: bool
+                              

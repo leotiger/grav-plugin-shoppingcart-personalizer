@@ -1,7 +1,4 @@
 title: Shop
-'@extends':
-    type: default
-    context: blueprints://pages
 
 form:
   fields:

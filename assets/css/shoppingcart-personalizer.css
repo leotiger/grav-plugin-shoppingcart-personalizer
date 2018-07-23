@@ -125,6 +125,18 @@ button.js__shoppingcart__continue-shopping {
     margin: 25px 0;
 }
 
+
+
+.js__shoppingcart-cart .cart-product-card {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.shoppingcart-variation-handler .group-variations-sel,
+.shoppingcart-variation-handler .js__shoppingcart__variationfreetext
+{
+    width: 100%;
+}
 /* screenwidth less than 768px - mobile/smaller tablets
 --------------------------------------------------------------- */
 @media only screen and (max-width: 767px) {

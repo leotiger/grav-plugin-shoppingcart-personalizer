@@ -28,14 +28,6 @@ placeoffer_form:
             outerclasses: placeoffer-message
             validate:
                 required: true
-
-        -
-            name: g-recaptcha-response
-            label: Captcha
-            type: captcha
-            recaptcha_not_validated: PLUGIN_SHOPPINGCART.PERSONALIZE_CAPTCHA_NOT_VALID
-            validate:
-              required: true
               
     buttons:
         - 
@@ -47,7 +39,7 @@ placeoffer_form:
     process:
         -
             email:
-                subject: '[{{form.value.name|e}} offers Tessa] {{ form.value.subject|e }}'
+                subject: '{{PLUGIN_SHOPPINGCART.PERSONALIZE_OFFER_SUBJECTID}}: [{{form.value.name|e}}] {{ form.value.subject|e }}'
                 body: '{% include ''forms/data.html.twig'' %}'
         -
             save:

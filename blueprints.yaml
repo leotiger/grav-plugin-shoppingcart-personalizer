@@ -1,6 +1,6 @@
 name: Shopping Cart Personalizer Addon
-version: 0.1.4
-description: "Personalizer for the Grav Shopping Cart Plugin"
+version: 0.9.0
+description: "Personlizer for the Grav Shopping Cart Plugin"
 icon: shopping-cart
 author:
   name: Uli Hake
@@ -12,7 +12,7 @@ keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock managem
 bugs: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/issues
 license: MIT
 
-testing: true
+testing: false
 
 dependencies:
   - { name: shoppingcart, version: '~1.1' }
@@ -107,7 +107,7 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
-                
+
             ui.fancybox:
               type: toggle
               label: Activate fancybox support
@@ -119,6 +119,42 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
+
+            ui.loadfancybox:
+              type: toggle
+              label: Load fancybox css and js
+              help: Load fancybox scripts if not provided in theme
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            ui.shoppingcart_product_blueprint:
+              label: Extend product blueprint
+              type: text
+              default: 'default'
+              help: Specify a base blueprint for your product items (must exist in your theme, instance)
+              validate:
+                type: string
+
+            ui.shoppingcart_products_blueprint:
+              label: Extend catalogue blueprint
+              type: text
+              default: 'default'
+              help: Specify a base blueprint for product catalogue (must exist in your theme, instance)
+              validate:
+                type: string
+
+            ui.shoppingcart_categories_blueprint:
+              label: Extend categories blueprint
+              type: text
+              default: 'default'
+              help: Specify a base blueprint for the shop (categories) page (must exist in your theme, instance)
+              validate:
+                type: string
                 
             urls.shop_url:
               label: Visualize Shop URL
