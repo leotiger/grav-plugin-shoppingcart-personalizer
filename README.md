@@ -42,6 +42,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * fix shoppingcart configuration injection problem
 * inject checkout form into shoppingcart checkout page (related with configuration injection)
 * improved theme integration possibilities allowing to specify the base templates that product pages shall extend (defaults to default)
+* provide product configuration in an own tab in admin
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
 form configuration adding support for textarea, re-captcha, etc. A Pull Request for the shoppingcart plugin, v.1.2.2 is
