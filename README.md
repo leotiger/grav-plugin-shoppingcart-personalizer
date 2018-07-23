@@ -26,6 +26,9 @@ stock management, country restriction, single product, service vs. shippable pro
 * mark product as service product (service products need no shipping)
 * editable product id in admin
 * show remove button in checkout cart if desired
+* optionally remove existing product (necessary in the context of product variations)
+* grouped product variations and configurations with pricing, stock, customer input
+* reflect configured variations and configuration in cart
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
@@ -38,6 +41,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * refactor javascript to allow optimized js load in the body region
 * fix shoppingcart configuration injection problem
 * inject checkout form into shoppingcart checkout page (related with configuration injection)
+* improved theme integration possibilities allowing to specify the base templates that product pages shall extend (defaults to default)
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
 form configuration adding support for textarea, re-captcha, etc. A Pull Request for the shoppingcart plugin, v.1.2.2 is
