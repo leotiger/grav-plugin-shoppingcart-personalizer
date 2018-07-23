@@ -282,17 +282,21 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         if (!$page instanceof Page || $page->template() !== 'shoppingcart_product') {
             return false;
         }
-        array_walk($page->header()->groups, function(&$group, $key, &$groupids) {            
-            if (in_array($group['groupid'], $groupids)) {
-                $group['groupid'] = $group['groupid'] . '-' . $key;                
-            }
-            array_walk($group['variations'], function(&$variation, $varkey, &$varids) {            
-                if (in_array($variation['variationid'], $varids)) {
-                    $variation['variationid'] = $variation['variationid'] . '-' . $varkey;                
+        if (isset($page->header()->groups) && is_array($page->header()->groups)) {
+            array_walk($page->header()->groups, function(&$group, $key, &$groupids) {            
+                if (in_array($group['groupid'], $groupids)) {
+                    $group['groupid'] = $group['groupid'] . '-' . $key;                
                 }
-                $varids[] = $variation['variationid'];
+                if (isset($group['variations']) && is_array($group['variations'])) {
+                    array_walk($group['variations'], function(&$variation, $varkey, &$varids) {            
+                        if (in_array($variation['variationid'], $varids)) {
+                            $variation['variationid'] = $variation['variationid'] . '-' . $varkey;                
+                        }
+                        $varids[] = $variation['variationid'];
+                    }, []);
+                }
+                $groupids[] = $group['groupid'];
             }, []);
-            $groupids[] = $group['groupid'];
-        }, []);
+        }
     }    
 }
