@@ -46,8 +46,7 @@ stock management, country restriction, single product, service vs. shippable pro
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
 form configuration adding support for textarea, re-captcha, etc. A Pull Request for the shoppingcart plugin, v.1.2.2 is
-placed but you may update your shoppingcart plugin using the [fork](https://github.com/leotiger/grav-plugin-shoppingcart) as long as the proposals are not integrated into
-the shoppingcart plugin.
+placed but you may update your shoppingcart plugin using the [fork](https://github.com/leotiger/grav-plugin-shoppingcart) as long as the proposals are not integrated into the shoppingcart plugin. But don't worry, this plugin mitigates problems of the shoppingcart plugin by refactoring many of its core functions.
 
 The Shoppingcart-Notify Add-on allows you to:
 
