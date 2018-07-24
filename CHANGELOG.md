@@ -2,7 +2,7 @@
 ## 07-24-2018
 
 1. [](#bugfix)
-    * Fix bug if no groups and variations a present in onAdminSave
+    * Fix bug if no groups and variations are present in onAdminSave
 
 # v0.9.0
 ## 07-23-2018
