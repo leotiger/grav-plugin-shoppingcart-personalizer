@@ -161,9 +161,9 @@ form:
                 type: string
                 
             shop.restrict_countries:
-              label: Restrict Countries
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_RESTRICT_COUNTRIES
               type: select
-              help: Restrict shop operations to the selected countries
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_RESTRICT_COUNTRIES_HELP
               classes: fancy
               multiple: true
               default: 
