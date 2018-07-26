@@ -4,12 +4,35 @@
     <li>
         {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
         {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: product_ordered.product.price } %}
+        
+        {% if product_ordered.product.variants is defined and product_ordered.product.variants|length > 0 %}
+        <br>
+        {{ "PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_BASEPRICE"|t|e }}:
+        {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
+        {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: (product_ordered.product.variants|first).varbaseprice } %}
+        <ul>
+        {% for variant in product_ordered.product.variants %}
+        <li>
+        {{ product_ordered.quantity|e }} x {{ variant.varmultiplier|e }} {{ variant.vardata.title|e }} at
+        {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: variant.varprice } %}
+        </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
     </li>
 {% endfor %}
+{% if config.plugins.shoppingcart.general.product_taxes == 'included' %}
+<h3>{{  "PLUGIN_SHOPPINGCART.INCLUDING_TAXES"|t|e }}</h3>    
+{% else %}
+<h3>{{  "PLUGIN_SHOPPINGCART.EXCLUDING_TAXES"|t|e }}</h3>
+{% endif %}
+{% include 'partials/shoppingcart_core_price_order.html.twig' with { price: order.taxes } %}
+
 
 <h3>{{ "PLUGIN_SHOPPINGCART.TOTAL_PAID"|t|e }}</h3>
 
 {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: order.amount } %}
+
 
 <h3>{{ "PLUGIN_SHOPPINGCART.ORDER_DETAILS"|t|e }}</h3>
 

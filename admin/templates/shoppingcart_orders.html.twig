@@ -21,6 +21,7 @@
                 <tr class="h">
                     <th class="date">Date</th>
                     <th class="amount">Amount</th>
+                    <th class="taxes">Taxes</th>
                     <th class="details">Details</th>
                     <th class="products">Products</th>
                 </tr>
@@ -32,6 +33,13 @@
                                 {{ order.amount }}{{ currency_symbol }}
                             {% else %}
                                 {{ currency_symbol }}{{ order.amount }}
+                            {% endif %}
+                        </td>
+                        <td class="taxes">
+                            {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                {{ order.taxes }}{{ currency_symbol }}
+                            {% else %}
+                                {{ currency_symbol }}{{ order.taxes }}
                             {% endif %}
                         </td>
                         <td class="details">
@@ -52,17 +60,54 @@
                         </td>
                         <td class="products">
                             {% for product in order.products %}
-                                <strong>Item</strong>: {{product.product.title}} -
-                                <strong>Quantity</strong>: {{product.quantity}} -
-                                <strong>Price</strong>:
+                                <strong>{{ "PLUGIN_SHOPPINGCART.ITEM"|t }}</strong>: {{product.product.title}} -
+                                <strong>{{ "PLUGIN_SHOPPINGCART.QUANTITY"|t }}</strong>: {{product.quantity}} -
+                                <strong>{{ "PLUGIN_SHOPPINGCART.PRICE"|t }}</strong>:
 
                                 {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
                                     {{ product.product.price }}{{ currency_symbol }}
                                 {% else %}
                                     {{ currency_symbol }}{{ product.product.price }}
                                 {% endif %}
-
+                                {% if product.product.variants is defined and product.product.variants|length > 0 %}
+                                    <br>
+                                    <strong>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_BASEPRICE"|t }}</strong>: {{ (product.product.variants|first).varbaseprice }} -
+                                    <strong>{{ "PLUGIN_SHOPPINGCART.QUANTITY"|t }}</strong>: {{product.quantity}} -
+                                    <strong>{{ "PLUGIN_SHOPPINGCART.PRICE"|t }}</strong>:
+                                    {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                        {{ (product.product.variants|first).varbaseprice * product.quantity }} {{ currency_symbol }}
+                                    {% else %}
+                                        {{ currency_symbol }} {{ (product.product.variants|first).varbaseprice * product.quantity }}
+                                    {% endif %}
+                                    {% for variant in product.product.variants %}                                        
+                                        <br>
+                                        <strong>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_VARIATION"|t }}</strong>: {{ variant.vardata.title }} -
+                                        <strong>{{ "PLUGIN_SHOPPINGCART.PRICE"|t }}</strong>:
+                                        {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                            {{ variant.varprice }} {{ currency_symbol }}
+                                        {% else %}
+                                            {{ currency_symbol }} {{ variant.varprice }}
+                                        {% endif %}
+                                        <strong>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_VARIATION_QUANTITY"|t }}</strong>: {{ variant.varmultiplier ~ ' * ' ~ product.quantity }} -
+                                        <strong>{{ "PLUGIN_SHOPPINGCART.PRICE"|t }}</strong>:
+                                        {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                            {{ variant.varprice * product.quantity * variant.varmultiplier }} {{ currency_symbol }}
+                                        {% else %}
+                                            {{ currency_symbol }} {{ variant.varprice * product.quantity * variant.varmultiplier }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
                                 <br>
+                                <strong>{{ "PLUGIN_SHOPPINGCART.TOTAL"|t }}</strong>: 
+                                {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+                                    {{ product.product.price * product.quantity }} {{ currency_symbol }}
+                                {% else %}
+                                    {{ currency_symbol }} {{ product.product.price * product.quantity }}
+                                {% endif %}
+                                
+                                <hr>
+                                
+                                
                             {% endfor %}
                         </td>
                     </tr>

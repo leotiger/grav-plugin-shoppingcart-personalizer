@@ -29,6 +29,8 @@ en:
         PERSONALIZE_OFFER_SUBJECTID: Query
         PERSONALIZE_VARIATION_REMARK: Your remarks
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variations and configurations
+        PERSONALIZE_VARIATION: Variation
+        PERSONALIZE_VARIATION_QUANTITY: Var. quantity
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Baseprice
         PERSONALIZE_CHECKOUT_REMOVE: Checkout remove button
         PERSONALIZE_CHECKOUT_REMOVE_HELP: Display remove button in checkout cart
@@ -108,6 +110,8 @@ de:
         PERSONALIZE_OFFER_SUBJECTID: Anfrage
         PERSONALIZE_VARIATION_REMARK: Ihre Angaben
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variationen und Konfiguration
+        PERSONALIZE_VARIATION: Variation
+        PERSONALIZE_VARIATION_QUANTITY: Var. Menge
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Grundpreis
         PERSONALIZE_CHECKOUT_REMOVE: 'Kasse mit Option "Entfernen"'
         PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Option "Entfernen" im Warenkorb anzeigen'        
@@ -186,6 +190,8 @@ ca:
         PERSONALIZE_OFFER_SUBJECTID: Consulta
         PERSONALIZE_VARIATION_REMARK: Observacions
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variacions i configuracions
+        PERSONALIZE_VARIATION: Variació
+        PERSONALIZE_VARIATION_QUANTITY: Var. quantitat
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Preu base
         PERSONALIZE_CHECKOUT_REMOVE: 'Caixa amb botó "Eliminar"'
         PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Mostrar opció "Eliminar" per productes en la caixa'        
@@ -265,6 +271,8 @@ es:
         PERSONALIZE_OFFER_SUBJECTID: Consulta
         PERSONALIZE_VARIATION_REMARK: Observaciones
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variaciones y configuraciones
+        PERSONALIZE_VARIATION: Variación
+        PERSONALIZE_VARIATION_QUANTITY: Var. cantidad
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Precio base
         PERSONALIZE_CHECKOUT_REMOVE: 'Caja con botón "Eliminar"'
         PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Mostrar la opción "Eliminar" para productos en la caja'        
