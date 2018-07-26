@@ -1,4 +1,7 @@
 enabled: true
+shop:
+  restrict_countries:
+    - '*'
 placeoffer_form:
     name: placeoffer    
     fields:

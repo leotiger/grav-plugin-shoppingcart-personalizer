@@ -160,6 +160,18 @@ form:
               validate:
                 type: string
                 
+            shop.restrict_countries:
+              label: Restrict Countries
+              type: select
+              help: Restrict shop operations to the selected countries
+              classes: fancy
+              multiple: true
+              default: 
+                  - '*'
+              '@data-options': '\Grav\Plugin\ShoppingCart\ShoppingCart::getShippingCountries'
+              validate:
+                type: commalist
+                
             urls.shop_url:
               label: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_URL
               help: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_URL_HELP

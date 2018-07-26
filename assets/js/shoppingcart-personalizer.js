@@ -886,4 +886,25 @@
         return isAny();
     };    
 
+    /***********************************************************/
+    /* Run in our own function for countryCanBuy as the implementation in ShoppingCart is a stub
+     * 
+     * @todo this may not work in older browsers like IE 11
+     * @todo could be optimized as we repeat the object to array conversion for each check
+     * @param {type} countryCode
+     * @returns {Boolean}
+     */
+    /***********************************************************/
+    ShoppingCart.countryCanBuy = function countryCanBuy(countryCode) {
+        if (typeof ShoppingCart.restrictedCountries === 'undefined' && typeof ShoppingCart.settings.shop.restrict_countries !== 'undefined') {
+            ShoppingCart.restrictedCountries = Object.values(ShoppingCart.settings.shop.restrict_countries);
+        }
+        if (ShoppingCart.restrictedCountries.length && ShoppingCart.restrictedCountries.includes(countryCode)) {
+            return true;
+        } else if(ShoppingCart.restrictedCountries.length && ShoppingCart.restrictedCountries.includes("*")) {
+            return true;
+        }
+        return false;
+    };
+
 })(window.ShoppingCart);
