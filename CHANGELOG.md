@@ -1,8 +1,17 @@
 # v0.9.2
 ## 26-07-2018
 
-1. [](#improved)
+1. [](#new)
+    * Add taxes to order confirmation and backend breakdown of orders
+    * Display ordered product variations and configurations in confirmation
+    * Display ordered product variations and configurations in backend
+
+2. [](#improved)
     * Make admin strings translatable
+    * Labels in order breakdown in backend translatable
+
+3. [](#bugfix)
+    * Try to fix changelog format for output in grav plugin store
 
 # v0.9.1
 ## 24-07-2018
