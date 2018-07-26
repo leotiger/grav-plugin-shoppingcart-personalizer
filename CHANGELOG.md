@@ -1,3 +1,9 @@
+# v0.9.3
+## 27-07-2018
+
+1. [](#new)
+    * Move restrict countries from notify plugin into this one as this is a basic and necessary feature
+
 # v0.9.2
 ## 26-07-2018
 
