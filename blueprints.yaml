@@ -1,6 +1,6 @@
 name: Shopping Cart Personalizer Addon
-version: 0.9.1
-description: "Personlizer for the Grav Shopping Cart Plugin"
+version: 0.9.2
+description: "Personalizer for the Grav Shopping Cart Plugin"
 icon: shopping-cart
 author:
   name: Uli Hake
@@ -8,7 +8,7 @@ author:
   url: https://www.saveva.com
 homepage: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer
 demo: https://www.tessa.es
-keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock management
+keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock management, variations, product configuration
 bugs: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/issues
 license: MIT
 
@@ -45,7 +45,8 @@ form:
                 type: bool
 
             cart.display_remove_option:
-              label: Display remove option in checkout cart
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_CHECKOUT_REMOVE
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_CHECKOUT_REMOVE_HELP
               type: toggle
               highlight: 1
               default: 0
@@ -58,6 +59,7 @@ form:
             ui.use_breadcrumbs:
               type: toggle
               label: PLUGIN_SHOPPINGCART.PERSONALIZE_USE_BREADCRUMB
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_USE_BREADCRUMB_HELP
               highlight: 1
               default: 1
               options:
@@ -67,8 +69,8 @@ form:
                 type: bool
 
             ui.currency_decimal_comma:
-              label: Display comma as decimal separator
-              help: Display comma instead of dot as decimal separator
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_DECIMAL
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_DECIMAL_HELP                
               type: toggle
               highlight: 0
               default: 0
@@ -79,8 +81,8 @@ form:
                 type: bool
 
             ui.short_labels_breakpoint:
-              label: Viewport width breakpoint to use short labels
-              help: Determines the maximum value of viewport width for short labels. Expressed in pixels
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_DESKTOP_BREAKPOINT                
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_DESKTOP_BREAKPOINT_HELP
               type: text
               default: 480
               validate:
@@ -89,6 +91,7 @@ form:
             ui.image_container_square:
               type: toggle
               label: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_IMAGE_EQUALIZER
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_IMAGE_EQUALIZER_HELP
               highlight: 1
               default: 1
               options:
@@ -99,7 +102,8 @@ form:
                 
             ui.testmode:
               type: toggle
-              label: Shop in test mode
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_TEST_MODE
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_TEST_MODE_HELP
               highlight: 1
               default: 1
               options:
@@ -110,8 +114,8 @@ form:
 
             ui.fancybox:
               type: toggle
-              label: Activate fancybox support
-              help: Allow images to be displayed with fancybox overlay on click
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_FANCYBOX
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_UI_FANCYBOX_HELP
               highlight: 0
               default: 0
               options:
@@ -122,8 +126,8 @@ form:
 
             ui.loadfancybox:
               type: toggle
-              label: Load fancybox css and js
-              help: Load fancybox scripts if not provided in theme
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_FANCYBOX_LOAD
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_FANCYBOX_LOAD_HELP
               highlight: 0
               default: 0
               options:
@@ -133,56 +137,56 @@ form:
                 type: bool
 
             ui.shoppingcart_product_blueprint:
-              label: Extend product blueprint
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS_HELP
               type: text
               default: 'default'
-              help: Specify a base blueprint for your product items (must exist in your theme, instance)
               validate:
                 type: string
 
             ui.shoppingcart_products_blueprint:
-              label: Extend catalogue blueprint
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS_HELP
               type: text
               default: 'default'
-              help: Specify a base blueprint for product catalogue (must exist in your theme, instance)
               validate:
                 type: string
 
             ui.shoppingcart_categories_blueprint:
-              label: Extend categories blueprint
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS_HELP                
               type: text
               default: 'default'
-              help: Specify a base blueprint for the shop (categories) page (must exist in your theme, instance)
               validate:
                 type: string
                 
             urls.shop_url:
-              label: Visualize Shop URL
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_URL
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_URL_HELP
               type: text
               default: '/shop'
-              help: The shop visualization page URL. Change if conflicting with another route
               validate:
                 type: string
                 
             urls.terms_url:
-              label: Visualize Terms URL
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_TERMS_URL
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_TERMS_URL_HELP
               type: text
               default: '/shop-terms-and-conditions'
-              help: The shop terms visualization page URL. Change if conflicting with another route
               validate:
                 type: string
 
             urls.placeoffer_url:
-              label: Offer form url
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_QUOTE_URL
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_QUOTE_URL_HELP                
               type: text
-              help: Url to retrieve the place offer form
               default: '/shop-place-offer'
               validate:
                 type: string
 
         -
           type: tab
-          title: Placeoffer Form
+          title: PLUGIN_SHOPPINGCART.PERSONALIZE_QUOTE_FORM
 
           fields:
 
@@ -194,8 +198,7 @@ form:
               fields:
 
                 .type:
-                  label: Type
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TYPE
                   type: select
                   default: text
                   options:
@@ -214,33 +217,33 @@ form:
                 .validate:
                   toggleable: true
                   type: array
-                  label: Validate
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_VALIDATE
                   help:
                   placeholder_key: value
                   placeholder_value: label
 
                 .name:
                   toggleable: true
-                  label: Name
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_NAME
                   help:
                   type: text
 
                 .label:
                   toggleable: true
-                  label: Label
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_LABEL
                   help:
                   type: text
                   
                 .title:
                   toggleable: true
-                  label: Title
-                  help: Only for spacer
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TITLE
+                  help: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TITLE_HELP
                   type: text
                   
                 .underline:
                   toggleable: true
-                  label: Underline
-                  help: Only for spacer
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_UNDERLINE
+                  help: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_UNDERLINE_HELP
                   default: 1
                   type: bool
                   options:
@@ -251,12 +254,11 @@ form:
 
                 .help:
                   toggleable: true
-                  label: Help
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_HELP
                   type: text
 
                 .ignore:
-                  label: Ignore
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_IGNORE
                   type: toggle
                   highlight: 0
                   default: 0
@@ -268,38 +270,33 @@ form:
 
                 .classes:
                   toggleable: true
-                  label: Classes
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CLASSES
                   help:
                   type: text
 
                 .id:
                   toggleable: true
-                  label: Id
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_ID
                   type: text
 
                 .outerclasses:
                   toggleable: true
-                  label: Outer classes
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_OUTER_CLASSES
                   type: text
 
                 .content:
                   toggleable: true
-                  label: Content
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CONTENT
                   type: text
 
                 .markdown:
                   toggleable: true
-                  label: Content includes Markdown?
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CONTENT_MARKDOWN
                   type: text
 
                 .options:
                   toggleable: true
                   type: array
-                  label: Options
-                  help:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_OPTIONS
                   placeholder_key: value
                   placeholder_value: label
