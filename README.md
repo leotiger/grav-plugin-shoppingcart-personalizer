@@ -36,6 +36,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * define product image
 * define catalogue image
 * show multiple product images
+* restrict countries (moved-in from notify as this is a quite essential feature, an out of the box feature)
 * activate fancybox support for item images
 * background colors for image containers (defaults to transparent)
 * refactor javascript to allow optimized js load in the body region
@@ -51,7 +52,6 @@ placed but you may update your shoppingcart plugin using the [fork](https://gith
 
 The Shoppingcart-Notify Add-on allows you to:
 
-* restrict countries
 * checks product availablility if checkout is called
 * adds additional security checks server-side to prevent cart manipulations in the front-end
 * sends confirmation email to customer with customizable template
