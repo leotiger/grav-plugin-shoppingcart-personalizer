@@ -9,18 +9,16 @@ en:
         PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Please use country selector to define cost of delivery
         PERSONALIZE_CART_IMAGE_EQUALIZER: Equalize image container size
         PERSONALIZE_SHOP_PAGE: Shop
-        PERSONALIZE_USE_BREADCRUMB: Show breadcrumb
-        PERSONALIZE_SHOP_TEST_MODE: Shop in test mode
-        PERSONALIZE_ALLOW_QUOTE: Your offer
-        PERSONALIZE_ALLOW_QUOTE_SEND: Send your offer
+        PERSONALIZE_ALLOW_QUOTE: Your question
+        PERSONALIZE_ALLOW_QUOTE_SEND: Send your question
         PERSONALIZE_ALLOW_QUOTE_CLOSE: Close
         PERSONALIZE_MODAL_CLOSE: Close
-        PERSONALIZE_ALLOW_QUOTE_TITLE: Place your offer 
-        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Offer message'
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Place your question 
+        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Question message'
         PERSONALIZE_PLACE_OFFER_NAME: 'Your name'
         PERSONALIZE_CAPTCHA_NOT_VALID: 'Captcha not valid!'
-        PERSONALIZE_PLACE_OFFER_THANKS: 'Thank you for placing an offer.'
-        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Send your offer'
+        PERSONALIZE_PLACE_OFFER_THANKS: 'Thank you for sending the question.'
+        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Send your question'
         PERSONALIZE_PLACE_OFFER_PRODUCT: 'Product'
         PERSONALIZE_PLACE_OFFER_PRODUCT_URL: 'Url'
         PERSONALIZE_BILLING_DATA: 'Billing data'
@@ -32,6 +30,52 @@ en:
         PERSONALIZE_VARIATION_REMARK: Your remarks
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variations and configurations
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Baseprice
+        PERSONALIZE_CHECKOUT_REMOVE: Checkout remove button
+        PERSONALIZE_CHECKOUT_REMOVE_HELP: Display remove button in checkout cart
+        PERSONALIZE_USE_BREADCRUMB: Show breadcrumb
+        PERSONALIZE_USE_BREADCRUMB_HELP: Enable display of breadcrump in shop area if breadcrumb plugin is available
+        PERSONALIZE_UI_DECIMAL: Comma as decimal separator 
+        PERSONALIZE_UI_DECIMAL_HELP: Display comma instead of dot in front-end as decimal separator
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT: Desktop vw breakpoint           
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT_HELP: Defines the viewport width breakpoint that triggers use of abbreviated labels. Expressed in pixels.
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Image equalizer
+        PERSONALIZE_CART_IMAGE_EQUALIZER_HELP: Zoom crop images to specified width to offer a homogenous display of product images
+        PERSONALIZE_SHOP_TEST_MODE: Test mode
+        PERSONALIZE_SHOP_TEST_MODE_HELP: Put shop into test mode. Displays an alert to the customer.
+        PERSONALIZE_UI_FANCYBOX: Fancybox images
+        PERSONALIZE_UI_FANCYBOX_HELP: Activate fancybox display of product images in product detail pages
+        PERSONALIZE_FANCYBOX_LOAD: Fancybox assets
+        PERSONALIZE_FANCYBOX_LOAD_HELP: Load fancybox assets if not available through theme
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS: Product blueprint extends
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product items (must exist in your theme, instance, etc.)
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS: Products blueprint extends
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product collection pages (must exist in your theme, instance, etc.)
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS: Shop blueprint extends
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your shop pages (product collections overview, must exist in your theme, instance, etc.)
+        PERSONALIZE_SHOP_URL: Shop path
+        PERSONALIZE_SHOP_URL_HELP: Set the main shop path
+        PERSONALIZE_TERMS_URL: Terms path
+        PERSONALIZE_TERMS_URL_HELP: The path to your terms and condition page for customers
+        PERSONALIZE_QUOTE_URL: Quote path
+        PERSONALIZE_QUOTE_URL_HELP: Set the path if you want to allow quotes, remarks, questions related with products. Path should not exist in the instance!!!
+        PERSONALIZE_QUOTE_FORM: Quote form
+        PERSONALIZE_FIELD_TYPE: Field type
+        PERSONALIZE_FIELD_VALIDATE: Validate
+        PERSONALIZE_FIELD_NAME: Name
+        PERSONALIZE_FIELD_LABEL: Label
+        PERSONALIZE_FIELD_TITLE: Title
+        PERSONALIZE_FIELD_TITLE_HELP: Only for spacer
+        PERSONALIZE_FIELD_UNDERLINE: Underline
+        PERSONALIZE_FIELD_UNDERLINE_HELP: Only for spacer
+        PERSONALIZE_FIELD_HELP: Help
+        PERSONALIZE_FIELD_IGNORE: Ignore field
+        PERSONALIZE_FIELD_CLASSES: Classes
+        PERSONALIZE_FIELD_ID: Id
+        PERSONALIZE_FIELD_OUTER_CLASSES: Outer classes
+        PERSONALIZE_FIELD_CONTENT: Content
+        PERSONALIZE_FIELD_CONTENT_MARKDOWN: Content includes markdown?
+        PERSONALIZE_FIELD_OPTIONS: Options
+        
     
 de:
     PLUGIN_SHOPPINGCART:
@@ -44,18 +88,16 @@ de:
         PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Die Länderauswahl konfiguriert die Versandkosten
         PERSONALIZE_CART_IMAGE_EQUALIZER: Equalize image container size
         PERSONALIZE_SHOP_PAGE: Shop
-        PERSONALIZE_USE_BREADCRUMB: Ariadnafaden anzeigen
-        PERSONALIZE_SHOP_TEST_MODE: Online-Shop im Testmodus
-        PERSONALIZE_ALLOW_QUOTE: Ihr Angebot
-        PERSONALIZE_ALLOW_QUOTE_SEND: Senden Sie Ihr Angebot
+        PERSONALIZE_ALLOW_QUOTE: Ihre Nachfrage
+        PERSONALIZE_ALLOW_QUOTE_SEND: Nachfrage senden
         PERSONALIZE_ALLOW_QUOTE_CLOSE: Schliessen
         PERSONALIZE_MODAL_CLOSE: Schliessen
-        PERSONALIZE_ALLOW_QUOTE_TITLE: Angebot zusenden 
-        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Angebotsnachricht'
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Anfrage zusenden 
+        PERSONALIZE_PLACE_OFFER_MESSAGE: 'Anfragetext'
         PERSONALIZE_PLACE_OFFER_NAME: 'Ihr Name'
         PERSONALIZE_CAPTCHA_NOT_VALID: 'Captcha nicht gültig!'
-        PERSONALIZE_PLACE_OFFER_THANKS: 'Danke für Ihr Angebot.'
-        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Angebot senden'
+        PERSONALIZE_PLACE_OFFER_THANKS: 'Danke für Ihre Nachfrage.'
+        PERSONALIZE_PLACE_OFFER_SUBMIT: 'Anfrage senden'
         PERSONALIZE_PLACE_OFFER_PRODUCT: 'Produkt'
         PERSONALIZE_PLACE_OFFER_PRODUCT_URL: 'Url'
         PERSONALIZE_BILLING_DATA: 'Rechnungsdaten'
@@ -67,6 +109,51 @@ de:
         PERSONALIZE_VARIATION_REMARK: Ihre Angaben
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variationen und Konfiguration
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Grundpreis
+        PERSONALIZE_CHECKOUT_REMOVE: 'Kasse mit Option "Entfernen"'
+        PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Option "Entfernen" im Warenkorb anzeigen'        
+        PERSONALIZE_USE_BREADCRUMB: Ariadnafaden anzeigen        
+        PERSONALIZE_USE_BREADCRUMB_HELP: Enable display of breadcrump in shop area if breadcrumb plugin is available
+        PERSONALIZE_UI_DECIMAL: Komma für Dezimalstellen
+        PERSONALIZE_UI_DECIMAL_HELP: Komma anstatt Punkt als Trenner für Dezimalstellen in der Anzeige von Preisen
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT: Bildschirm VW-Umbruch
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT_HELP: Definieren Sie die Viewport-Breite in Pixeln, um für Beschriftungen in abgekürzter Variante anzuzeigen
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Bildanpassung
+        PERSONALIZE_CART_IMAGE_EQUALIZER_HELP: Zoom-Crop Filter für Produkt-Bilder, um die einheitliche Darstellung zu verbessern
+        PERSONALIZE_SHOP_TEST_MODE: Test Modus
+        PERSONALIZE_SHOP_TEST_MODE_HELP: Informieren Sie Kunden, dass sich das Online-Geschäft im Test-Modus befindet.
+        PERSONALIZE_UI_FANCYBOX: Fancybox Gallerie
+        PERSONALIZE_UI_FANCYBOX_HELP: Erlauben Sie das Laden von Produktbildern mit Fancybox
+        PERSONALIZE_FANCYBOX_LOAD: Fancybox assets
+        PERSONALIZE_FANCYBOX_LOAD_HELP: Load fancybox assets if not available through theme
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS: Produkt-Vorlage erweitert
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product items (must exist in your theme, instance, etc.)
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS: Produktklassenvorlage erweitert
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product collection pages (must exist in your theme, instance, etc.)
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS: Shopkatalogvorlage erweitert
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your shop pages (product collections overview, must exist in your theme, instance, etc.)
+        PERSONALIZE_SHOP_URL: Shop-Pfad
+        PERSONALIZE_SHOP_URL_HELP: Set the main shop path
+        PERSONALIZE_TERMS_URL: Konditionen-Pfad
+        PERSONALIZE_TERMS_URL_HELP: The path to your terms and condition page for customers
+        PERSONALIZE_QUOTE_URL: Anfrage-Pfad
+        PERSONALIZE_QUOTE_URL_HELP: Set the path if you want to allow quotes, remarks, questions related with products. Path should not exist in the instance!!!
+        PERSONALIZE_QUOTE_FORM: Anfrage-Form
+        PERSONALIZE_FIELD_TYPE: Feldtyp
+        PERSONALIZE_FIELD_VALIDATE: Prüfen
+        PERSONALIZE_FIELD_NAME: Name
+        PERSONALIZE_FIELD_LABEL: Beschriftung
+        PERSONALIZE_FIELD_TITLE: Titel
+        PERSONALIZE_FIELD_TITLE_HELP: Only for spacer
+        PERSONALIZE_FIELD_UNDERLINE: Unterstreichen
+        PERSONALIZE_FIELD_UNDERLINE_HELP: Only for spacer
+        PERSONALIZE_FIELD_HELP: Hilfe
+        PERSONALIZE_FIELD_IGNORE: Feld ignorieren
+        PERSONALIZE_FIELD_CLASSES: CSS-Klassen
+        PERSONALIZE_FIELD_ID: Id
+        PERSONALIZE_FIELD_OUTER_CLASSES: Container-CSS-Klassen
+        PERSONALIZE_FIELD_CONTENT: Inhalt
+        PERSONALIZE_FIELD_CONTENT_MARKDOWN: Inhalt mit markdown?
+        PERSONALIZE_FIELD_OPTIONS: Auswahloptionen
 
 ca:
     PLUGIN_SHOPPINGCART:
@@ -79,18 +166,16 @@ ca:
         PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Feu servir el selector de país per definir el cost del lliurament.
         PERSONALIZE_CART_IMAGE_EQUALIZER: Igualar la mida del contenidor de la imatge
         PERSONALIZE_SHOP_PAGE: Botiga
-        PERSONALIZE_USE_BREADCRUMB: Mostrar la ruta de navegació
-        PERSONALIZE_SHOP_TEST_MODE: Botiga en prova
         PERSONALIZE_ALLOW_QUOTE: Oferir
-        PERSONALIZE_ALLOW_QUOTE_SEND: Enviar la vostra oferta
+        PERSONALIZE_ALLOW_QUOTE_SEND: Enviar consulta
         PERSONALIZE_ALLOW_QUOTE_CLOSE: Tancar
         PERSONALIZE_MODAL_CLOSE: Tancar
-        PERSONALIZE_ALLOW_QUOTE_TITLE: Emetre la vostra oferta
-        PERSONALIZE_PLACE_OFFER_MESSAGE: "Missatge de oferta"
+        PERSONALIZE_ALLOW_QUOTE_TITLE: La vostra consulta
+        PERSONALIZE_PLACE_OFFER_MESSAGE: "Missatge de la consulta"
         PERSONALIZE_PLACE_OFFER_NAME: "El teu nom"
         PERSONALIZE_CAPTCHA_NOT_VALID: "Captcha no és vàlid!"
-        PERSONALIZE_PLACE_OFFER_THANKS: "Gràcies la oferta."
-        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar la oferta"
+        PERSONALIZE_PLACE_OFFER_THANKS: "Gràcies per la consulta."
+        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar consulta"
         PERSONALIZE_PLACE_OFFER_PRODUCT: "Producte"
         PERSONALIZE_PLACE_OFFER_PRODUCT_URL: "Url"
         PERSONALIZE_BILLING_DATA: "Dades de facturació"
@@ -102,6 +187,52 @@ ca:
         PERSONALIZE_VARIATION_REMARK: Observacions
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variacions i configuracions
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Preu base
+        PERSONALIZE_CHECKOUT_REMOVE: 'Caixa amb botó "Eliminar"'
+        PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Mostrar opció "Eliminar" per productes en la caixa'        
+        PERSONALIZE_USE_BREADCRUMB: Amb ruta de navegació   
+        PERSONALIZE_USE_BREADCRUMB_HELP: Enable display of breadcrump in shop area if breadcrumb plugin is available
+        PERSONALIZE_UI_DECIMAL: Comma per separar decimals
+        PERSONALIZE_UI_DECIMAL_HELP: Display comma instead of dot in front-end as decimal separator
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT: Punt de trencament pantalla
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT_HELP: Defines the viewport width breakpoint that triggers use of abbreviated labels. Expressed in pixels.
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Equalització imatges
+        PERSONALIZE_CART_IMAGE_EQUALIZER_HELP: Zoom crop images to specified width to offer a homogenous display of product images
+        PERSONALIZE_SHOP_TEST_MODE: Mode de prova
+        PERSONALIZE_SHOP_TEST_MODE_HELP: Put shop into test mode. Displays an alert to the customer.
+        PERSONALIZE_UI_FANCYBOX: Imatges Fancybox
+        PERSONALIZE_UI_FANCYBOX_HELP: Activate fancybox display of product images in product detail pages
+        PERSONALIZE_FANCYBOX_LOAD: Actius Fancybox
+        PERSONALIZE_FANCYBOX_LOAD_HELP: Load fancybox assets if not available through theme
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS: Plantilla de productes extèn
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product items (must exist in your theme, instance, etc.)
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS: Plantilla de col·leccions extèn
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product collection pages (must exist in your theme, instance, etc.)
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS: Plantilla de la botiga extèn
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your shop pages (product collections overview, must exist in your theme, instance, etc.)
+        PERSONALIZE_SHOP_URL: Ruta botiga
+        PERSONALIZE_SHOP_URL_HELP: Set the main shop path
+        PERSONALIZE_TERMS_URL: Ruta condicions
+        PERSONALIZE_TERMS_URL_HELP: The path to your terms and condition page for customers
+        PERSONALIZE_QUOTE_URL: Ruta consulta
+        PERSONALIZE_QUOTE_URL_HELP: Set the path if you want to allow quotes, remarks, questions related with products. Path should not exist in the instance!!!
+        PERSONALIZE_QUOTE_FORM: Formulari de consulta
+        PERSONALIZE_FIELD_TYPE: Tipus camp
+        PERSONALIZE_FIELD_VALIDATE: Validar
+        PERSONALIZE_FIELD_NAME: Nom
+        PERSONALIZE_FIELD_LABEL: Etiqueta
+        PERSONALIZE_FIELD_TITLE: Títol
+        PERSONALIZE_FIELD_TITLE_HELP: Tan sols per separator
+        PERSONALIZE_FIELD_UNDERLINE: Subrajar
+        PERSONALIZE_FIELD_UNDERLINE_HELP: Tan sols per separator
+        PERSONALIZE_FIELD_HELP: Ajuda
+        PERSONALIZE_FIELD_IGNORE: Obviar camp
+        PERSONALIZE_FIELD_CLASSES: Clases
+        PERSONALIZE_FIELD_ID: Id
+        PERSONALIZE_FIELD_OUTER_CLASSES: Clases contenidor
+        PERSONALIZE_FIELD_CONTENT: Contingut
+        PERSONALIZE_FIELD_CONTENT_MARKDOWN: Contingut inclou markdown?
+        PERSONALIZE_FIELD_OPTIONS: Opcions
+        
 
 es:
     PLUGIN_SHOPPINGCART:
@@ -114,18 +245,16 @@ es:
         PERSONALIZE_CHECKOUT_CHOOSE_SHIPPING_METHOD_DESC: Utilizar el selector del país para definir método de envio y coste
         PERSONALIZE_CART_IMAGE_EQUALIZER: Igualar la mida del contenidor de la imatge
         PERSONALIZE_SHOP_PAGE: Tienda
-        PERSONALIZE_USE_BREADCRUMB: Mostrar la ruta de navegación
-        PERSONALIZE_SHOP_TEST_MODE: Tienda en modo de prueba
-        PERSONALIZE_ALLOW_QUOTE: Ofrecer
-        PERSONALIZE_ALLOW_QUOTE_SEND: Envie su oferta
+        PERSONALIZE_ALLOW_QUOTE: Consultar
+        PERSONALIZE_ALLOW_QUOTE_SEND: Envie su consulta
         PERSONALIZE_ALLOW_QUOTE_CLOSE: Cerrar
         PERSONALIZE_MODAL_CLOSE: Cerrar
-        PERSONALIZE_ALLOW_QUOTE_TITLE: Enviar su oferta
-        PERSONALIZE_PLACE_OFFER_MESSAGE: "Mensaje de oferta"
+        PERSONALIZE_ALLOW_QUOTE_TITLE: Enviar su consulta
+        PERSONALIZE_PLACE_OFFER_MESSAGE: "Mensaje de consulta"
         PERSONALIZE_PLACE_OFFER_NAME: "Su nombre"
         PERSONALIZE_CAPTCHA_NOT_VALID: "Captcha no es válido!"
-        PERSONALIZE_PLACE_OFFER_THANKS: "Gracies por su oferta."
-        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar la oferta"
+        PERSONALIZE_PLACE_OFFER_THANKS: "Gracies por enviar su consulta."
+        PERSONALIZE_PLACE_OFFER_SUBMIT: "Enviar consulta"
         PERSONALIZE_PLACE_OFFER_PRODUCT: "Producto"
         PERSONALIZE_PLACE_OFFER_PRODUCT_URL: "Url"
         PERSONALIZE_BILLING_DATA: "Datos de facturación"
@@ -137,3 +266,48 @@ es:
         PERSONALIZE_VARIATION_REMARK: Observaciones
         PERSONALIZE_CART_VARIATIONS_HEADLINE: Variaciones y configuraciones
         PERSONALIZE_CART_VARIATIONS_BASEPRICE: Precio base
+        PERSONALIZE_CHECKOUT_REMOVE: 'Caja con botón "Eliminar"'
+        PERSONALIZE_CHECKOUT_REMOVE_HELP: 'Mostrar la opción "Eliminar" para productos en la caja'        
+        PERSONALIZE_USE_BREADCRUMB: Con ruta de navegació   
+        PERSONALIZE_USE_BREADCRUMB_HELP: Enable display of breadcrump in shop area if breadcrumb plugin is available
+        PERSONALIZE_UI_DECIMAL: Comma para separar decimales
+        PERSONALIZE_UI_DECIMAL_HELP: Display comma instead of dot in front-end as decimal separator
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT: Punto de corte pantalla
+        PERSONALIZE_UI_DESKTOP_BREAKPOINT_HELP: Defines the viewport width breakpoint that triggers use of abbreviated labels. Expressed in pixels.
+        PERSONALIZE_CART_IMAGE_EQUALIZER: Equalización imágenes
+        PERSONALIZE_CART_IMAGE_EQUALIZER_HELP: Zoom crop images to specified width to offer a homogenous display of product images
+        PERSONALIZE_SHOP_TEST_MODE: Modo de prueba
+        PERSONALIZE_SHOP_TEST_MODE_HELP: Put shop into test mode. Displays an alert to the customer.
+        PERSONALIZE_UI_FANCYBOX: Imágenes Fancybox
+        PERSONALIZE_UI_FANCYBOX_HELP: Activate fancybox display of product images in product detail pages
+        PERSONALIZE_FANCYBOX_LOAD: Activos Fancybox
+        PERSONALIZE_FANCYBOX_LOAD_HELP: Load fancybox assets if not available through theme
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS: Plantilla de productos extiende
+        PERSONALIZE_PRODUCT_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product items (must exist in your theme, instance, etc.)
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS: Plantilla de colecciones extiende
+        PERSONALIZE_PRODUCTS_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your product collection pages (must exist in your theme, instance, etc.)
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS: Plantilla de la tienda extiende
+        PERSONALIZE_CATEGORIES_BLUEPRINT_EXTENDS_HELP: Specify a base blueprint for your shop pages (product collections overview, must exist in your theme, instance, etc.)
+        PERSONALIZE_SHOP_URL: Ruta tienda
+        PERSONALIZE_SHOP_URL_HELP: Set the main shop path
+        PERSONALIZE_TERMS_URL: Ruta condiciones
+        PERSONALIZE_TERMS_URL_HELP: The path to your terms and condition page for customers
+        PERSONALIZE_QUOTE_URL: Ruta consulta
+        PERSONALIZE_QUOTE_URL_HELP: Set the path if you want to allow quotes, remarks, questions related with products. Path should not exist in the instance!!!
+        PERSONALIZE_QUOTE_FORM: Formulario de consulta
+        PERSONALIZE_FIELD_TYPE: Tipo del campo
+        PERSONALIZE_FIELD_VALIDATE: Validar
+        PERSONALIZE_FIELD_NAME: Nombre
+        PERSONALIZE_FIELD_LABEL: Etiqueta
+        PERSONALIZE_FIELD_TITLE: Título
+        PERSONALIZE_FIELD_TITLE_HELP: Solo separator
+        PERSONALIZE_FIELD_UNDERLINE: Subrajar
+        PERSONALIZE_FIELD_UNDERLINE_HELP: Solo para separator
+        PERSONALIZE_FIELD_HELP: Ayuda
+        PERSONALIZE_FIELD_IGNORE: Ignorar camp
+        PERSONALIZE_FIELD_CLASSES: Clases
+        PERSONALIZE_FIELD_ID: Id
+        PERSONALIZE_FIELD_OUTER_CLASSES: Clases contenidor
+        PERSONALIZE_FIELD_CONTENT: Contenido
+        PERSONALIZE_FIELD_CONTENT_MARKDOWN: Contenido incluye markdown?
+        PERSONALIZE_FIELD_OPTIONS: Opciones        
