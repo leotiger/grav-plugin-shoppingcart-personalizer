@@ -22,12 +22,14 @@ stock management, country restriction, single product, service vs. shippable pro
 
 * stock configuration
 * maximum quantity of a product allowed in cart
+* quantity steps for products
 * support for unique products (nice for artists, etc.)
 * mark product as service product (service products need no shipping)
 * editable product id in admin
 * show remove button in checkout cart if desired
 * optionally remove existing product (necessary in the context of product variations)
 * grouped product variations and configurations with pricing, stock, customer input
+* quantity / configuration steps for variations
 * reflect configured variations and configuration in cart
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
@@ -88,10 +90,24 @@ If you copy templates to your theme in most cases it's sufficient to copy only t
 
 ## Installation
 
-Download the [ZIP
-archive](https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/archive/master.zip)
-from GitHub and extract it to the `user/plugins` directory in your Grav
-installation or use the install option provided in the tools section of the GRAV admin plugin. Assure that the plugin folder name is shoppingcart-personalizer. If GRAV approves the plugin, it may appear on the GRAV plugin site with automated installation support through cli and/or the Plugins section in the admin interface.
+Installing the Shoppingcart Personalizer plugin can be done in three ways. The GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.
+
+If you install manually please assure yourself that the plugin folder inside /user/plugins directory is named shoppingcart-personalizer. The manual install method requires
+that you already dispose of the shoppingcart plugin in your GRAV instance.
+
+### Admin Installation (Preferred)
+
+The simplest way to install this plugin is via the [Grav Admininitration Panel](https://learn.getgrav.org/admin-panel/plugins). Once inside of the Plugins section click ADD and select the 
+Shoppingcart Personalizer for installation. This will install dependencies as well.
+
+
+### GPM Installation
+
+Another simple way to install this plugin is via the [Grav Package Manager (GPM)](http://learn.getgrav.org/advanced/grav-gpm) through your system's terminal (also called the command line).  From the root of your Grav instance type:
+
+    bin/gpm install shoppingcart-personalizer
+
+This will install the Shoppingcart Personlizer plugin into your `/user/plugins` directory within Grav. Its files can be found under `/your/site/grav/user/plugins/shoppingcart-personalizer`.
 
 ## Help
 
@@ -103,10 +119,11 @@ You can see both add-ons (Personalizer and Notify) in action on [Tessa](https://
 
 ## Credits
 
-Thanks to @flaviocopes for the shoppingcart plugin. 
+Thanks to @flaviocopes for the shoppingcart plugin.
+ 
 This plugin includes the [Jquery Fancybox](http://fancyapps.com/fancybox/3/) plugin. You can activate support in the configuration of the plugin.
 
 ## Known Issues
 
-Hopefully this plugin will obtain some feedback and suggestions. As of version 0.1.1 this is marked for testing and issues are probable. I will try to enhance the plugin with additional
-basic features in the future as I believe that GRAV needs better support for online shops.
+Hopefully this plugin will obtain some feedback and suggestions. I will try to enhance the plugin with additional
+basic features in the future as I believe that GRAV needs better support for e-commerce.
