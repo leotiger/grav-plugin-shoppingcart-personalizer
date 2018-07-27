@@ -79,7 +79,56 @@ en:
         PERSONALIZE_FIELD_OPTIONS: Options
         PERSONALIZE_RESTRICT_COUNTRIES: Restrict countries
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restrict the list of available countries for the shop
-        PERSONALIZE_VARIATION_UPLOAD_HINT: You can upload a file once checkout is completed
+        PERSONALIZE_VARIATION_UPLOAD_HINT: You can upload a file once checkout is completed        
+        PERSONALIZE_PRODUCT: Product
+        PERSONALIZE_PRODUCT_ID: Product ID
+        PERSONALIZE_PRODUCT_STOCK: Stock
+        PERSONALIZE_CART_MAXIMUM: Cart maximum
+        PERSONALIZE_CART_MAXIMUM_HELP: Maximum allowed in cart. Should not be greater than existing stock.
+        PERSONALIZE_PRODUCT_STEP: Quantity steps
+        PERSONALIZE_PRODUCT_STEP_HELP: E.g., allow product only to be bought in pairs needs step to be set to 2. 0 deactivates the feature.
+        PERSONALIZE_SERVICE_PRODUCT: Service product
+        PERSONALIZE_SERVICE_PRODUCT_HELP: Service product do not ship, hence no shipping costs if no other shippable products are present in the cart
+        PERSONALIZE_PRODUCT_INDEX_IMAGE: Index image
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_HELP: Image for product collection pages            
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_BGCOLOR: BGColor collection image
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE: Details image
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_HELP: Main image for product details page
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR: BGColor detail images
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL: Show all media
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP: Show all product media
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE: Quote form
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE_HELP: Show quote form on product detail page. (Requires bootstrap support at the moment)
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD: Remove first
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD_HELP: Remove existing cart product before adding again. Mandatory for products with variations.
+        PERSONALIZE_PRODUCT_GROUPS_ADD: Add group
+        PERSONALIZE_PRODUCT_GROUP_ID: Group ID
+        PERSONALIZE_PRODUCT_GROUP_TITLE: Group title
+        PERSONALIZE_PRODUCT_GROUP_DESCRIPTION: Group description
+        PERSONALIZE_PRODUCT_GROUP_PRICE: Default price
+        PERSONALIZE_PRODUCT_GROUP_MIN: Default min
+        PERSONALIZE_PRODUCT_GROUP_MAX: Default max
+        PERSONALIZE_PRODUCT_GROUP_STEP: Default step
+        PERSONALIZE_PRODUCT_GROUP_IMAGE: Default image
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED: Variation required
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED_HELP: Selection of a variation is required
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK: Stock / Config input
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK_HELP: Present form for stock / config data based on min/max/step settings of the group / variation
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS: Variations
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS_ADD: Add variation
+        PERSONALIZE_PRODUCT_VARIATION_ID: ID
+        PERSONALIZE_PRODUCT_VARIATION_TITLE: Title
+        PERSONALIZE_PRODUCT_VARIATION_DESCRIPTION: Description
+        PERSONALIZE_PRODUCT_VARIATION_PRICE: Price
+        PERSONALIZE_PRODUCT_VARIATION_MIN: Min
+        PERSONALIZE_PRODUCT_VARIATION_MAX: Max
+        PERSONALIZE_PRODUCT_VARIATION_STEP: Step
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA: Image
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA_HELP: Select variation image.
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT: Input
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Allow customer to submit text for the product / variation
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Upload
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: Customer can upload a file after completion of checkout in the context of this variation
     
 de:
     PLUGIN_SHOPPINGCART:
@@ -162,8 +211,57 @@ de:
         PERSONALIZE_FIELD_OPTIONS: Auswahloptionen
         PERSONALIZE_RESTRICT_COUNTRIES: Länderauswahl einschränken
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Schränken Sie die operativen Länder ihres Shops ein
-        PERSONALIZE_VARIATION_UPLOAD_HINT: Sobald der Einkauf abgeschlossen ist, können Sie eine Datei hochladen
-        
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Sobald der Einkauf abgeschlossen ist, können Sie eine Datei hochladen        
+        PERSONALIZE_PRODUCT: Produkt
+        PERSONALIZE_PRODUCT_ID: Produkt-ID
+        PERSONALIZE_PRODUCT_STOCK: Vorrat
+        PERSONALIZE_CART_MAXIMUM: Warenkorb maximal
+        PERSONALIZE_CART_MAXIMUM_HELP: Maximal zulässige Anzahl im Warenkorb. Sollte nicht größer sein als der Bestand.
+        PERSONALIZE_PRODUCT_STEP: Mengenschritte
+        PERSONALIZE_PRODUCT_STEP_HELP: Zum Beispiel, wenn das Produkt nur paarweise gekauft werden soll, muss der Schritt auf 2 gesetzt werden. 0 deaktiviert die Funktion.
+        PERSONALIZE_SERVICE_PRODUCT: Serviceprodukt
+        PERSONALIZE_SERVICE_PRODUCT_HELP: Serviceprodukte werden nicht versandt, d.h. es fallen keine Versandkosten and, wenn keine anderen lieferbaren Produkte im Warenkorb vorhanden sind.
+        PERSONALIZE_PRODUCT_INDEX_IMAGE: Indexbild
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_HELP: Bild für Produktübersichten
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_BGCOLOR: BGColor-Übersichten
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE: Detail-Bild
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_HELP: Hauptbild für die Detailseite
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR: BGColor Detailbilder
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL: Alle Medien anzeigen
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP: Zeigt alle Produktmedien an, derzeit nur Bilder
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE: Angebotsformular
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE_HELP: Angebots- oder Nachfrageformular auf der Detailseite anzeigen. (Benötigt zur Zeit Bootstrap-Unterstützung)
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD: Zuerst entfernen
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD_HELP: Entfernen Sie ein vorhandenes Warenkorbprodukt, bevor Sie es erneut hinzufügen. Obligatorisch für Produkte mit Variationen.
+        PERSONALIZE_PRODUCT_GROUPS_ADD: Gruppe hinzufügen
+        PERSONALIZE_PRODUCT_GROUP_ID: Gruppen-ID
+        PERSONALIZE_PRODUCT_GROUP_TITLE: Titel
+        PERSONALIZE_PRODUCT_GROUP_DESCRIPTION: Beschreibung
+        PERSONALIZE_PRODUCT_GROUP_PRICE: Standardpreis
+        PERSONALIZE_PRODUCT_GROUP_MIN: Standard min
+        PERSONALIZE_PRODUCT_GROUP_MAX: Standard max
+        PERSONALIZE_PRODUCT_GROUP_STEP: Standardschritt
+        PERSONALIZE_PRODUCT_GROUP_IMAGE: Standardbild
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED: Variation erforderlich
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED_HELP: Auswahl einer Variation ist erforderlich
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK: Mit Eingabe
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK_HELP: Eingabefelder für Bestands- / Konfigurationsdaten basierend auf Min / Max / Schritt der Gruppe oder Variation anzeigen
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS: Variationen
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS_ADD: Variation hinzufügen
+        PERSONALIZE_PRODUCT_VARIATION_ID: ID
+        PERSONALIZE_PRODUCT_VARIATION_TITLE: Titel
+        PERSONALIZE_PRODUCT_VARIATION_DESCRIPTION: Beschreibung
+        PERSONALIZE_PRODUCT_VARIATION_PRICE: Preis
+        PERSONALIZE_PRODUCT_VARIATION_MIN: Min
+        PERSONALIZE_PRODUCT_VARIATION_MAX: Max
+        PERSONALIZE_PRODUCT_VARIATION_STEP: Schritt
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA: Bild
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA_HELP: Wählen Sie das Variationsbild aus.
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT: Kundentext
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Erlaube dem Kunden, Text für das Produkt / die Variation beizufügen
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Hochladen
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: Der Kunde kann eine Datei nach Abschluss des Checkouts im Rahmen dieser Variante hochladen.    
+
 
 ca:
     PLUGIN_SHOPPINGCART:
@@ -246,9 +344,56 @@ ca:
         PERSONALIZE_FIELD_OPTIONS: Opcions
         PERSONALIZE_RESTRICT_COUNTRIES: Restringir països
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restringir la llista de països disponibles a la botiga
-        PERSONALIZE_VARIATION_UPLOAD_HINT: Quan la compra està feta, pot adjuntar un fitxer
-        
-        
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Quan la compra està feta, pot adjuntar un fitxer        
+        PERSONALIZE_PRODUCT: Producte
+        PERSONALIZE_PRODUCT_ID: ID producte
+        PERSONALIZE_PRODUCT_STOCK: Estoc
+        PERSONALIZE_CART_MAXIMUM: Màxim permès
+        PERSONALIZE_CART_MAXIMUM_HELP: Màxim permès al carretó. No ha de ser superior a l'estoc.
+        PERSONALIZE_PRODUCT_STEP: passos de quantitat
+        PERSONALIZE_PRODUCT_STEP_HELP: Per exemple, si vols que el producte només es compra per parelles necessites establir aquest valor en 2. 0 desactiva la funció.
+        PERSONALIZE_SERVICE_PRODUCT: Servei
+        PERSONALIZE_SERVICE_PRODUCT_HELP: El producte és un servei que no s'envia, de manera que no hi ha costos d'lliurmanet si no hi ha altres productes que cal enviar al carretó
+        PERSONALIZE_PRODUCT_INDEX_IMAGE: Imatge col·lecció
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_HELP: Imatge per a col·leccions de productes
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_BGCOLOR: BGColor col·leccions
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE: Imatge detalls
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_HELP: Imatge principal de la pàgina de detalls del producte
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR: BGColor imatges detalls
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL: Mostra tot
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP: Mostra tots els imatges del producte
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE: Formulari de consulta
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE_HELP: Mostra el formulari de consulta a la pàgina detall del producte. (Requereix suport de bootstrap en aquest moment)
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD: Eliminar abans
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD_HELP: Elimina el producte si existeix en el carretó abans d'afegir-ho de nou. Obligatori per a productes amb variacions.
+        PERSONALIZE_PRODUCT_GROUPS_ADD: Afegir un grup
+        PERSONALIZE_PRODUCT_GROUP_ID: ID del grup
+        PERSONALIZE_PRODUCT_GROUP_TITLE: Títol del grup
+        PERSONALIZE_PRODUCT_GROUP_DESCRIPTION: Descripció
+        PERSONALIZE_PRODUCT_GROUP_PRICE: Preu per defecte
+        PERSONALIZE_PRODUCT_GROUP_MIN: Min per defecte
+        PERSONALIZE_PRODUCT_GROUP_MAX: Màxim predeterminat
+        PERSONALIZE_PRODUCT_GROUP_STEP: Pas per defecte
+        PERSONALIZE_PRODUCT_GROUP_IMAGE: Imatge predeterminada
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED: Variació obligatoria
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED_HELP: S'ha de seleccionar una variació.
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK: Amb camps de configuració
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK_HELP: Mostra camps de configuració basats en la configuració min / max / pas del grup o de la variació
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS: Variacions
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS_ADD: Afegir una variació
+        PERSONALIZE_PRODUCT_VARIATION_ID: ID
+        PERSONALIZE_PRODUCT_VARIATION_TITLE: Títol
+        PERSONALIZE_PRODUCT_VARIATION_DESCRIPTION: Descripció
+        PERSONALIZE_PRODUCT_VARIATION_PRICE: Preu
+        PERSONALIZE_PRODUCT_VARIATION_MIN: Mín
+        PERSONALIZE_PRODUCT_VARIATION_MAX: Màx
+        PERSONALIZE_PRODUCT_VARIATION_STEP: Pas
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA: Imatge
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA_HELP: Seleccioneu la imatge de la variació.
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT: Entrada
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Permet que el client enviï text en el context del producte o de la variació
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Carrega
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: El client pot pujar un fitxer després de completar el procés de pagament en el context d'aquesta variació.        
 
 es:
     PLUGIN_SHOPPINGCART:
@@ -331,5 +476,53 @@ es:
         PERSONALIZE_FIELD_OPTIONS: Opciones      
         PERSONALIZE_RESTRICT_COUNTRIES: Restringir países
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restringir la lista de países disponibles en la tienda
-        PERSONALIZE_VARIATION_UPLOAD_HINT: Cuando la compra está hecha, puede adjuntar un fichero
-        
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Cuando la compra está hecha, puede adjuntar un fichero        
+        PERSONALIZE_PRODUCT: Producto
+        PERSONALIZE_PRODUCT_ID: ID producto
+        PERSONALIZE_PRODUCT_STOCK: Stock
+        PERSONALIZE_CART_MAXIMUM: Máximo en carro
+        PERSONALIZE_CART_MAXIMUM_HELP: Máximo permitido en el carrito. No debe ser mayor que el stock existente.
+        PERSONALIZE_PRODUCT_STEP: Pasos cantidad
+        PERSONALIZE_PRODUCT_STEP_HELP: Por ejemplo, permitir que el producto solo se compre por parejas necesita que el paso se establezca en 2. 0 desactiva la función.
+        PERSONALIZE_SERVICE_PRODUCT: Servicio
+        PERSONALIZE_SERVICE_PRODUCT_HELP: El producto de servicio no se envía, por lo tanto, no hay costos de envío si no hay otros productos que se tienen que enviar en el carrito.
+        PERSONALIZE_PRODUCT_INDEX_IMAGE: Imagen índice
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_HELP: Imagen para colecciones de productos
+        PERSONALIZE_PRODUCT_INDEX_IMAGE_BGCOLOR: BGColor colecciones
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE: Imagen detalle
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_HELP: Imagen principal para la página de detalles del producto
+        PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR: BGColor detalles
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL: Todas las imágenes
+        PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP: Mostrar todas las imágenes del producto
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE: Formulario de consulta
+        PERSONALIZE_PRODUCT_ALLOW_QUOTE_HELP: Mostar el formulario de consulta en la página de detalles del producto. (Requiere soporte para bootstrap en este momento)
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD: Eliminar primero
+        PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD_HELP: Elimina el producto existente del carro antes de volver a agregarlo. Obligatorio para productos con variaciones.
+        PERSONALIZE_PRODUCT_GROUPS_ADD: Añadir grupo
+        PERSONALIZE_PRODUCT_GROUP_ID: ID del grupo
+        PERSONALIZE_PRODUCT_GROUP_TITLE: Título
+        PERSONALIZE_PRODUCT_GROUP_DESCRIPTION: Descripción
+        PERSONALIZE_PRODUCT_GROUP_PRICE: Precio predeterminado
+        PERSONALIZE_PRODUCT_GROUP_MIN: Min. predeterminado
+        PERSONALIZE_PRODUCT_GROUP_MAX: Max. predeterminado
+        PERSONALIZE_PRODUCT_GROUP_STEP: Paso predeterminado
+        PERSONALIZE_PRODUCT_GROUP_IMAGE: Imagen predeterminada
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED: Variación obligatoria
+        PERSONALIZE_PRODUCT_GROUP_REQUIRED_HELP: Se requiere la selección de una variación
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK: Con campos
+        PERSONALIZE_PRODUCT_GROUP_WITH_STOCK_HELP: Presentar campos en función de la configuración min / max / paso del grupo o de la variación.
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS: Variaciones
+        PERSONALIZE_PRODUCT_GROUP_VARIATIONS_ADD: Agregar variación
+        PERSONALIZE_PRODUCT_VARIATION_ID: ID
+        PERSONALIZE_PRODUCT_VARIATION_TITLE: Título
+        PERSONALIZE_PRODUCT_VARIATION_DESCRIPTION: Descripción
+        PERSONALIZE_PRODUCT_VARIATION_PRICE: Precio
+        PERSONALIZE_PRODUCT_VARIATION_MIN: Min.
+        PERSONALIZE_PRODUCT_VARIATION_MAX: Max.
+        PERSONALIZE_PRODUCT_VARIATION_STEP: Paso
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA: Image
+        PERSONALIZE_PRODUCT_VARIATION_MEDIA_HELP: Seleccione la imagen de la variación.
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT: Campo de texto
+        PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Permitir que el cliente envíe texto en el contexto del producto o de la variación
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Upload
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: El cliente puede subir un archivo después de la finalización de la compra en el contexto de esta variación        

@@ -1,3 +1,15 @@
+# v0.9.4
+## 27-07-2018
+
+1. [](#new)
+    * Allow quantity steps
+    * Display variation images
+    * Display hint if file upload is available for a customer after checkout in the context of a product configuration or variant
+1. [](#improved)
+    * Display of product variations and configurations
+    * Translations for product configuration section in product pages added to languages.yaml
+    * Show submitted customer text in backend 
+
 # v0.9.3
 ## 27-07-2018
 
@@ -11,12 +23,10 @@
     * Add taxes to order confirmation and backend breakdown of orders
     * Display ordered product variations and configurations in confirmation
     * Display ordered product variations and configurations in backend
-
-2. [](#improved)
+1. [](#improved)
     * Make admin strings translatable
-    * Labels in order breakdown in backend translatable
-
-3. [](#bugfix)
+    * Labels in order breakdown in backend added to languages.yaml
+1. [](#bugfix)
     * Try to fix changelog format for output in grav plugin store
 
 # v0.9.1

@@ -17,20 +17,20 @@ form:
           fields:
               product:
                 type: section
-                title: Product
+                title: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT
                 underline: true
 
                 fields:
                   header.price:
                     type: text
-                    label: Price
+                    label: PLUGIN_SHOPPINGCART.PRICE
                     default: 10
                     validate:
                       type: number
 
                   header.product_id:
                     type: text
-                    label: Product ID
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_ID
                     default: ''
                     validate:
                       rule: productids
@@ -38,7 +38,7 @@ form:
                       
                   header.stock:
                     type: text
-                    label: Stock
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_STOCK
                     default: 1
                     validate:
                       type: int
@@ -46,8 +46,8 @@ form:
 
                   header.cartmax:
                     type: text
-                    label: Maximum allowed in cart
-                    help: Maximum allowed in cart if stock is greater than this, 0 deactivates the option
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_MAXIMUM
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_MAXIMUM_HELP
                     default: 0
                     validate:
                       type: int
@@ -55,7 +55,8 @@ form:
                       
                   header.cartstep:
                     type: text
-                    label: Step
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_STEP
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_STEP_HELP
                     default: 0
                     validate:
                       type: int
@@ -63,8 +64,8 @@ form:
 
                   header.service_product:
                     type: toggle
-                    label: Service product
-                    help: Service products have free shipping, they are digital, local, virtual, etc.
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_SERVICE_PRODUCT
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_SERVICE_PRODUCT_HELP
                     highlight: 0
                     default: 0
                     options:
@@ -75,32 +76,30 @@ form:
 
                   header.index_photo:
                     type: pagemediaselect
-                    label: Index Image
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_INDEX_IMAGE
                     preview_images: true
-                    help: Used in shop index pages
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_INDEX_IMAGE_HELP                    
 
                   header.index_bgcolor:
                     type: colorpicker
-                    label: Background color for index thumbnail
-                    help: Background color for index thumbnail
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_INDEX_IMAGE_BGCOLOR
                     default: 'rgba(255, 255, 255, 0.00)'
 
                   header.default_photo:
                     type: pagemediaselect
-                    label: Default Image
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_IMAGE
                     preview_images: true
-                    help: Used as the main product image
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_IMAGE_HELP
 
                   header.product_bgcolor:
                     type: colorpicker
-                    label: Background color for thumbnails
-                    help: Background color for product thumbnails
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR
                     default: 'rgba(255, 255, 255, 0.00)'
 
                   header.show_all_media:
                     type: toggle
-                    label: Display all page media
-                    help: Display all existing page media in details page.
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP
                     highlight: 0
                     default: 0
                     options:
@@ -114,14 +113,13 @@ form:
                     default: 0
                     readonly: true  
                     classes: hide
-                    help: The last sales timestamp (Read-only)
                     validate:
                       number
 
                   header.allowquote:
                     type: toggle
-                    label: Allow quote
-                    help: Allow price quote contact
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_ALLOW_QUOTE
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_ALLOW_QUOTE_HELP
                     highlight: 0
                     default: 0
                     options:
@@ -132,8 +130,8 @@ form:
                          
                   header.remove_on_add:
                     type: toggle
-                    label: Remove product if in cart before add
-                    help: Remove previous product from cart if added again
+                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD
+                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_REMOVE_BEFORE_ADD
                     highlight: 1
                     default: 1
                     options:
@@ -144,69 +142,68 @@ form:
 
               variationgroups:
                   type: section
-                  title: Product configurations and variations
+                  title: PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_HEADLINE
                   underline: true
 
                   fields:
                     header.groups:
                       type: list
                       style: vertical
-                      btnLabel: 'Add Variation Groups'
+                      btnLabel: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUPS_ADD
 
                       fields:
                         .groupid:
                           type: text
-                          label: Group Id
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_ID
                           validate:
                             rule: productids
                             required: true
                         .grouptitle:
                           type: text
-                          label: Group title
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_TITLE
                           validate:
                             type: string                                                     
                             required: true  
                         .groupdescription:
                           type: text
-                          label: Group description
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_DESCRIPTION
                           validate:
                             type: string                                                      
                         .groupprice:
                           type: text
-                          label: Default Price
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_PRICE
                           default: 0
                           validate:
                             type: number
                         .groupmin:
                           type: text
-                          label: Default Min
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_MIN
                           default: 0
                           validate:
                             type: int  
                             min: 0
                         .groupmax:
                           type: text
-                          label: Default Max
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_MAX
                           default: 0
                           validate:
                             type: int                            
                             min: 0
                         .groupstep:
                           type: text
-                          label: Default Step
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_STEP
                           default: 0
                           validate:
                             type: int
                             min: 0                            
                         .groupmedia:
                           type: pagemediaselect
-                          label: Default Group Image
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_IMAGE
                           preview_images: true
-                          help: Set default image for variation group
                         .grouprequired:
                           type: toggle
-                          label: Selection required
-                          help: Customer has to select a variation / configuration
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_REQUIRED
+                          help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_REQUIRED_HELP
                           highlight: 0
                           default: 0
                           options:
@@ -216,8 +213,8 @@ form:
                                type: bool
                         .groupasinput:
                           type: toggle
-                          label: Handle with stock input
-                          help: Allow variation stock
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_WITH_STOCK
+                          help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_WITH_STOCK_HELP
                           highlight: 0
                           default: 0
                           options:
@@ -228,65 +225,62 @@ form:
                                
                         .variations:  
                           type: list
-                          label: Variations
-                          btnLabel: 'Add Variation'    
+                          label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_VARIATIONS
+                          btnLabel: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_GROUP_VARIATIONS_ADD
                           collapsed: true
                           fields:
                             .variationid:
                               type: text
-                              label: VariationID
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_ID
                               default: ''
                               validate:
                                 rule: productids
                                 required: true
                             .title:
                               type: text
-                              label: Title                  
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_TITLE
                               validate:
                                 type: string
                                 required: true
                             .description:
                               type: text
-                              label: Description
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_DESCRIPTION
                             .price:
                               type: text
-                              label: Price
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_PRICE
                               default: 0
                               validate:
                                 type: number
                             .varmin:
                               type: text
-                              label: Min required
-                              help: Cartmax, etc.
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_MIN
                               default: 0
                               validate:
                                 type: int
                                 min: 0                                
                             .varmax:
                               type: text
-                              label: Max allowed
-                              help: Maximum stock, etc.
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_MAX
                               default: 1
                               validate:
                                 type: int
                                 min: 0
                             .varstep:
                               type: text
-                              label: Step
-                              help: Input steps
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_STEP
                               default: 0
                               validate:
                                 type: int
                                 min: 0
                             .media:
                               type: pagemediaselect
-                              label: Variaton Image
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_MEDIA
                               preview_images: true
-                              help: Display image for variation
+                              help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_MEDIA_HELP
                             .freetext:
                               type: toggle
-                              label: Allow customer text
-                              help: Add text field for customer input
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_FREETEXT
+                              help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP
                               highlight: 0
                               default: 0
                               options:
@@ -296,8 +290,8 @@ form:
                                 type: bool
                             .fileupload:
                               type: toggle
-                              label: File upload
-                              help: Allow file upload
+                              label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_UPLOAD
+                              help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP
                               highlight: 0
                               default: 0
                               options:

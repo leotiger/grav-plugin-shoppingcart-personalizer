@@ -58,7 +58,6 @@
                     } else {
                         $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '" />';
                     }
-                    $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
                     $interface += '<br>';
                     
                 } else {

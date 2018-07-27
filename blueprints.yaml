@@ -1,5 +1,5 @@
 name: Shopping Cart Personalizer Addon
-version: 0.9.3
+version: 0.9.4
 description: "Personalizer for the Grav Shopping Cart Plugin"
 icon: shopping-cart
 author:
@@ -8,6 +8,7 @@ author:
   url: https://www.saveva.com
 homepage: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer
 demo: https://www.tessa.es
+docs: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/blob/master/README.md
 keywords: shoppingcart, ecommerce, e-commerce, plugin, shop, cart, stock management, variations, product configuration
 bugs: https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/issues
 license: MIT
