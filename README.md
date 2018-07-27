@@ -28,7 +28,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * editable product id in admin
 * show remove button in checkout cart if desired
 * optionally remove existing product (necessary in the context of product variations)
-* grouped product variations and configurations with pricing, stock, customer input
+* grouped product variations and configurations with pricing, stock, customer input, (file upload for customers on the way)
 * quantity / configuration steps for variations
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
