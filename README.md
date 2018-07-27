@@ -88,6 +88,10 @@ You can customize the look and feel in several ways:
 
 If you copy templates to your theme in most cases it's sufficient to copy only the base templates without including templates in the partials folder. If you modify templates you do it at your own risk as you may break things.
 
+## Language support
+
+The plugin includes as of v0.9.4 of language definitions for English, German, Catalan and Spanish. Help with translation is highly appreciated.
+
 ## Installation
 
 Installing the Shoppingcart Personalizer plugin can be done in three ways. The GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.

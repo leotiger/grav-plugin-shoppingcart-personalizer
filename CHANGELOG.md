@@ -8,7 +8,7 @@
 1. [](#improved)
     * Display of product variations and configurations
     * Translations for product configuration section in product pages added to languages.yaml
-    * Show submitted customer text in backend 
+    * Show submitted customer text in backend
 
 # v0.9.3
 ## 27-07-2018
