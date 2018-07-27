@@ -111,7 +111,10 @@ This will install the Shoppingcart Personlizer plugin into your `/user/plugins` 
 
 ## Help
 
-Apart from these basic instructions you can find more help on the GRAV [Shoppingcart website](https://gravcart.com/).
+Help can be obtained via issue section but we cannot guarantee to answer in a timely or exhaustive fashion.
+It will sometimes take some days to obtain responses and we will only answer to general problems. 
+Site specific integration problems will not be addressed in the issue section.
+If you have dedicated, site-specific integration neeeds, you may quote for support and we will send you an offer.
 
 ## Demo
 
@@ -119,7 +122,7 @@ You can see both add-ons (Personalizer and Notify) in action on [Tessa](https://
 
 ## Credits
 
-Thanks to @flaviocopes for the shoppingcart plugin.
+Thanks to @flaviocopes for the [Shoppingcart plugin](https://gravcart.com/).
  
 This plugin includes the [Jquery Fancybox](http://fancyapps.com/fancybox/3/) plugin. You can activate support in the configuration of the plugin.
 
