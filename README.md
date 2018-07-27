@@ -86,7 +86,7 @@ You can customize the look and feel in several ways:
 * by adding your own css definitions in your theme, etc.
 * by copying the templates to your theme and maintain modified versions there
 
-If you copy templates to your theme in most cases it's sufficient to copy only the base templates without including templates in the partials folder. If you modify templates you do it at your own risk as you may break things.
+If you modify templates you do it at your own risk as you may break things.
 
 ## Language support
 

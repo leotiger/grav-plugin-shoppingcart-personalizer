@@ -95,6 +95,11 @@
                                         {% else %}
                                             {{ currency_symbol }} {{ variant.varprice * product.quantity * variant.varmultiplier }}
                                         {% endif %}
+                                        {% if variant.varfreetext is defined and variant.varfreetext %}
+                                        <br><strong>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_VARIATION_FREETEXT"|t|e }}</strong>:
+                                        {{ variant.varfreetext }}
+                                        {% endif %}
+
                                     {% endfor %}
                                 {% endif %}
                                 <br>
