@@ -99,7 +99,9 @@ Installing the Shoppingcart Personalizer plugin can be done in three ways. The G
 If you install manually please assure yourself that the plugin folder inside /user/plugins directory is named shoppingcart-personalizer. The manual install method requires
 that you already dispose of the shoppingcart plugin in your GRAV instance.
 
-### Admin Installation (Preferred)
+The third method is through the Administration Panel.
+
+### Administration Panel Installation (Preferred)
 
 The simplest way to install this plugin is via the [Grav Admininitration Panel](https://learn.getgrav.org/admin-panel/plugins). Once inside of the Plugins section click ADD and select the 
 Shoppingcart Personalizer for installation. This will install dependencies as well.
