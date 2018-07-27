@@ -39,6 +39,7 @@
             {% for variation in group.variations %}
                 {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
                 {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
+                {% set optionstep = variation.varstep ? variation.varstep : group.groupstep %}            
                 {% set optionprice = 0 %}
                 {% if variation.price matches '/^[0-9]*\\.?[0-9]+$/' %}           
                     {% set optionprice = variation.price %}
@@ -46,7 +47,7 @@
                     {% set optionprice = group.groupprice %}
                 {% endif %}                
                 
-                <option id="varopt-{{ group.groupid ~ '-' ~ variation.variationid }}" {{ loop.index == 1 and group.grouprequired ? 'selected="selected"' : '' }} data-varprice="{{ optionprice }}" data-varid="{{ variation.variationid }}" data-handlemin="{{ optionmin }}" data-handlemax="{{ optionmax }}" data-variation="{{ variation|json_encode()|e }}" value="{{ variation.variationid }}">
+                <option id="varopt-{{ group.groupid ~ '-' ~ variation.variationid }}" {{ loop.index == 1 and group.grouprequired ? 'selected="selected"' : '' }} data-varprice="{{ optionprice }}" data-varid="{{ variation.variationid }}" data-handlemin="{{ optionmin }}" data-handlemax="{{ optionmax }}" data-handlestep="{{ optionstep }}" data-variation="{{ variation|json_encode()|e }}" value="{{ variation.variationid }}">
                     {{ variation.title }}
                 </option>                
             {% endfor %}    
@@ -90,7 +91,12 @@
     {% if stock > 1 %}
         <br>
         {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
-        <input type="number" id="js__shoppingcart__quantity" class="input-lg" min="1" max="{{ stock }}" value="1">
+        {% if page.header.cartstep is defined and page.header.cartstep > 0 and page.header.cartstep <= stock %}                    
+            {# @todo test if we need to run in modulus operation on this or if browser implementations for inputs of type number are smart enough #} 
+            <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="{{ page.header.cartstep }}" step="{{ page.header.cartstep }}" max="{{ stock }}" value="{{ page.header.cartstep }}" />
+        {% else %}
+            <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1" />
+        {% endif %}                
         <br>
         <br>
     {% else %}

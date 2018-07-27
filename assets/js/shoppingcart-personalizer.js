@@ -38,7 +38,7 @@
         var $asinput = $varsel.data('groupasinput');
         var $selected = $varsel.find('option:selected');
         var $groupid = $varsel.data('groupid');
-        var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null; 
+        var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null, $varstep = 0; 
         var $interface = '';
         
         if ($varsel.val()) {
@@ -46,12 +46,18 @@
             $varid = $selected.data('varid');
             $varmin = $selected.data('handlemin');
             $varmax = $selected.data('handlemax');
+            $varstep = $selected.data('handlestep');
             $variation = $selected.data('variation');            
             if ($asinput) {
                 
                 if ($varmin < $varmax) {
                     $interface += '<br>';
                     $interface += '<div class="variation-description">' + $variation['description'] + '</div>';
+                    if (typeof $varstep !== 'undefined' && $varstep && parseInt($varstep) <= $varmax) {
+                        $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" step="' + $varstep + '" value="' + $varstep + '" />';
+                    } else {
+                        $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '" />';
+                    }
                     $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
                     $interface += '<br>';
                     
@@ -124,7 +130,7 @@
             var $asinput = $varsel.data('groupasinput');
             var $selected = $varsel.find('option:selected');
             var $groupid = $varsel.data('groupid');
-            var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null; 
+            var $varprice = 0, $varid = 0, $varmin = 0, $varmax = 0, $variation = null, $varstep = 0; 
             var $interface = '';
 
             if ($varsel.val()) {
@@ -132,13 +138,18 @@
                 $varid = $selected.data('varid');
                 $varmin = $selected.data('handlemin');
                 $varmax = $selected.data('handlemax');
+                $varstep = $selected.data('handlestep');
                 $variation = $selected.data('variation');            
                 if ($asinput) {
 
                     if ($varmin < $varmax) {
                         $interface += '<br>';
                         $interface += '<div class="variation-description">' + $variation['description'] + '</div>';
-                        $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
+                        if (typeof $varstep !== 'undefined' && $varstep && parseInt($varstep) <= $varmax) {
+                            $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" step="' + $varstep + '" value="' + $varstep + '" />';
+                        } else {
+                            $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '" />';
+                        }
                         $interface += '<br>';
 
                     } else {

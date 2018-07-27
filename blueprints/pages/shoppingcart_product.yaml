@@ -35,6 +35,7 @@ form:
                     validate:
                       rule: productids
                       required: true
+                      
                   header.stock:
                     type: text
                     label: Stock
@@ -51,11 +52,19 @@ form:
                     validate:
                       type: int
                       min: 0
+                      
+                  header.cartstep:
+                    type: text
+                    label: Step
+                    default: 0
+                    validate:
+                      type: int
+                      min: 0
 
                   header.service_product:
                     type: toggle
                     label: Service product
-                    help: Service products have free shipping, they are digital or local
+                    help: Service products have free shipping, they are digital, local, virtual, etc.
                     highlight: 0
                     default: 0
                     options:
@@ -174,12 +183,21 @@ form:
                           default: 0
                           validate:
                             type: int  
+                            min: 0
                         .groupmax:
                           type: text
                           label: Default Max
                           default: 0
                           validate:
-                            type: number                            
+                            type: int                            
+                            min: 0
+                        .groupstep:
+                          type: text
+                          label: Default Step
+                          default: 0
+                          validate:
+                            type: int
+                            min: 0                            
                         .groupmedia:
                           type: pagemediaselect
                           label: Default Group Image
@@ -239,7 +257,7 @@ form:
                             .varmin:
                               type: text
                               label: Min required
-                              help: If used for input configuration, minimum value, else used for cartmax
+                              help: Cartmax, etc.
                               default: 0
                               validate:
                                 type: int
@@ -247,8 +265,16 @@ form:
                             .varmax:
                               type: text
                               label: Max allowed
-                              help: If used for input configuration, maximum value, else treated as stock
+                              help: Maximum stock, etc.
                               default: 1
+                              validate:
+                                type: int
+                                min: 0
+                            .varstep:
+                              type: text
+                              label: Step
+                              help: Input steps
+                              default: 0
                               validate:
                                 type: int
                                 min: 0
