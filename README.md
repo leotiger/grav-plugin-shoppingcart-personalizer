@@ -48,7 +48,7 @@ stock management, country restriction, single product, service vs. shippable pro
 
 On the road for the 1.0 release:
 
-* File uploads for products (once checked-out)
+* Customer file uploads for products (once checked-out and payed)
 * Display of product variation and configuration images
 * Additional basic features
 
