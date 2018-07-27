@@ -132,6 +132,12 @@ button.js__shoppingcart__continue-shopping {
     vertical-align: top;
 }
 
+.shoppingcart-variation-handler .product-item-group {
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
 .shoppingcart-variation-handler .group-variations-sel,
 .shoppingcart-variation-handler .js__shoppingcart__variationfreetext
 {

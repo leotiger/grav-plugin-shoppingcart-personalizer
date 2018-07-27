@@ -137,6 +137,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             'PERSONALIZE_VARIATION_REMARK',
             'PERSONALIZE_CART_VARIATIONS_HEADLINE',
             'PERSONALIZE_CART_VARIATIONS_BASEPRICE',
+            'PERSONALIZE_VARIATION_UPLOAD_HINT',
         ];
     }    
     
@@ -231,7 +232,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/jquery.fancybox.js');
             $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/jquery.fancybox.css');        
         }
-        
+        $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/dropzone.js');        
         $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/shoppingcart-personalizer.js');        
         $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/shoppingcart-personalizer.css');        
         

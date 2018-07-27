@@ -1,10 +1,5 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 (function(ShoppingCart) {
-    
+        
     jQuery( ".js__shoppingcart__remove-from-cart" ).off();    
     jQuery( ".js__shoppingcart__quantity-box-cart" ).off();    
     
@@ -55,10 +50,10 @@
             if ($asinput) {
                 
                 if ($varmin < $varmax) {
-                    $interface = '<br>'
-                        + '<div class="variation-description">' + $variation['description'] + '</div>'
-                        + '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
-                        + '<br>';
+                    $interface += '<br>';
+                    $interface += '<div class="variation-description">' + $variation['description'] + '</div>';
+                    $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
+                    $interface += '<br>';
                     
                 } else {
                     $interface += '<input type="hidden" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" value="' + $varmin + '" />';
@@ -69,6 +64,19 @@
                 $interface += '<input type="text" placeholder="' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_REMARK.replace('"',"'") + '" id="freetext-' + $groupid + '-' + $varid + '" class="js__shoppingcart__variationfreetext" value="" />';
                 $interface += '</div>';
             }
+            if ($variation['fileupload']) {                    
+                $interface += '<br>';
+                $interface += '<div class="variation-upload-hint">';
+                $interface += window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_UPLOAD_HINT;
+                $interface += '</div>';
+            }
+            jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb').hide();
+            if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {
+                jQuery('#varmedia-' + $groupid + '-' + $varid).show();
+            } else if (jQuery('#varmedia-' + $groupid).length) {
+                jQuery('#varmedia-' + $groupid).show();
+            }
+            
         }
         jQuery('#grouphandler-' + $groupid).html($interface);
         ShoppingCart.calcVariations(ShoppingCart.currentProduct);
@@ -128,10 +136,10 @@
                 if ($asinput) {
 
                     if ($varmin < $varmax) {
-                        $interface = '<br>'
-                            + '<div class="variation-description">' + $variation['description'] + '</div>'
-                            + '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
-                            + '<br>';
+                        $interface += '<br>';
+                        $interface += '<div class="variation-description">' + $variation['description'] + '</div>';
+                        $interface += '<input type="number" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig input-lg" min="' + $varmin + '" max="' + $varmax + '" value="' + $varmin + '">';
+                        $interface += '<br>';
 
                     } else {
                         $interface += '<input type="hidden" data-groupid="' + $groupid + '" data-varid="' + $varid + '" data-varprice="' + $varprice + '" class="js__shoppingcart__variationconfig" value="' + $varmin + '" />';
@@ -142,6 +150,18 @@
                     $interface += '<br><div class="variation-freetext">';
                     $interface += '<input type="text" placeholder="' + window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_REMARK.replace('"',"'") + '" id="freetext-' + $groupid + '-' + $varid + '" class="js__shoppingcart__variationfreetext input-lg" value="" />';
                     $interface += '</div>';
+                }
+                if ($variation['fileupload']) {                    
+                    $interface += '<br>';
+                    $interface += '<div class="variation-upload-hint">';
+                    $interface += window.PLUGIN_SHOPPINGCART.translations.PERSONALIZE_VARIATION_UPLOAD_HINT;
+                    $interface += '</div>';
+                }
+                jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb').hide();
+                if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {
+                    jQuery('#varmedia-' + $groupid + '-' + $varid).show();
+                } else if (jQuery('#varmedia-' + $groupid).length) {
+                    jQuery('#varmedia-' + $groupid).show();
                 }
             }
             jQuery('#grouphandler-' + $groupid).html($interface);

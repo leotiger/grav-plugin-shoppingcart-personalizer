@@ -10,6 +10,9 @@
 {% set initialPrice = page.header.price %}
 {% set initialStocks = {0: page.header.stock, 1: (page.header.cartmax and page.header.cartmax < page.header.stock ? page.header.cartmax : page.header.stock)} %}
 <div class="shoppingcart-variation-handler">
+    <div class="shoppingcart-variation-headline">
+        {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_HEADLINE'|t|e }}
+    </div>
 {% for group in variationgroups if group.variations|length > 0 %}
     {% if group.grouprequired %}
     {% set hasRequiredGroup = true %}
@@ -49,7 +52,8 @@
             {% endfor %}    
             </select>
         </div>
-        <div class="product-item-group-handler" id="grouphandler-{{ group.groupid }}">            
+        <div class="product-item-group-handler" id="grouphandler-{{ group.groupid }}"> 
+        {# handled in client side javascript  
         {% if group.groupasinput and group.grouprequired and handlemin and handlemax %}
             {% if handlemin < handlemax %}
                 <br>
@@ -66,6 +70,14 @@
             <input type="text" placehoder="{{ 'SHOPPINGCART.PERSONALIZE_VARIATION_REMARK'|t|e }}" id="freetext-{{ group.groupid ~ '-' ~ (group.variations|first).variationid }}" class="js__shoppingcart__variationfreetext input-lg" value="" />
             </div>
         {% endif %}
+        {% if group.grouprequired and (group.variations|first).fileupload %}
+            <br>
+            <div class="variation-upload-hint">
+            {{ 'SHOPPINGCART.PERSONALIZE_VARIATION_UPLOAD_HINT'|t|e }}
+            <br>
+            </div>
+        {% endif %}
+        #}  
         </div>
         <br>
     </div>
@@ -74,7 +86,7 @@
 {% if stock %}
     <div class="shoppingcart-price">
     {% include 'partials/shoppingcart_core_price.html.twig' with { price: initialPrice, stock: stock } %}                
-    </div>
+    </div>        
     {% if stock > 1 %}
         <br>
         {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 

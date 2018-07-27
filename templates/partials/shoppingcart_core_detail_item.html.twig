@@ -43,6 +43,37 @@
         {% else %}
             <br><br><br>
         {% endif %}
+        {% if variationgroups|length > 0 %}
+        {% for group in variationgroups if group.variations|length > 0 %}
+            <div class="product-item-group-media" id="groupmedia-{{ group.groupid }}">
+                {% if group.groupmedia is defined and page.media[group.groupmedia] is defined %}
+                    {% if config.plugins.shoppingcart.ui.image_container_square %}
+                    <div class="shoppingcart-thumb" id='varmedia-{{ group.groupid }}' style="display:none;text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
+                    {% else %}
+                    <div class="shoppingcart-thumb" id='varmedia-{{ group.groupid }}' style='display:none;'>    
+                    {% endif %}    
+                    <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ page.media[group.groupmedia].url }}">
+                    {{ page.media[group.groupmedia].cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+                    </a>
+                    </div>
+                {% endif %}
+                
+                {% for variation in group.variations %}
+                    {% if variation.media is defined and page.media[variation.media] is defined %}
+                        {% if config.plugins.shoppingcart.ui.image_container_square %}
+                        <div class="shoppingcart-thumb" id='varmedia-{{ group.groupid ~ '-' ~ variation.variationid }}' style="display:none;text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
+                        {% else %}
+                        <div class="shoppingcart-thumb" id='varmedia-{{ group.groupid ~ '-' ~ variation.variationid }}' style='display:none;'>    
+                        {% endif %}    
+                        <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ page.media[variation.media].url }}">
+                        {{ page.media[variation.media].cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+                        </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% endif %}
     </div>
     <div class="shoppingcart-details block">
         <h2>{{ page.header.title|e }}</h2>
@@ -56,11 +87,12 @@
             {% set formatedprice = product.price|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}            
             <div class="shoppingcart-price">
             {% include 'partials/shoppingcart_core_price.html.twig' with { price: page.header.price, stock: page.header.stock } %}                
-            </div>
+            </div>            
             {% set stock = page.header.stock %}
             {% if page.header.cartmax is defined and page.header.cartmax and page.header.cartmax <= stock %}
             {% set stock = page.header.cartmax %}
             {% endif %}
+            
             {% if stock > 1 %}
                 <br>
                 {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
@@ -96,7 +128,6 @@
 
                     addStudioLoadEvent(function() {
                         ShoppingCart.currentProduct = currentProduct;
-                        //ShoppingCart.currentVariations = {# variations|json_encode() #};
                     });
                 }());
             </script>            

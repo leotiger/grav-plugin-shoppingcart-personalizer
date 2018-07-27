@@ -79,7 +79,7 @@ en:
         PERSONALIZE_FIELD_OPTIONS: Options
         PERSONALIZE_RESTRICT_COUNTRIES: Restrict countries
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restrict the list of available countries for the shop
-        
+        PERSONALIZE_VARIATION_UPLOAD_HINT: You can upload a file once checkout is completed
     
 de:
     PLUGIN_SHOPPINGCART:
@@ -162,6 +162,7 @@ de:
         PERSONALIZE_FIELD_OPTIONS: Auswahloptionen
         PERSONALIZE_RESTRICT_COUNTRIES: Länderauswahl einschränken
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Schränken Sie die operativen Länder ihres Shops ein
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Sobald der Einkauf abgeschlossen ist, können Sie eine Datei hochladen
         
 
 ca:
@@ -245,6 +246,7 @@ ca:
         PERSONALIZE_FIELD_OPTIONS: Opcions
         PERSONALIZE_RESTRICT_COUNTRIES: Restringir països
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restringir la llista de països disponibles a la botiga
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Quan la compra està feta, pot adjuntar un fitxer
         
         
 
@@ -329,4 +331,5 @@ es:
         PERSONALIZE_FIELD_OPTIONS: Opciones      
         PERSONALIZE_RESTRICT_COUNTRIES: Restringir países
         PERSONALIZE_RESTRICT_COUNTRIES_HELP: Restringir la lista de países disponibles en la tienda
+        PERSONALIZE_VARIATION_UPLOAD_HINT: Cuando la compra está hecha, puede adjuntar un fichero
         
