@@ -111,7 +111,7 @@ This will install the Shoppingcart Personlizer plugin into your `/user/plugins` 
 
 ## Help
 
-Help can be obtained via issue section but we cannot guarantee to answer in a timely or exhaustive fashion.
+Help can be obtained via the [issue section](https://github.com/leotiger/grav-plugin-shoppingcart-personalizer/issues) but we cannot guarantee to answer in a timely or exhaustive fashion.
 It will sometimes take some days to obtain responses and we will only answer to general problems. 
 Site specific integration problems will not be addressed in the issue section.
 If you have dedicated, site-specific integration neeeds, you may quote for support and we will send you an offer.
