@@ -4,6 +4,7 @@
 1. [](#new)
     * Add detail order page in admin
     * Add customer personalize page
+    * Add personalize upload for product variationns and configurations
 1. [](#improved)
     * Add existing plugins to add-on overview page
 1. [](#bugfix)
