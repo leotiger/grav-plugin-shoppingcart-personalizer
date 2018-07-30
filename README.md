@@ -32,6 +32,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * quantity / configuration steps for variations
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
+* Customer file uploads for products (once cart has been checked-out)
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
@@ -51,7 +52,6 @@ stock management, country restriction, single product, service vs. shippable pro
 
 On the road for the 1.0 release:
 
-* Customer file uploads for products (once cart has been checked-out)
 * Additional basic features
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
