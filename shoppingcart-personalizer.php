@@ -21,9 +21,6 @@ use Grav\Common\Data\Blueprints;
 use Symfony\Component\Yaml\Yaml;
 use Grav\Common\Utils;
 
-
-
-
 /**
  * Class ShoppingcartPersonalizerPlugin
  * @package Grav\Plugin
@@ -213,18 +210,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         if (!$page) {
             /** @var Uri $uri */
             $uri = $this->grav['uri'];
-            /*
-            if (!empty($_POST) && isset($_POST['data'])) {
-                $post = $_POST['data'];
-                $post = $this->cleanDataKeys($post);                        
-                if (isset($post['order_created_on']) && isset($post['order_token'])) {
-                    $order = $this->findOrder($post['order_created_on'], $post['order_token']);
-                }                
-            } else {
-             * 
-             */
             $order = $this->findOrder($uri->query('id'), $uri->query('token'));                
-            //}            
             /** @var Twig $twig */
             $twig = $this->grav['twig'];
             $twig->twig_vars['order'] = $order;
@@ -235,16 +221,11 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $page->slug(basename($url));
             $addForm = false;
             if (!isset($order['personalized'])) {
-            
                 $personalizeOrderForm = $this->config->get('plugins.shoppingcart-personalizer.personalizeorder_form', []);
                 $personalizeOrderForm['action'] = $this->personalize_url;
-                
-                
-                
                 $personalizeOrderForm['fields'] = [];
                 $personalizeOrderForm['buttons'] = [
                     ['type' => 'submit', 'classes' => 'btn btn-primary', 'value' => 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCTS_SUBMIT']
-
                 ];
                 $personalizeOrderForm['process'] = [
                     ['personalizeorder' => ['personalizeorder' => true]],
@@ -316,7 +297,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             unset($post['_json']);
         }
         $post = $this->cleanDataKeys($post);        
-        //$this->grav['log']->info(json_encode($post));
         if (isset($post['order_created_on']) && isset($post['order_token'])) {            
             $order = $this->findOrder($post['order_created_on'], $post['order_token']);
             if ($order) {
@@ -358,7 +338,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             
         }
     }
-    
     
     /**
      * Saves the personalized order to the filesystem
@@ -438,7 +417,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $page->modifyHeader('form', $placeOfferForm);
         }        
     }
-    
     
     /**
      * Initialize configuration
