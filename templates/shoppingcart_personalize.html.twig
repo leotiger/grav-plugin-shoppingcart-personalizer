@@ -1,0 +1,10 @@
+{% extends 'partials/shoppingcart_core_base.html.twig' %}
+{% block content %}
+    {% if order and order.token %}
+    	<div class="shoppingcart-container shoppingcart__order-confirmation">
+        	<h1>{{ "PLUGIN_SHOPPINGCART.THANKS_FOR_YOUR_ORDER"|t|e }}</h1>
+
+        	{% include 'partials/shoppingcart_core_personalize_details.html.twig' %}
+    	</div>
+    {% endif %}
+{% endblock %}

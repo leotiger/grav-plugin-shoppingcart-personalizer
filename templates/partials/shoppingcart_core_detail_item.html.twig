@@ -65,7 +65,7 @@
                         {% else %}
                         <div class="shoppingcart-thumb" id='varmedia-{{ group.groupid ~ '-' ~ variation.variationid }}' style='display:none;'>    
                         {% endif %}    
-                        <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ page.media[variation.media].url }}">
+                        <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="none"' : 'target="_blank"' }} href="{{ page.media[variation.media].url }}">
                         {{ page.media[variation.media].cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
                         </a>
                         </div>

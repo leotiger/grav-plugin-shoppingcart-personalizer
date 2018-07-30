@@ -129,6 +129,13 @@ en:
         PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Allow customer to submit text for the product / variation
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Upload
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: Customer can upload a file after completion of checkout in the context of this variation
+        PERSONALIZE_ORDER_FORM: Personalize order
+        PERSONALIZE_ORDER_URL: Personalize path
+        PERSONALIZE_ORDER_URL_HELP: Show a form that allows to submit the customer to submit additional information and personalizations. The path should not exist in the system
+        PERSONALIZE_SHOPPINGCART_ORDER: Order
+        PERSONALIZE_ORDER_LINKLABEL: Personalize order
+        PERSONALIZE_YOUR_PRODUCTS: Personalize your products
+        PERSONALIZE_PRODUCTS_SUBMIT: Personalize
     
 de:
     PLUGIN_SHOPPINGCART:
@@ -260,8 +267,11 @@ de:
         PERSONALIZE_PRODUCT_VARIATION_FREETEXT: Kundentext
         PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Erlaube dem Kunden, Text für das Produkt / die Variation beizufügen
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Hochladen
-        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: Der Kunde kann eine Datei nach Abschluss des Checkouts im Rahmen dieser Variante hochladen.    
-
+        PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: Der Kunde kann eine Datei nach Abschluss des Checkouts im Rahmen dieser Variante hochladen.  
+        PERSONALIZE_ORDER_FORM: Auftragsdaten
+        PERSONALIZE_ORDER_URL: Auftragsdatenpfad
+        PERSONALIZE_ORDER_URL_HELP: Zeigen Sie ein Formular, das es dem Kunden ermöglicht, zusätzliche Informationen und Personalisierungen einzureichen. Der Pfad sollte nicht im System existieren.
+        PERSONALIZE_SHOPPINGCART_ORDER: Auftrag
 
 ca:
     PLUGIN_SHOPPINGCART:
@@ -394,6 +404,10 @@ ca:
         PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Permet que el client enviï text en el context del producte o de la variació
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Carrega
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: El client pot pujar un fitxer després de completar el procés de pagament en el context d'aquesta variació.        
+        PERSONALIZE_ORDER_FORM: Dades comanda
+        PERSONALIZE_ORDER_URL: Ruta comanda
+        PERSONALIZE_ORDER_URL_HELP: Mostrar un formulari que permet al client enviar informació addicional i personalitzacions en el context de la comanda. La ruta no hauria d'existir al sistema.
+        PERSONALIZE_SHOPPINGCART_ORDER: Comanda
 
 es:
     PLUGIN_SHOPPINGCART:
@@ -526,3 +540,8 @@ es:
         PERSONALIZE_PRODUCT_VARIATION_FREETEXT_HELP: Permitir que el cliente envíe texto en el contexto del producto o de la variación
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD: Upload
         PERSONALIZE_PRODUCT_VARIATION_UPLOAD_HELP: El cliente puede subir un archivo después de la finalización de la compra en el contexto de esta variación        
+        PERSONALIZE_ORDER_FORM: Datos encargo
+        PERSONALIZE_ORDER_URL: Ruta encargo
+        PERSONALIZE_ORDER_URL_HELP: Mostrar un formulario que permite al cliente enviar información addicional y personalizaciones en el contexto del encargo. La ruta no debe existir en el sistema.
+        PERSONALIZE_SHOPPINGCART_ORDER: Encargo
+        

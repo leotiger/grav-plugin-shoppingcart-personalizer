@@ -197,6 +197,14 @@ form:
               validate:
                 type: string
 
+            urls.personalize_url:
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_URL
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_URL_HELP                
+              type: text
+              default: '/shop-personalize-order'
+              validate:
+                type: string
+
         -
           type: tab
           title: PLUGIN_SHOPPINGCART.PERSONALIZE_QUOTE_FORM
@@ -204,6 +212,124 @@ form:
           fields:
 
             placeoffer_form.fields:
+              type: list
+              array: true
+              style: vertical
+
+              fields:
+
+                .type:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TYPE
+                  type: select
+                  default: text
+                  options:
+                    text: text
+                    display: display
+                    select: select
+                    checkbox: checkbox
+                    email: email
+                    toggle: toggle
+                    textarea: textarea
+                    captcha: captcha
+                    spacer: spacer
+                  validate:
+                    type: string
+
+                .validate:
+                  toggleable: true
+                  type: array
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_VALIDATE
+                  help:
+                  placeholder_key: value
+                  placeholder_value: label
+
+                .name:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_NAME
+                  help:
+                  type: text
+
+                .label:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_LABEL
+                  help:
+                  type: text
+                  
+                .title:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TITLE
+                  help: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_TITLE_HELP
+                  type: text
+                  
+                .underline:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_UNDERLINE
+                  help: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_UNDERLINE_HELP
+                  default: 1
+                  type: bool
+                  options:
+                    1: PLUGIN_ADMIN.ENABLED
+                    0: PLUGIN_ADMIN.DISABLED                  
+                  validate:
+                      bool
+
+                .help:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_HELP
+                  type: text
+
+                .ignore:
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_IGNORE
+                  type: toggle
+                  highlight: 0
+                  default: 0
+                  options:
+                    1: PLUGIN_ADMIN.YES
+                    0: PLUGIN_ADMIN.NO
+                  validate:
+                    type: bool
+
+                .classes:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CLASSES
+                  help:
+                  type: text
+
+                .id:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_ID
+                  type: text
+
+                .outerclasses:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_OUTER_CLASSES
+                  type: text
+
+                .content:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CONTENT
+                  type: text
+
+                .markdown:
+                  toggleable: true
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_CONTENT_MARKDOWN
+                  type: text
+
+                .options:
+                  toggleable: true
+                  type: array
+                  label: PLUGIN_SHOPPINGCART.PERSONALIZE_FIELD_OPTIONS
+                  placeholder_key: value
+                  placeholder_value: label
+
+
+        -
+          type: tab
+          title: PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_FORM
+
+          fields:
+
+            personalizeorder_form.fields:
               type: list
               array: true
               style: vertical

@@ -1,0 +1,29 @@
+{% extends 'partials/base.html.twig' %}
+{% if admin.route %}
+    {% set context = admin.page(true) %}
+{% endif %}
+
+{% block titlebar %}
+    <h1><i class="fa fa-fw fa-file-text-o"></i> <a href="{{ config.plugins.admin.route ~ '/shoppingcart' }}">{{ "PLUGIN_SHOPPINGCART.SHOPPING_CART"|tu }}</a></h1>
+{% endblock %}
+
+{% block content %}
+    <style>
+        th { background: #d9d9d9; }
+
+        tr, td { text-align: left;}
+        .details { flex: 1.5 }
+
+        .center {
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+    {% if order %}
+    <h1>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_SHOPPINGCART_ORDER"|tu }}: {{ order.created_on }} {{ shit }}</h1>
+
+    <div class="admin-block">
+        <a href="{{ personalize_url ~ '?id=' ~ order.created_on ~ '&token=' ~ order.token }}">{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_LINKLABEL"|tu }}</a>
+    </div>
+    {% endif %}
+{% endblock %}

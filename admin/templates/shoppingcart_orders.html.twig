@@ -27,7 +27,7 @@
                 </tr>
                 {% for order in grav.twig.orders.orders %}
                     <tr>
-                        <td class="date">{{order.created_on|slice(0, 4)}}/{{order.created_on|slice(4, 2)}}/{{order.created_on|slice(6, 2)}}</td>
+                        <td class="date"><a href="{{ config.plugins.admin.route ~ '/shoppingcart/shoppingcart_order/id:' ~ order.created_on ~ '/token:' ~ order.token }}">{{order.created_on|slice(0, 4)}}/{{order.created_on|slice(4, 2)}}/{{order.created_on|slice(6, 2)}}</a></td>                        
                         <td class="amount">
                             {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
                                 {{ order.amount }}{{ currency_symbol }}

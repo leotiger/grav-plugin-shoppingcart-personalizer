@@ -1,3 +1,14 @@
+# v0.9.5
+## 30-07-2018
+
+1. [](#new)
+    * Add detail order page in admin
+    * Add customer personalize page
+1. [](#improved)
+    * Add existing plugins to add-on overview page
+1. [](#bugfix)
+    * only show active variation images in fancybox
+
 # v0.9.4
 ## 27-07-2018
 

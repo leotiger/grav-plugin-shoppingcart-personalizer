@@ -76,10 +76,14 @@
                 $interface += '</div>';
             }
             jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb').hide();
-            if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {
+            jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb a').attr('data-fancybox', '');
+            if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {                
+                jQuery('#varmedia-' + $groupid + '-' + $varid + ' a').attr('data-fancybox','itemgallery');
                 jQuery('#varmedia-' + $groupid + '-' + $varid).show();
             } else if (jQuery('#varmedia-' + $groupid).length) {
+                jQuery('#varmedia-' + $groupid + ' a').attr('data-fancybox','itemgallery');
                 jQuery('#varmedia-' + $groupid).show();
+
             }
             
         }
@@ -168,9 +172,12 @@
                     $interface += '</div>';
                 }
                 jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb').hide();
-                if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {
+                jQuery('#groupmedia-' + $groupid).find('.shoppingcart-thumb a').attr('data-fancybox', '');
+                if (jQuery('#varmedia-' + $groupid + '-' + $varid).length) {                
+                    jQuery('#varmedia-' + $groupid + '-' + $varid + ' a').attr('data-fancybox','itemgallery');
                     jQuery('#varmedia-' + $groupid + '-' + $varid).show();
                 } else if (jQuery('#varmedia-' + $groupid).length) {
+                    jQuery('#varmedia-' + $groupid + ' a').attr('data-fancybox','itemgallery');
                     jQuery('#varmedia-' + $groupid).show();
                 }
             }
