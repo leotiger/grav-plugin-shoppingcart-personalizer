@@ -5,6 +5,8 @@
     * Add detail order page in admin
     * Add customer personalize page
     * Add personalize upload for product variationns and configurations
+    * Show variation uploads and configurations in admin, frontend
+    * Allow additional basket personalizations, e.g. add a billing form to be filled in after checkout, etc.
 1. [](#improved)
     * Add existing plugins to add-on overview page
 1. [](#bugfix)

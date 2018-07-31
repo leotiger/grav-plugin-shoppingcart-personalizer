@@ -52,3 +52,11 @@ placeoffer_form:
                 body: '{% include ''forms/data.txt.twig'' %}'
         -
             message: PLUGIN_SHOPPINGCART.PERSONALIZE_PLACE_OFFER_THANKS
+
+personalizeorder_form:
+  fields:
+    -
+      type: display
+      name: personalize_your_products
+      label: PLUGIN_SHOPPINGCART.PERSONALIZE_YOUR_PRODUCTS
+      ignore: false
