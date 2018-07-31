@@ -1,21 +1,12 @@
 <?php
 namespace Grav\Plugin;
 
-use Grav\Common\File\CompiledYamlFile;
-use Grav\Common\GPM\GPM;
 use Grav\Common\Grav;
-use Grav\Common\Config\Config;
-use Grav\Common\Inflector;
-use Grav\Common\Language\Language;
 use Grav\Common\Page\Page;
 use Grav\Common\Page\Pages;
 use Grav\Common\Plugin;
-use Grav\Common\Uri;
-use Grav\Common\User\User;
 use RocketTheme\Toolbox\File\File;
 use RocketTheme\Toolbox\Event\Event;
-use RocketTheme\Toolbox\Session\Session;
-use Grav\Plugin\Shortcodes\BlockShortcode;
 use Grav\Common\Filesystem\Folder;
 use Grav\Common\Data\Blueprints;
 use Symfony\Component\Yaml\Yaml;
