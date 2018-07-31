@@ -136,6 +136,8 @@ en:
         PERSONALIZE_ORDER_LINKLABEL: Personalize order
         PERSONALIZE_YOUR_PRODUCTS: Personalize your products
         PERSONALIZE_PRODUCTS_SUBMIT: Personalize
+        PERSONALIZE_FORCE_EMAILS: Force email notifications
+        PERSONALIZE_FORCE_EMAILS_HELP: If instance adaptation of checkout form and others misses email process configuration, force sending of simple confirmation emails with essential links
     
 de:
     PLUGIN_SHOPPINGCART:

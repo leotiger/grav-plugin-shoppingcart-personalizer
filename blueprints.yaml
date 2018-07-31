@@ -204,6 +204,18 @@ form:
               default: '/shop-personalize-order'
               validate:
                 type: string
+                
+            shop.force_emails:
+              type: toggle
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_FORCE_EMAILS
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_FORCE_EMAILS_HELP
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
 
         -
           type: tab

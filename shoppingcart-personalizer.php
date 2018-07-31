@@ -523,11 +523,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Remove personalization uploads
      *
-     * We need a workaround for the inconsistency bug in shoppingcart see issue 
-     * 
-     * @param string $id order id
-     * @param string $token order token
-     * @return order
+     * @param string $path path to variation uploads
+     * @return boolean/array $files 
      */
     private function removePersonalizationUploads($path)
     {        
@@ -551,7 +548,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      * Get personalization uploads
      *
      * We need a workaround for the inconsistency bug in shoppingcart
-     * see issue 
+     * see issue #88 
      * 
      * @param string $id order id
      * @param string $token order token
@@ -581,7 +578,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      * Find order
      *
      * We need a workaround for the inconsistency bug in shoppingcart
-     * see issue 
+     * see issue #88
      * 
      * @param string $id order id
      * @param string $token order token
@@ -614,7 +611,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      * Get order filename
      *
      * We need a workaround for the inconsistency bug in shoppingcart
-     * see issue 
+     * see issue #88
      * 
      * @param string $id order id
      * @param string $token order token
