@@ -1,3 +1,10 @@
+# v0.9.6
+## 01-08-2018
+
+1. [](#new)
+    * Add email notifications
+    * Add stock updates
+
 # v0.9.5
 ## 30-07-2018
 

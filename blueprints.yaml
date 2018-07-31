@@ -1,6 +1,6 @@
 name: Shopping Cart Personalizer Addon
-version: 0.9.5
-description: "Personalizer for the Grav Shopping Cart Plugin"
+version: 0.9.6
+description: "Power overload the Shopping Cart Plugin with stock management, variations, product personalizations, country restrictions and plenty of other tweaks and features."
 icon: shopping-cart
 author:
   name: Uli Hake
