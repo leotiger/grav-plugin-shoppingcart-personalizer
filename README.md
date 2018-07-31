@@ -33,6 +33,8 @@ stock management, country restriction, single product, service vs. shippable pro
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
 * Customer file uploads for products (once cart has been checked-out)
+* Display variation customizations (uploads, text) in frontend and backend
+* Add details order page to administration 
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
@@ -52,7 +54,7 @@ stock management, country restriction, single product, service vs. shippable pro
 
 On the road for the 1.0 release:
 
-* Additional basic features
+* Additional basic features, e.g. email notifications, automatic stock updates
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
 form configuration adding support for textarea, re-captcha, etc. A Pull Request for the shoppingcart plugin, v.1.2.2 is
@@ -64,7 +66,7 @@ The Shoppingcart-Notify Add-on allows you to:
 * adds additional security checks server-side to prevent cart manipulations in the front-end
 * sends confirmation email to customer with customizable template
 * offers basic mailchimp integration (will be improved and enhanced)
-* automizes stock management with multi-language support
+* enhanced stock management with multi-language support
 * digital downloads
 * etc.
 
