@@ -28,13 +28,13 @@ stock management, country restriction, single product, service vs. shippable pro
 * editable product id in admin
 * show remove button in checkout cart if desired
 * optionally remove existing product (necessary in the context of product variations)
-* grouped product variations and configurations with pricing, stock, customer input, (file upload for customers on the way)
+* grouped product variations and configurations with pricing, stock, customer input
 * quantity / configuration steps for variations
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
-* Customer file uploads for products (once cart has been checked-out)
-* Display variation customizations (uploads, text) in frontend and backend
-* Add details order page to administration 
+* customer file uploads for products (once cart has been checked-out)
+* display variation customizations (uploads, text) in frontend and backend
+* add details order page to administration 
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
 * show add to cart button in catalogue pages
 * display decimal separator as comma
