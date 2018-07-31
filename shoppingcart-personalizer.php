@@ -80,7 +80,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      */
     public function onTwigTemplatePaths()
     {
-      // Register Shopping Cart Studio Twig templates
       $this->grav['twig']->twig_paths[] = __DIR__ . '/templates';
 
     }
@@ -96,7 +95,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         foreach ($strings as $string) {
             $translations .= 'PLUGIN_SHOPPINGCART.translations.' . $string . ' = "' . $this->grav['language']->translate(['PLUGIN_SHOPPINGCART.' . $string]) . '"; ' . PHP_EOL;
         }
-
         $assets->addInlineJs($translations);
     }
 
@@ -177,7 +175,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     'onPagesInitialized' => ['addPersonalizePage', 0]
                 ]);
             }
-            
         } else {
             $this->enable([
                 'onTwigTemplatePaths'                        => ['onTwigAdminTemplatePaths', 1000],
@@ -208,10 +205,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         $page = $pages->dispatch($url);
 
         if (!$page) {
-            /** @var Uri $uri */
             $uri = $this->grav['uri'];
             $order = $this->findOrder($uri->query('id'), $uri->query('token'));                
-            /** @var Twig $twig */
             $twig = $this->grav['twig'];
             $twig->twig_vars['order'] = $order;
             $twig->twig_vars['currency'] = $this->config->get('plugins.shoppingcart.general.currency');
@@ -334,8 +329,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     
                 }
             }
-        } else {
-            
         }
     }
     
@@ -349,7 +342,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     private function savePersonalizedOrderToFilesystem($order, $filename)
     {
         $body = Yaml::dump($order);
-
         $file = File::instance(DATA_DIR . 'shoppingcart' . '/' . $filename);
         $file->save($body);
     }    
@@ -369,14 +361,12 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 $value = json_decode($value, true);
             }
         }
-
         return $data;
     }
 
     protected function cleanDataKeys($source = [])
     {
         $out = [];
-
         if (is_array($source)) {
             foreach ($source as $key => $value) {
                 $key = str_replace(['%5B', '%5D'], ['[', ']'], $key);
@@ -387,7 +377,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 }
             }
         }
-
         return $out;
     }    
     
@@ -399,11 +388,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         $uri = $this->grav['uri'];
         $pages = $this->grav['pages'];
         $page = $pages->dispatch($uri->path());
-        
         if (!$page instanceof Page) {
             return false;
         }
-        
         $pageLang = $page->language();
         $pageFile = $page->file()->basename() . '.md';
         $placeOfferForm = $this->config->get('plugins.shoppingcart-personalizer.placeoffer_form');
@@ -423,16 +410,13 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      */
     public function onPageInitialized()
     {
-        /** @var Page $page */
         $page = $this->grav['page'];
         
-        // if I'm not in a Shop page, and I don't need to add JS globally, return
         if (!$this->config->get('plugins.shoppingcart.general.load_js_globally')) {
             if (!in_array($page->template(), $this->shoppingcart->getOwnPageTypes())) {
                 return;
             }
         }
-        
         // Fix shoppingcart mis-configurations while PR is not accepted, approved by Flavio Copes
         if (isset($page->header()->shoppingcart)) {
             unset($page->header()->shoppingcart);
@@ -450,7 +434,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/jquery.fancybox.js');
             $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/jquery.fancybox.css');        
         }
-        //$this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/dropzone.js');        
         $this->grav['assets']->addJs('plugin://' . $this->plugin_name . '/assets/js/shoppingcart-personalizer.js');        
         $this->grav['assets']->addCss('plugin://' . $this->plugin_name . '/assets/css/shoppingcart-personalizer.css');        
         
@@ -522,8 +505,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Remove personalization uploads
      *
-     * We need a workaround for the inconsistency bug in shoppingcart
-     * see issue 
+     * We need a workaround for the inconsistency bug in shoppingcart see issue 
      * 
      * @param string $id order id
      * @param string $token order token
@@ -769,7 +751,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 ];
             }
 
-
             // Handle file size limits
             $settings->filesize *= self::BYTES_TO_MB; // 1024 * 1024 [MB in Bytes]
             if ($settings->filesize > 0 && $upload->file->size > $settings->filesize) {
@@ -779,7 +760,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     'message' => $grav['language']->translate('PLUGIN_FORM.EXCEEDED_GRAV_FILESIZE_LIMIT')
                 ];
             }
-
 
             // we need to move the file at this stage or else
             // it won't be available upon save later on
@@ -846,7 +826,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             // Finally store the new uploaded file in the field session
             $session->setFlashObject('files-upload', $flash);
 
-
             // json_response
             $json_response = [
                 'status' => 'success',
@@ -879,11 +858,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         $files->file = new \stdClass();
 
         foreach ($data as $fieldName => $fieldValue) {
-            // Since Files Upload are always happening via Ajax
-            // we are not interested in handling `multiple="true"`
-            // because they are always handled one at a time.
-            // For this reason we normalize the value to string,
-            // in case it is arriving as an array.
             $value = (array) Utils::getDotNotation($fieldValue, $key);
             $files->file->{$fieldName} = array_shift($value);
         }
@@ -918,5 +892,4 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     {
         return Utils::getPagePathFromToken($path, $page);
     }
-    
 }
