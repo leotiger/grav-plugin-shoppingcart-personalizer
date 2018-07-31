@@ -654,7 +654,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Handles ajax upload for files.
      * Stores in a flash object the temporary file and deals with potential file errors.
-     *
+     * PR #272 for form plugin would allow to solve upload hooking into events without the need of code duplications
      * @return mixed True if the action was performed.
      */
     public function uploadFiles($page)
