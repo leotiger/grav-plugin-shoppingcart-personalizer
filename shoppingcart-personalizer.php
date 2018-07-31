@@ -639,14 +639,10 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      */
     public function onAdminMenu()
     {
-        //$uri = $this->grav['uri'];
-            
-        //if (strpos($uri->path(), $this->config->get('plugins.admin.route') . '/' . $this->route) !== false) {
         $this->grav['twig']->plugins_hooked_nav['PLUGIN_SHOPPINGCART.SHOPPING_CART'] = [
             'route' => $this->shoppingcart_route,
             'icon'  => 'fa-shopping-cart'
         ];
-        //}
     }
     
     /**
@@ -708,7 +704,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
 
             // Remove the error object to avoid storing it
             unset($upload->file->error);
-
 
             // Handle Accepted file types
             // Accept can only be mime types (image/png | image/*) or file extensions (.pdf|.jpg)
