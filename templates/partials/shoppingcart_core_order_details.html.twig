@@ -1,5 +1,4 @@
 <h3>{{ "PLUGIN_SHOPPINGCART.PRODUCTS_BOUGHT"|t|e }}</h3>
-
 {% for product_ordered in order.products %}
     <li>
         {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
@@ -11,16 +10,39 @@
         {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
         {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: (product_ordered.product.variants|first).varbaseprice } %}
         <ul>
-        {% for variant in product_ordered.product.variants %}
+        {% for variant in product_ordered.product.variants %}        
         <li>
         {{ product_ordered.quantity|e }} x {{ variant.varmultiplier|e }} {{ variant.vardata.title|e }} at
         {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: variant.varprice } %}
+        {% if (variant.varfreetext and variant.varfreetext|length > 0) or (variant.varuploads and variant.varuploads|length > 0) %}
+            <ul>
+            {% if variant.varfreetext|length > 0 %}
+                <li>{{ variant.varfreetext }}</li>
+            {% endif %}
+            {% if variant.varuploads and variant.varuploads|length %}
+            {% for upload in variant.varuploads %}
+                <li>
+                    <a href="{{ url(upload) }}">{{ upload|basename }}</a>
+                </li>
+            {% endfor %}
+            {% endif %}
+            </ul>
+
+        {% endif %}
         </li>
         {% endfor %}
         </ul>
         {% endif %}
     </li>
 {% endfor %}
+
+{% if not order.personalized is defined or not order.personalized %}        
+<h5>
+<a href="{{ url(config.plugins.shoppingcart.urls.personalize_url) ~ '?id=' ~ order.created_on ~ '&token=' ~ order.token }}">{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_LINKLABEL"|t }}</a>
+</h5>
+{% endif %}
+
+
 {% if config.plugins.shoppingcart.general.product_taxes == 'included' %}
 <h3>{{  "PLUGIN_SHOPPINGCART.INCLUDING_TAXES"|t|e }}</h3>    
 {% else %}

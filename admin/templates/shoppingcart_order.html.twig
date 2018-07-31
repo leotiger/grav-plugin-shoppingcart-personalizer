@@ -19,11 +19,84 @@
             text-align: center;
         }
     </style>
-    {% if order %}
     <h1>{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_SHOPPINGCART_ORDER"|tu }}: {{ order.created_on }} {{ shit }}</h1>
-
+    {% if order %}
     <div class="admin-block">
+        {% if not order.personalized is defined or not order.personalized %}        
         <a href="{{ personalize_url ~ '?id=' ~ order.created_on ~ '&token=' ~ order.token }}">{{ "PLUGIN_SHOPPINGCART.PERSONALIZE_ORDER_LINKLABEL"|tu }}</a>
+        {% endif %}
+        
+        <h3>{{ "PLUGIN_SHOPPINGCART.PRODUCTS_BOUGHT"|t|e }}</h3>
+
+        {% for product_ordered in order.products %}
+            <li>
+                {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
+                {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: product_ordered.product.price } %}
+
+                {% if product_ordered.product.variants is defined and product_ordered.product.variants|length > 0 %}
+                <br>
+                {{ "PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_BASEPRICE"|t|e }}:
+                {{ product_ordered.quantity|e }} {{ product_ordered.product.title|e }} at
+                {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: (product_ordered.product.variants|first).varbaseprice } %}
+                <ul>
+                {% for variant in product_ordered.product.variants %}
+                <li>
+                {{ product_ordered.quantity|e }} x {{ variant.varmultiplier|e }} {{ variant.vardata.title|e }} at
+                {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: variant.varprice } %}
+                {% if (variant.varfreetext and variant.varfreetext|length > 0) or (variant.varuploads and variant.varuploads|length > 0) %}
+                    <ul>
+                    {% if variant.varfreetext|length > 0 %}
+                        <li>{{ variant.varfreetext }}</li>
+                    {% endif %}
+                    {% if variant.varuploads and variant.varuploads|length %}
+                    {% for upload in variant.varuploads %}
+                        <li>
+                            <a href="{{ url(upload) }}">{{ upload|basename }}</a>
+                        </li>
+                    {% endfor %}
+                    {% endif %}
+                    </ul>
+                    
+                {% endif %}
+                </li>
+
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+
+        {% if config.plugins.shoppingcart.general.product_taxes == 'included' %}
+        <h3>{{  "PLUGIN_SHOPPINGCART.INCLUDING_TAXES"|t|e }}</h3>    
+        {% else %}
+        <h3>{{  "PLUGIN_SHOPPINGCART.EXCLUDING_TAXES"|t|e }}</h3>
+        {% endif %}
+        {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: order.taxes } %}
+
+
+        <h3>{{ "PLUGIN_SHOPPINGCART.TOTAL_PAID"|t|e }}</h3>
+
+        {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: order.amount } %}
+
+
+        <h3>{{ "PLUGIN_SHOPPINGCART.ORDER_DETAILS"|t|e }}</h3>
+
+        {% for index, item in order.data %}
+            {% set the_field = '' %}
+            {% for field in config.plugins.shoppingcart.checkout_form.fields %}
+                {% if field.name == index %}
+                    {% set the_field = field %}
+                {% endif %}
+            {% endfor %}
+
+            {% if not the_field.ignore %}
+                <strong>{{ the_field.label|t|default(index)|e }}</strong>:
+                {{ item|e }}
+                <br>
+            {% endif %}
+        {% endfor %}        
+        
     </div>
     {% endif %}
 {% endblock %}

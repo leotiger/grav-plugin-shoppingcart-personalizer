@@ -209,14 +209,30 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             if (!isset($order['personalized'])) {
                 $personalizeOrderForm = $this->config->get('plugins.shoppingcart-personalizer.personalizeorder_form', []);
                 $personalizeOrderForm['action'] = $this->personalize_url;
-                $personalizeOrderForm['fields'] = [];
-                $personalizeOrderForm['buttons'] = [
-                    ['type' => 'submit', 'classes' => 'btn btn-primary', 'value' => 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCTS_SUBMIT']
-                ];
-                $personalizeOrderForm['process'] = [
-                    ['personalizeorder' => ['personalizeorder' => true]],
-                    ['redirect' => $this->personalize_url],
-                ];
+                if (!isset($personalizeOrderForm['fields'])) {
+                    $personalizeOrderForm['fields'] = [];
+                }
+                if (!isset($personalizeOrderForm['buttons'])) {
+                    $personalizeOrderForm['buttons'] = [
+                        ['type' => 'submit', 'classes' => 'btn btn-primary', 'value' => 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCTS_SUBMIT']
+                    ];
+                }
+                if (!isset($personalizeOrderForm['process'])) {
+                    $personalizeOrderForm['process'] = [];
+                }
+
+                // Bit of an overkill to check these things
+                if (!isset($personalizeOrderForm['process']['personalizeorder'])) {
+                    array_push($personalizeOrderForm['process'], ['personalizeorder' => ['personalizeorder' => true]]);
+                }
+                if (!isset($personalizeOrderForm['process']['redirect'])) {
+                    $redirect_url = $this->config->get('plugins.shoppingcart.urls.order_url', $this->personalize_url);                    
+                    if ($redirect_url !== $this->personalize_url) {
+                        $orderid = $this->getOrderFilename($uri->query('id'), $uri->query('token'));
+                        $redirect_url = $redirect_url . '/id:' . pathinfo($orderid)['filename'] . '/token:' . $uri->query('token');
+                    }
+                    array_push($personalizeOrderForm['process'], ['redirect' => $redirect_url]);
+                }
                 
                 array_push($personalizeOrderForm['fields'], ['name' => 'order_token', 'type' => 'hidden', 'default' => $order['token']]);
                 array_push($personalizeOrderForm['fields'], ['name' => 'order_created_on', 'type' => 'hidden', 'default' => $order['created_on']]);
@@ -293,11 +309,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $order = $this->findOrder($post['order_created_on'], $post['order_token']);
             if ($order) {
                 $order['personalized'] = true;
-                
+                $data = [$order, $post];
                 if (isset($order['products'])) {
                     array_walk($order['products'], function(&$product, $key, $data) {
-                        $order = $data[0];
-                        $post = $data[1];
                         if (isset($product['product']['variants'])) {
                             array_walk($product['product']['variants'], function(&$variant, $varkey, $data) {            
                                 $order = $data[0];
@@ -306,6 +320,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                                     $postfield = 'freetext_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid'];
                                     if (isset($post[$postfield])) {
                                         $variant['varfreetext'] = $post[$postfield];
+                                        unset($post[$postfield]);
                                     }
                                 }
                                 if (isset($variant['vardata']['fileupload']) && $variant['vardata']['fileupload'] && $variant['vardata']['fileupload'] != 'false') {
@@ -313,17 +328,28 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                                     if ($files) {
                                         $variant['varuploads'] = $files;
                                     }
+                                    if (isset($post['orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid']])) {
+                                        unset($post['orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid']]);
+                                    }
                                 }
-                            }, [$order, $post]);
+                                
+                            }, $data);
                         }
-                    }, [$order, $post]);
+                    }, $data);
                 }
-                
+                //$post = $data[1];                
                 $orderfile = $this->getOrderFilename($post['order_created_on'], $post['order_token']);
+                unset($post['order_created_on']);
+                unset($post['order_token']);
+                foreach($post as $key => $field) {
+                    if (stripos($key, 'freetext_') !== false || stripos($key,'orderfile_') !== false) {
+                        unset($post[$key]);
+                    }
+                }
+                /** @todo We can enhance the whole stuff merging with data captured during checkout **/
+                $order['personalizations'] = $post;
                 if ($orderfile) {
                     $this->savePersonalizedOrderToFilesystem($order, $orderfile);
-                    $this->grav['log']->info('we have loaded our order on post');
-                    
                 }
             }
         }

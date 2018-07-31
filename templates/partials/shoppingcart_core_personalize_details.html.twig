@@ -15,6 +15,21 @@
         <li>
         {{ product_ordered.quantity|e }} x {{ variant.varmultiplier|e }} {{ variant.vardata.title|e }} at
         {% include 'partials/shoppingcart_core_price_order.html.twig' with { price: variant.varprice } %}
+        {% if (variant.varfreetext and variant.varfreetext|length > 0) or (variant.varuploads and variant.varuploads|length > 0) %}
+            <ul>
+            {% if variant.varfreetext|length > 0 %}
+                <li>{{ variant.varfreetext }}</li>
+            {% endif %}
+            {% if variant.varuploads and variant.varuploads|length %}
+            {% for upload in variant.varuploads %}
+                <li>
+                    <a href="{{ url(upload) }}">{{ upload|basename }}</a>
+                </li>
+            {% endfor %}
+            {% endif %}
+            </ul>
+        {% endif %}
+        
         </li>
         {% endfor %}
         </ul>
