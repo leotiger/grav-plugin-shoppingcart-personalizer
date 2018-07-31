@@ -225,8 +225,14 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     foreach($order['products'] as $product) {
                         if (isset($product['product']['variants'])) {
                             foreach($product['product']['variants'] as $variant) {
+                                /** @todo Config running in from frontend does not maintain the original type, bool may appear as string. 
+                                 * But we want to use the config representing the state at time of buying not the current system state.
+                                **/
                                 if (isset($variant['vardata']['fileupload']) && $variant['vardata']['fileupload'] && $variant['vardata']['fileupload'] != 'false') {
                                     $addForm = true;
+                                    /** @todo Problems may arise with missing uploads as we empty the storage on get call, not on post 
+                                     * A PR #272 for the Form plugin has been opened which would allow to solve this correctly hooking into an event
+                                    **/
                                     $this->removePersonalizationUploads('orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid']);
                                     array_push($personalizeOrderForm['fields'], ['label' => $variant['vardata']['title'], 'name' => 'orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid'], 'type' => 'file', 'multiple' => false]);                            
                                 }
@@ -662,11 +668,11 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $orderinfo = explode('_', $post['name'])[1];
             $varinfo = explode('_', $post['name'])[2];
             
+            /** @todo accept setting as configuration option **/
             $settings = [
                 'destination' => 'user/data/scp/' . $orderinfo . '_' . $varinfo,
                 'accept' => ['image/*','application/zip','text/plain','application/x-rar-compressed'],
             ];
-            //$this->data->blueprints()->schema()->getProperty($post['name']);
             $settings = (object) array_merge(
                 ['destination' => $config->get('plugins.form.files.destination', 'self@'),
                  'avoid_overwriting' => $config->get('plugins.form.files.avoid_overwriting', false),
@@ -792,6 +798,13 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             if ($settings->random_name) {
                 $extension = pathinfo($upload->file->name)['extension'];
                 $upload->file->name = Utils::generateRandomString(15) . '.' . $extension;
+            } else {
+                // Assure failsafe filenames
+                $extension = pathinfo($upload->file->name)['extension'];
+                $upload->file->name = mb_ereg_replace("[^a-zA-Z0-9\-_~.]", '', pathinfo($upload->file->name)['filename']) . '.' . $extension;
+                if (!pathinfo($upload->file->name)['filename']) {
+                    $upload->file->name = Utils::generateRandomString(15) . '.' . $extension;
+                }
             }
 
             // Handle conflicting name if needed
