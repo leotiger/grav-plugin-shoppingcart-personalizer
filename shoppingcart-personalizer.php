@@ -320,7 +320,6 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                                     $postfield = 'freetext_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid'];
                                     if (isset($post[$postfield])) {
                                         $variant['varfreetext'] = $post[$postfield];
-                                        unset($post[$postfield]);
                                     }
                                 }
                                 if (isset($variant['vardata']['fileupload']) && $variant['vardata']['fileupload'] && $variant['vardata']['fileupload'] != 'false') {
@@ -328,16 +327,12 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                                     if ($files) {
                                         $variant['varuploads'] = $files;
                                     }
-                                    if (isset($post['orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid']])) {
-                                        unset($post['orderfile_' . $order['created_on'] . '-' . $order['token'] . '_' . $variant['groupid'] . '-' . $variant['varid']]);
-                                    }
                                 }
                                 
                             }, $data);
                         }
                     }, $data);
                 }
-                //$post = $data[1];                
                 $orderfile = $this->getOrderFilename($post['order_created_on'], $post['order_token']);
                 unset($post['order_created_on']);
                 unset($post['order_token']);
