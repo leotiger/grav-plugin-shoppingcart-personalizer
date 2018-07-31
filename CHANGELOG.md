@@ -1,9 +1,11 @@
-# v0.9.6
+# v1.0.0
 ## 01-08-2018
 
 1. [](#new)
-    * Add email notifications
+    * Add option to force email notifications
     * Add stock updates
+    * Minimum cart amount
+    * Minimum free shipping amount    
 
 # v0.9.5
 ## 30-07-2018

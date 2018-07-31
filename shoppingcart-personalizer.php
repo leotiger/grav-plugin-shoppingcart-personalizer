@@ -27,6 +27,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     protected $route = 'shoppingcart/shoppingcart_order';    
     protected $shoppingcart_route = 'shoppingcart';
     protected $personalize_url;
+    protected $order;
     
     /**
      * @return array
@@ -159,6 +160,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 'onPageInitialized'                       => ['onPageInitialized', -1000],
                 'onPagesInitialized'      => ['onPagesInitialized', 9],                
                 'onFormProcessed' => ['onFormProcessed', 0],
+                'onShoppingCartAfterSaveOrder' => ['onShoppingCartAfterSaveOrder', -1000],
+                'onShoppingCartAfterSavePersonalization' => ['onShoppingCartAfterSavePersonalization', -1000],
             ]);
             $this->personalize_url = $this->config->get('plugins.shoppingcart-personalizer.urls.personalize_url');
             if ($this->personalize_url && $this->personalize_url == $uri->path()) {
@@ -221,6 +224,10 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     $personalizeOrderForm['process'] = [];
                 }
 
+                //if (!isset($personalizeOrderForm['process']['email'])) {
+                //    array_push($personalizeOrderForm['process'], ['forceemail' => ['id' => "{{ form.value.order_created_on|e }}", 'token' => "{{ form.value.order_token|e }}"]]);
+                //}
+                                
                 // Bit of an overkill to check these things
                 if (!isset($personalizeOrderForm['process']['personalizeorder'])) {
                     array_push($personalizeOrderForm['process'], ['personalizeorder' => ['personalizeorder' => true]]);
@@ -346,6 +353,12 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 if ($orderfile) {
                     $this->savePersonalizedOrderToFilesystem($order, $orderfile);
                 }
+                $this->grav->fireEvent('onShoppingCartAfterSavePersonalization', new Event([
+                    'order'    => $order,
+                    'order_id' => pathinfo($filename)['filename']
+                ]));
+
+                
             }
         }
     }
@@ -353,9 +366,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Saves the personalized order to the filesystem
      *
-     * @param $order
-     *
-     * @return string
+     * @param object $order
+     * @param string $filename
      */
     private function savePersonalizedOrderToFilesystem($order, $filename)
     {
@@ -909,4 +921,179 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     {
         return Utils::getPagePathFromToken($path, $page);
     }
+    
+    /**
+     * Send emails after checkout if necessary
+     * 
+     * @param array $event event data
+     */
+    public function onShoppingCartAfterSaveOrder($event) {
+        $order = $event['order'];        
+        if (!$this->order) {
+            $this->requireOrder();
+            $this->order = new ShoppingCart\Order($order);
+        }
+        if (!isset($order['checkoutemail'])) {
+            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.NOTIFY_EMAIL_CONFIRMATION_SUBJECT');        
+            $to = $this->order->__get('data')['email'];
+            $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
+            $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
+            if ($sent) {            
+                $order['checkoutemail'] = [
+                    'sent' => $this->udate('Ymd-His-u'),
+                    'to' => $to,
+                    'bcc' => $from,
+                    'from' => $from
+                ];
+
+                $this->saveOrder($order, $event['order_id'] . '.yaml');
+            }
+        }        
+    }
+
+    /**
+     * Send emails after checkout if necessary
+     * 
+     * @param array $event event data
+     */    
+    public function onShoppingCartAfterSavePersonalization($event) {
+        $order = $event['order'];        
+        if (!$this->order) {
+            $this->requireOrder();
+            $this->order = new ShoppingCart\Order($order);
+        }        
+        if (!isset($order['checkoutemail'])) {
+            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.NOTIFY_EMAIL_CONFIRMATION_SUBJECT');        
+            $to = $this->order->__get('data')['email'];
+            $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
+            $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
+            if ($sent) {            
+                $order['checkoutemail'] = [
+                    'sent' => $this->udate('Ymd-His-u'),
+                    'to' => $to,
+                    'bcc' => $from,
+                    'from' => $from
+                ];
+
+                $this->saveOrder($order, $event['order_id'] . '.yaml');
+            }
+        }        
+        
+    }
+    
+    /**
+     * Load order class definition
+     *
+     */
+    protected function requireOrder()
+    {
+        $path = realpath(__DIR__ . '/../shoppingcart/classes/order.php');
+        if (!file_exists($path)) {
+            $path = realpath(__DIR__ . '/../grav-plugin-shoppingcart/classes/order.php');
+        }
+        require_once($path);
+    }
+    
+    /**
+     * Quick utility method to send an HTML email.
+     *
+     * @param        $subject
+     * @param string $content
+     * @param string $to
+     * @param string $template
+     * @param null $from
+     * @param string $mimetype
+     *
+     * @return bool True if the action was performed.
+     */
+    public function sendEmail($subject, $content, $to, $order, $template = 'confirmation', $from = null, $mimetype = 'text/html')
+    {
+        $grav = Grav::instance();
+        if (!$from) {
+            $from = $grav['config']->get('plugins.email.from');
+        }
+        if (!isset($grav['Email']) || empty($from)) {
+            //throw new \RuntimeException($grav['language']->translate('PLUGIN_EMAIL.PLEASE_CONFIGURE_A_FROM_ADDRESS'));
+            $grav['log']->alert($grav['language']->translate('PLUGIN_EMAIL.PLEASE_CONFIGURE_A_FROM_ADDRESS'));
+            return false;
+        }
+        if (empty($to) || empty($subject)) {
+            return false;
+        }
+        //Initialize twig if not yet initialized
+        $grav['twig']->init();
+        $body = $grav['twig']->processTemplate('email/' . $template . '.html.twig', ['content' => $content, 'order' => $order['order'], 'orderid' => $order['order_id']]);
+        $message = $grav['Email']->message($subject, $body, $mimetype)
+            ->setFrom($from)
+            ->setTo($to)
+            ->setBcc($from);
+        $sent = $grav['Email']->send($message);
+        if ($sent < 1) {
+            return false;
+        } else {
+            return true;
+        }
+    }       
+    
+    /**
+     * Update stock of product including language variations
+     * Re-cache pages and parents if necessary
+     * 
+     * @param Order $order
+     */
+    protected function processStock($order) {
+        if ($this->config->get('system.cache.autotouch', false) && method_exists($this->grav['cache'], 'disableAutotouch')) {
+            $this->grav['cache']->disableAutotouch();
+        }
+        $pages = $this->grav['pages'];        
+        $lastSale = new \DateTime();  
+        foreach($order->__get('products') as $productobj) {
+            $product = $productobj["product"];
+            $pages = $this->grav['pages'];
+            $page = $pages->get($product['path']);
+            if ($page) {
+                $stock = intval($page->header()->stock) - intval($productobj['quantity']);
+                $page->modifyHeader('stock', $stock);
+                $page->modifyHeader('lastSale', $lastSale->getTimestamp());
+                $page->lastModified(true);
+                if (isset($page->header()->shoppingcart)) {                        
+                    unset($page->header()->shoppingcart);
+                }                
+                $page->save();
+                if (count($page->translatedLanguages())) {                
+                    foreach($page->translatedLanguages() as $lang => $translation) {
+                        $langPath = $product['path'] . '/shoppingcart_product.' . $lang . '.md';
+                        $translated_page = new Page();
+                        $translated_page->init(new \SplFileInfo($langPath), $lang . '.md');
+                        $translated_page->modifyHeader('stock', $stock);
+                        $translated_page->modifyHeader('lastSale', $lastSale->getTimestamp());
+                        if (isset($translated_page->header()->shoppingcart)) {                        
+                            unset($translated_page->header()->shoppingcart);
+                        }
+                        $translated_page->save();
+                    }
+                }
+                foreach($page->untranslatedLanguages(true) as $lang => $translation) {
+                    $langPath = $product['path'] . '/shoppingcart_product.' . $translation . '.md';                    
+                    if (file_exists($langPath)) {                        
+                        //don't overwrite existing translation efforts
+                        $translated_page = new Page();
+                        $translated_page->init(new \SplFileInfo($langPath), $translation . '.md');
+                        $translated_page->modifyHeader('published', false);
+                        $translated_page->modifyHeader('stock', $stock);
+                        $translated_page->modifyHeader('lastSale', $lastSale->getTimestamp());
+                        if (isset($translated_page->header()->shoppingcart)) {                        
+                            unset($translated_page->header()->shoppingcart);
+                        }                        
+                        $translated_page->save();                        
+                    }
+                }                
+            }
+        }
+        if ($this->config->get('system.cache.autotouch', false) || $this->config->get('plugins.shoppingcart-personalize.shop.clearcache', false)) {
+            //super fast way to refresh apcu or memcached...
+            $user_config = Grav::instance()['locator']->findResource('config://system.yaml');  
+            touch($user_config);
+        }
+    }        
 }

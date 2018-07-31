@@ -28,6 +28,38 @@
            jQuery('.' + $variantblock).toggle();
        }
     });
+    
+    /***********************************************************/
+    /* Verify free shipping
+    /* #event
+    /***********************************************************/
+    jQuery(document).on('onBeforeGenerateShippingPrice', function(event) {
+        if (ShoppingCart.settings.cart.freeshipping) {
+            var freeamount = parseInt(ShoppingCart.settings.cart.freeshipping);
+            var orderPrice = 0;
+            var i = 0;
+            var shippingFreeForService = true;
+            while (i < ShoppingCart.items.length) {
+                orderPrice += ShoppingCart.items[i].product.price * ShoppingCart.items[i].quantity;
+                // Let's be sure that shipping activates if we have at least one product that is not a service product
+                if (typeof ShoppingCart.items[i].product.service_product === 'undefined' || !ShoppingCart.items[i].product.service_product) {
+                    shippingFreeForService = false;
+                }
+                i++;
+            }
+            
+            
+            ShoppingCart.renderCart();
+            var freeshipping = parseInt(orderPrice) >= freeamount || shippingFreeForService;
+            if (freeshipping) {
+                ShoppingCart.shippingPrice = 0;
+                ShoppingCart.renderCart();
+                return false;
+            }
+        } 
+        return true;
+    });
+    
     /***********************************************************/
     /* Update variation interface and handle variation config
     /* #event

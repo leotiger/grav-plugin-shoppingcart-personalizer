@@ -56,6 +56,22 @@ form:
                 0: PLUGIN_ADMIN.DISABLED
               validate:
                 type: bool
+
+            cart.minimumSumToPlaceOrder:
+                label: PLUGIN_SHOPPINGCART.PERSONALIZE_MINIMUM_ORDER_AMOUNT
+                type: text
+                default: 50
+                validate:
+                    number
+
+            cart.freeshipping:
+                label: PLUGIN_SHOPPINGCART.PERSONALIZE_FREE_SHIPPING_AMOUNT
+                type: text
+                default: 0
+                help: Minimum amount for free shipping
+                validate:
+                  int
+                
                 
             ui.use_breadcrumbs:
               type: toggle
@@ -205,10 +221,30 @@ form:
               validate:
                 type: string
                 
+            shop.from_email:
+                label: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_EMAIL_SENDER
+                type: text
+                size: large
+                help: PLUGIN_SHOPPINGCART.PERSONALIZE_SHOP_EMAIL_SENDER_HELP
+                validate:
+                    email
+                
             shop.force_emails:
               type: toggle
               label: PLUGIN_SHOPPINGCART.PERSONALIZE_FORCE_EMAILS
               help: PLUGIN_SHOPPINGCART.PERSONALIZE_FORCE_EMAILS_HELP
+              highlight: 0
+              default: 0
+              options:
+                1: PLUGIN_ADMIN.ENABLED
+                0: PLUGIN_ADMIN.DISABLED
+              validate:
+                type: bool
+
+            shop.cachetouch:
+              type: toggle
+              label: PLUGIN_SHOPPINGCART.PERSONALIZE_CACHE_TOUCH
+              help: PLUGIN_SHOPPINGCART.PERSONALIZE_CACHE_TOUCH_HELP
               highlight: 0
               default: 0
               options:

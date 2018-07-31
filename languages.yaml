@@ -137,8 +137,19 @@ en:
         PERSONALIZE_YOUR_PRODUCTS: Personalize your products
         PERSONALIZE_PRODUCTS_SUBMIT: Personalize
         PERSONALIZE_FORCE_EMAILS: Force email notifications
-        PERSONALIZE_FORCE_EMAILS_HELP: If instance adaptation of checkout form and others misses email process configuration, force sending of simple confirmation emails with essential links
-    
+        PERSONALIZE_FORCE_EMAILS_HELP: If instance adaptation has not sent emails, force sending of simple confirmation emails with essential links
+        PERSONALIZE_CACHE_TOUCH: Force cache clear
+        PERSONALIZE_CACHE_TOUCH_HELP: Clear cache including volatile caches on stock updates to assure consistent display of products
+        PERSONALIZE_SHOP_EMAIL_SENDER: Shop email
+        PERSONALIZE_SHOP_EMAIL_SENDER_HELP: Specify a dedicated email sender for your shop, if left blank the site email will be used
+        PERSONALIZE_ORDER_CONFIRMATION_INTRO: " "
+        PERSONALIZE_ORDER_CONFIRMATION_FINAL: " "
+        PERSONALIZE_EMAIL_CONFIRMATION_SUBJECT: Order confirmation
+        PERSONALIZE_EMAIL_CONFIRMATION_HEADLINE: Thanks for your order    
+        PERSONALIZE_EMAIL_FOOTER: " "
+        PERSONALIZE_MINIMUM_ORDER_AMOUNT: Minimum order amount
+        PERSONALIZE_FREE_SHIPPING_AMOUNT: Free shipping amount
+
 de:
     PLUGIN_SHOPPINGCART:
         PERSONALIZE_SOLD: Sold
