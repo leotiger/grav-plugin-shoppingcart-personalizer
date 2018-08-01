@@ -9,112 +9,138 @@
 {% set hasRequiredGroup = false %}
 {% set initialPrice = page.header.price %}
 {% set initialStocks = {0: page.header.stock, 1: (page.header.cartmax and page.header.cartmax < page.header.stock ? page.header.cartmax : page.header.stock)} %}
+{% set productAvailable = true %}
 <div class="shoppingcart-variation-handler">
+{% for group in variationgroups if group.variations|length > 0 %}
+    {% for variation in group.variations %}
+        {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
+        {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
+        {% if group.grouprequired and group.groupasinput and (optionmax <= 0 or optionmin > optionmax) %}
+            {% set productAvailable = false %}
+        {% endif %}
+    {% endfor %}    
+{% endfor %}    
+{% if productAvailable %}    
     <div class="shoppingcart-variation-headline">
         {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_CART_VARIATIONS_HEADLINE'|t|e }}
     </div>
-{% for group in variationgroups if group.variations|length > 0 %}
-    {% if group.grouprequired %}
-    {% set hasRequiredGroup = true %}
-    {% endif %}
-    {% set handlemin = (group.variations|first).varmin ? (group.variations|first).varmin : group.groupmin %}
-    {% set handlemax = (group.variations|first).varmax ? (group.variations|first).varmax : group.groupmax %}            
-    {% set varprice = 0 %}
-    
-    <div class="product-item-group" id="{{ group.groupid }}">
-        <div class="product-item-group-variations">
-            <div class="group-title">{{ group.grouptitle }}</div>
-            <br>
-            <select class="group-variations-sel select-lg" data-groupid="{{ group.groupid }}" data-groupasinput="{{ group.groupasinput }}" data-groupprice="{{ group.groupprice }}" data-groupstock="{{ group.groupstock }}" data-groupcartmax="{{ group.groupcartmax }}"  data-groupaddtobaseprice="{{ group.groupaddtobaseprice }}" data-grouprequired="{{ group.grouprequired }}" data-groupmedia="{{ group.groupmedia }}" >
-            {% if not group.grouprequired %}
-                <option selected="selected" value="">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SELECT_VARIATION'|t|e }}</option>
-            {% else %}
-                {% if (group.variations|first).price matches '/^[0-9]*\\.?[0-9]+$/' %}           
-                    {% set varprice = (group.variations|first).price %}
-                {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}
-                    {% set varprice = group.groupprice %}
-                {% endif %}                
-                {% set initialPrice = initialPrice + (group.groupasinput ? handlemin * varprice : varprice) %}
+        
+    {% for group in variationgroups if group.variations|length > 0 %}
+
+        {% if group.grouprequired %}
+        {% set hasRequiredGroup = true %}
+        {% endif %}
+        {% for variation in group.variations %}
+            {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
+            {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
+            {% if group.grouprequired and group.groupasinput and (optionmax <= 0 or optionmin > optionmax) %}
+                {% set productAvailable = false %}
             {% endif %}
-            {% for variation in group.variations %}
-                {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
-                {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
-                {% set optionstep = variation.varstep ? variation.varstep : group.groupstep %}            
-                {% set optionprice = 0 %}
-                {% if variation.price matches '/^[0-9]*\\.?[0-9]+$/' %}           
-                    {% set optionprice = variation.price %}
-                {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}
-                    {% set optionprice = group.groupprice %}
-                {% endif %}                
-                {% if (group.groupasinput and optionmax > 0 and optionmin <= optionmax) or not group.groupasinput %}
-                <option id="varopt-{{ group.groupid ~ '-' ~ variation.variationid }}" {{ loop.index == 1 and group.grouprequired ? 'selected="selected"' : '' }} data-varprice="{{ optionprice }}" data-varid="{{ variation.variationid }}" data-handlemin="{{ optionmin }}" data-handlemax="{{ optionmax }}" data-handlestep="{{ optionstep }}" data-variation="{{ variation|json_encode()|e }}" value="{{ variation.variationid }}">
-                    {{ variation.title }}
-                </option>                
+        {% endfor %}    
+        {% set handlemin = (group.variations|first).varmin ? (group.variations|first).varmin : group.groupmin %}
+        {% set handlemax = (group.variations|first).varmax ? (group.variations|first).varmax : group.groupmax %}            
+        {% set varprice = 0 %}    
+        <div class="product-item-group" id="{{ group.groupid }}">
+            <div class="product-item-group-variations">
+                <div class="group-title">{{ group.grouptitle }}</div>
+                <br>
+                <select class="group-variations-sel select-lg" data-groupid="{{ group.groupid }}" data-groupasinput="{{ group.groupasinput }}" data-groupprice="{{ group.groupprice }}" data-groupstock="{{ group.groupstock }}" data-groupcartmax="{{ group.groupcartmax }}"  data-groupaddtobaseprice="{{ group.groupaddtobaseprice }}" data-grouprequired="{{ group.grouprequired }}" data-groupmedia="{{ group.groupmedia }}" >
+                {% if not group.grouprequired %}
+                    <option selected="selected" value="">{{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SELECT_VARIATION'|t|e }}</option>
+                {% else %}                
+                    {% if (group.variations|first).price matches '/^[0-9]*\\.?[0-9]+$/' %}           
+                        {% set varprice = (group.variations|first).price %}
+                    {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}
+                        {% set varprice = group.groupprice %}
+                    {% endif %}                
+                    {% set initialPrice = initialPrice + (group.groupasinput ? handlemin * varprice : varprice) %}
                 {% endif %}
-            {% endfor %}    
-            </select>
+                {% for variation in group.variations %}
+                    {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
+                    {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
+                    {% set optionstep = variation.varstep ? variation.varstep : group.groupstep %}            
+                    {% set optionprice = 0 %}
+                    {% if variation.price matches '/^[0-9]*\\.?[0-9]+$/' %}           
+                        {% set optionprice = variation.price %}
+                    {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}
+                        {% set optionprice = group.groupprice %}
+                    {% endif %}                
+                    {% if (group.groupasinput and optionmax > 0 and optionmin <= optionmax) or not group.groupasinput %}
+                    <option id="varopt-{{ group.groupid ~ '-' ~ variation.variationid }}" {{ loop.index == 1 and group.grouprequired ? 'selected="selected"' : '' }} data-varprice="{{ optionprice }}" data-varid="{{ variation.variationid }}" data-handlemin="{{ optionmin }}" data-handlemax="{{ optionmax }}" data-handlestep="{{ optionstep }}" data-variation="{{ variation|json_encode()|e }}" value="{{ variation.variationid }}">
+                        {{ variation.title }}
+                    </option>     
+                    {% endif %}
+                {% endfor %}    
+                </select>
+            </div>
+            <div class="product-item-group-handler" id="grouphandler-{{ group.groupid }}"> 
+            </div>
+            <br>
         </div>
-        <div class="product-item-group-handler" id="grouphandler-{{ group.groupid }}"> 
-        </div>
-        <br>
-    </div>
-{% endfor %}
+    {% endfor %}
+{% endif %}
 {% set stock = min(initialStocks) %}
-{% if stock %}
-    <div class="shoppingcart-price">
-    {% include 'partials/shoppingcart_core_price.html.twig' with { price: initialPrice, stock: stock } %}                
-    </div>        
-    {% if stock > 1 %}
-        <br>
-        {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
-        {% if page.header.cartstep is defined and page.header.cartstep > 0 and page.header.cartstep <= stock %}                    
-            {# @todo test if we need to run in modulus operation on this or if browser implementations for inputs of type number are smart enough #} 
-            <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="{{ page.header.cartstep }}" step="{{ page.header.cartstep }}" max="{{ stock }}" value="{{ page.header.cartstep }}" />
+{% if productAvailable %}
+    {% if stock %}
+        <div class="shoppingcart-price">
+        {% include 'partials/shoppingcart_core_price.html.twig' with { price: initialPrice, stock: stock } %}                
+        </div>        
+        {% if stock > 1 %}
+            <br>
+            {{ 'PLUGIN_SHOPPINGCART.QUANTITY'|t|e }}: 
+            {% if page.header.cartstep is defined and page.header.cartstep > 0 and page.header.cartstep <= stock %}                    
+                {# @todo test if we need to run in modulus operation on this or if browser implementations for inputs of type number are smart enough #} 
+                <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="{{ page.header.cartstep }}" step="{{ page.header.cartstep }}" max="{{ stock }}" value="{{ page.header.cartstep }}" />
+            {% else %}
+                <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1" />
+            {% endif %}                
+            <br>
+            <br>
         {% else %}
-            <input type="number" class="input-lg" id="js__shoppingcart__quantity" min="1" max="{{ stock }}" value="1" />
-        {% endif %}                
-        <br>
-        <br>
-    {% else %}
-       <input type="hidden" id="js__shoppingcart__quantity" placeholder="1" value="1" />
+           <input type="hidden" id="js__shoppingcart__quantity" placeholder="1" value="1" />
+        {% endif %}
     {% endif %}
-{% endif %}
 
-{% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { product: product } %}
-{% if page.header.allowquote %}
-    {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
-{% endif %}
-{% set price = initialPrice|number_format(2, '.', '') %}
-{% set baseprice = page.header.price|number_format(2, '.', '') %}
-{% set formatedprice = initialPrice|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}            
+    {% include 'partials/shoppingcart_core_add_to_cart.html.twig' with { product: product } %}
+    {% if page.header.allowquote %}
+        {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
+    {% endif %}
+    {% set price = initialPrice|number_format(2, '.', '') %}
+    {% set baseprice = page.header.price|number_format(2, '.', '') %}
+    {% set formatedprice = initialPrice|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}            
 
-<script>
-    (function() {
-        var currentProduct = {
-            title: "{{ product.title|e }}",
-            id: "{{ product.id|e }}",
-            formatted_price: "{{ formatedprice|e }}",
-            baseprice: "{{ baseprice|e }}",
-            price: "{{ initialPrice|e }}",
-            stock: "{{ stock }}",
-            image: "{{ product.image.cropResize(image_size_cart, image_size_cart).url|raw }}",
-            url: "{{ product.url|raw }}",
-            mdpath: "{{ page.filePath }}",
-            path: "{{ page.path }}",
-            bgcolor: "{{ page.header.product_bgcolor }}",
-            size_cart: "{{ image_size_cart }}",
-            service_product: "{{ page.header.service_product }}",
-            cartmax: "{{ page.header.cartmax }}",
-            removeonadd: "{{ page.header.remove_on_add ? page.header.remove_on_add : 1 }}"            
-        };
+    <script>
+        (function() {
+            var currentProduct = {
+                title: "{{ product.title|e }}",
+                id: "{{ product.id|e }}",
+                formatted_price: "{{ formatedprice|e }}",
+                baseprice: "{{ baseprice|e }}",
+                price: "{{ initialPrice|e }}",
+                stock: "{{ stock }}",
+                image: "{{ product.image.cropResize(image_size_cart, image_size_cart).url|raw }}",
+                url: "{{ product.url|raw }}",
+                mdpath: "{{ page.filePath }}",
+                path: "{{ page.path }}",
+                bgcolor: "{{ page.header.product_bgcolor }}",
+                size_cart: "{{ image_size_cart }}",
+                service_product: "{{ page.header.service_product }}",
+                cartmax: "{{ page.header.cartmax }}",
+                removeonadd: "{{ page.header.remove_on_add ? page.header.remove_on_add : 1 }}"            
+            };
 
-        addStudioLoadEvent(function() {
-            ShoppingCart.currentProduct = currentProduct;
-            ShoppingCart.productVariations = {{ variations|json_encode() }};
-            ShoppingCart.resetVariations();
-            ShoppingCart.calcVariations(ShoppingCart.currentProduct);
-        });
-    }());
-</script>            
+            addStudioLoadEvent(function() {
+                ShoppingCart.currentProduct = currentProduct;
+                ShoppingCart.productVariations = {{ variations|json_encode() }};
+                ShoppingCart.resetVariations();
+                ShoppingCart.calcVariations(ShoppingCart.currentProduct);
+            });
+        }());
+    </script>    
+{% else %}
+    {% if page.header.allowquote %}
+        {% include 'partials/shoppingcart_core_allow_quote.html.twig' with { product: product } %}
+    {% endif %}    
+{% endif %}    
 </div>
 

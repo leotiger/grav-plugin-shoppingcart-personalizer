@@ -949,7 +949,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     'bcc' => $from,
                     'from' => $from
                 ];
-                $this->saveOrder($this->order, $event['order_id'] . '.yaml');
+                $this->saveOrder($this->order->toArray(), $event['order_id']);
             }
         } 
     }
@@ -979,7 +979,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                     'from' => $from
                 ];
 
-                $this->saveOrder($this->order, $event['order_id'] . '.yaml');
+                $this->saveOrder($this->order->toArray(), $event['order_id'] . '.yaml');
             }
         }        
         

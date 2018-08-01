@@ -1,30 +1,44 @@
 {% set initialPrice = price %}
-
-{% set stocks = {0: stock, 1: (cartmax and cartmax < stock ? cartmax : stock)} %}
-{% set hasAddBasePrice = false %}
-{% for group in variationgroups if group.variations|length > 0 and group.grouprequired %}
-    
-    {% set groupindex = 'g_' ~ (loop.index * 1000) ~ '_' %}    
-    {% set prices = { 0: 100000000 } %}    
+{% set productAvailable = true %}
+{% for group in variationgroups if group.variations|length > 0 %}
     {% for variation in group.variations %}
-        {% if variation.price matches '/^[0-9]*\\.?[0-9]+$/' %}            
-            {% set prices = prices|merge({(loop.index) : (group.groupasinput ? variation.price * (variation.varmin ? variation.varmin : group.groupmin) : variation.price) }) %}
-        {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}            
-            {% set prices = prices|merge({(loop.index) : (group.groupasinput ? groupprice * (variation.varmin ? variation.varmin : group.groupmin) : group.groupprice)}) %}
+        {% set optionmin = variation.varmin ? variation.varmin : group.groupmin %}
+        {% set optionmax = variation.varmax ? variation.varmax : group.groupmax %}            
+        {% if group.grouprequired and group.groupasinput and (optionmax <= 0 or optionmin > optionmax) %}
+            {% set productAvailable = false %}
         {% endif %}
     {% endfor %}    
-    {% set initialPrice = (initialPrice + min(prices)) %}
-{% endfor %}
-{% set stock = min(stocks) %}
-{% if stock > 0 and initialPrice > 0 %}
-    {% set formatted_price = initialPrice|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
-    {% if (formatted_price ends with '.00' or formatted_price ends with ',00') and config.plugins.shoppingcart.ui.remove_cents_if_zero %}
-        {% set formatted_price = price|number_format(0) %}
-    {% endif %}
-    {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
-        {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRICEFROM'|t|e }} {{ formatted_price|e }} {{ currency_symbol|e }}
+{% endfor %}    
+{% if productAvailable %}
+    {% set stocks = {0: stock, 1: (cartmax and cartmax < stock ? cartmax : stock)} %}
+    {% set hasAddBasePrice = false %}
+    {% for group in variationgroups if group.variations|length > 0 and group.grouprequired %}
+
+        {% set groupindex = 'g_' ~ (loop.index * 1000) ~ '_' %}    
+        {% set prices = { 0: 100000000 } %}    
+        {% for variation in group.variations %}
+            {% if variation.price matches '/^[0-9]*\\.?[0-9]+$/' %}            
+                {% set prices = prices|merge({(loop.index) : (group.groupasinput ? variation.price * (variation.varmin ? variation.varmin : group.groupmin) : variation.price) }) %}
+            {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}            
+                {% set prices = prices|merge({(loop.index) : (group.groupasinput ? groupprice * (variation.varmin ? variation.varmin : group.groupmin) : group.groupprice)}) %}
+            {% endif %}
+        {% endfor %}    
+        {% set initialPrice = (initialPrice + min(prices)) %}
+    {% endfor %}
+
+    {% set stock = min(stocks) %}
+    {% if stock > 0 and initialPrice > 0 %}
+        {% set formatted_price = initialPrice|number_format(2, config.plugins.shoppingcart.ui.currency_decimal_comma ? ',' : '.', '') %}
+        {% if (formatted_price ends with '.00' or formatted_price ends with ',00') and config.plugins.shoppingcart.ui.remove_cents_if_zero %}
+            {% set formatted_price = price|number_format(0) %}
+        {% endif %}
+        {% if config.plugins.shoppingcart.ui.currency_symbol_position == 'after' %}
+            {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRICEFROM'|t|e }} {{ formatted_price|e }} {{ currency_symbol|e }}
+        {% else %}
+            {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRICEFROM'|t|e }} {{ currency_symbol|e }} {{ formatted_price|e }}
+        {% endif %}
     {% else %}
-        {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_PRICEFROM'|t|e }} {{ currency_symbol|e }} {{ formatted_price|e }}
+        {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SOLD'|t|e }}
     {% endif %}
 {% else %}
     {{ 'PLUGIN_SHOPPINGCART.PERSONALIZE_SOLD'|t|e }}
