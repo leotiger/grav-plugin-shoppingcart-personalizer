@@ -3,7 +3,10 @@
 
 1. [](#new)
     * Add option to force email notifications
-    * Add stock updates
+    * Add automatic stock updates with multi-language support
+    * Add stock updates for variations with multi-language support
+    * Trigger clear cache after stock updates if configured
+    * Add option to configure a dedicated shop email
     * Minimum cart amount
     * Minimum free shipping amount   
 1. [](#improved)

@@ -21,7 +21,7 @@ point for developers but not for site owners and administrators as it comes with
 stock management, country restriction, single product, service vs. shippable product, etc. The incomplete list of features comprised in the Shoppingcart Personalizer Add-on includes
 
 * stock configuration
-* automatic stock updates
+* automatic stock updates with multi-language support
 * maximum quantity of a product allowed in cart
 * quantity steps for products
 * minimum cart amount
@@ -34,7 +34,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * show remove button in checkout cart if desired
 * optionally remove existing product (necessary in the context of product variations)
 * grouped product variations and configurations with pricing, stock, customer input
-* stock updates for variations
+* stock updates for variations with multi-language support
 * quantity / configuration steps for variations
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
