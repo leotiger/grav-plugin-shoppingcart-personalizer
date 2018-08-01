@@ -5,7 +5,10 @@
     * Add option to force email notifications
     * Add stock updates
     * Minimum cart amount
-    * Minimum free shipping amount    
+    * Minimum free shipping amount   
+1. [](#improved)
+    * Minimum price for product with variations
+    * Show products with missing variation stocks as unavailable 
 
 # v0.9.5
 ## 30-07-2018
