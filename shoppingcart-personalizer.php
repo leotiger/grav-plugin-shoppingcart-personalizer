@@ -950,9 +950,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Send emails after checkout if necessary
      * 
-     * @param array $event event data
+     * @param Event $event event object
      */
-    public function onShoppingCartAfterSaveOrder($event) {
+    public function onShoppingCartAfterSaveOrder(Event $event) {
         $order = $event['order'];        
         if (!$this->order) {
             $this->requireOrder();
@@ -988,9 +988,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
     /**
      * Send emails after checkout if necessary
      * 
-     * @param array $event event data
+     * @param Event $event object
      */    
-    public function onShoppingCartAfterSavePersonalization($event) {
+    public function onShoppingCartAfterSavePersonalization(Event $event) {
         $order = $event['order'];      
         if ($order && !isset($order['personalizeemail'])) {            
             $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT');        
