@@ -918,7 +918,7 @@
         if (ShoppingCart.showCurrencyBeforePrice()) {
             return '<span class="currency">' + currency_symbol + '</span>' + price;
         } else {
-            return price + ' <span class="currency">' + currency_symbol + '</span>';
+            return price + '<span class="currency">' + currency_symbol + '</span>';
         }
     };
 
