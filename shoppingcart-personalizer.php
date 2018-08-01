@@ -209,7 +209,9 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $page->init(new \SplFileInfo(__DIR__ . "/pages/" . $filename));
             $page->slug(basename($url));
             $addForm = false;
-            if (!isset($order['personalized'])) {
+            $this->grav['log']->info('hey');
+            if ($order && (!isset($order['personalized']) || !$order['personalized'])) {
+                $this->grav['log']->info('hoops');
                 $personalizeOrderForm = $this->config->get('plugins.shoppingcart-personalizer.personalizeorder_form', []);
                 $personalizeOrderForm['action'] = $this->personalize_url;
                 if (!isset($personalizeOrderForm['fields'])) {
@@ -989,16 +991,17 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      * @param array $event event data
      */    
     public function onShoppingCartAfterSavePersonalization($event) {
-        $order = $event['order'];        
+        $order = $event['order'];      
         if ($order && !isset($order['personalizeemail'])) {            
             $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT');        
-            $to = $this->order['data']['email'];
+            $to = $order['data']['email'];
             $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
             if (!$from) {
                 $from = $this->config->get('plugins.email.from');
             }
+            $this->grav['log']->info('email or not: ' . $to . ' : ' . $from . ' : ' . $subject);
             $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
-            if ($sent) {            
+            if ($sent) {   
                 $order['personalizeemail'] = [
                     'sent' => $this->udate('Ymd-His-u'),
                     'to' => $to,
