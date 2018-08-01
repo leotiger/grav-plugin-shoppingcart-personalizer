@@ -21,7 +21,7 @@
     {% set handlemax = (group.variations|first).varmax ? (group.variations|first).varmax : group.groupmax %}            
     {% set varprice = 0 %}
     
-    <div class="product-item-group">
+    <div class="product-item-group" id="{{ group.groupid }}">
         <div class="product-item-group-variations">
             <div class="group-title">{{ group.grouptitle }}</div>
             <br>
@@ -46,39 +46,15 @@
                 {% elseif group.groupprice matches '/^[0-9]*\\.?[0-9]+$/' and group.groupprice > 0 %}
                     {% set optionprice = group.groupprice %}
                 {% endif %}                
-                
+                {% if (group.groupasinput and optionmax > 0 and optionmin <= optionmax) or not group.groupasinput %}
                 <option id="varopt-{{ group.groupid ~ '-' ~ variation.variationid }}" {{ loop.index == 1 and group.grouprequired ? 'selected="selected"' : '' }} data-varprice="{{ optionprice }}" data-varid="{{ variation.variationid }}" data-handlemin="{{ optionmin }}" data-handlemax="{{ optionmax }}" data-handlestep="{{ optionstep }}" data-variation="{{ variation|json_encode()|e }}" value="{{ variation.variationid }}">
                     {{ variation.title }}
                 </option>                
+                {% endif %}
             {% endfor %}    
             </select>
         </div>
         <div class="product-item-group-handler" id="grouphandler-{{ group.groupid }}"> 
-        {# handled in client side javascript  
-        {% if group.groupasinput and group.grouprequired and handlemin and handlemax %}
-            {% if handlemin < handlemax %}
-                <br>
-                <div class="variation-description">{{ (group.variations|first).description }}</div>                
-                <input type="number" data-groupid="{{ group.groupid }}" data-varid="{{ (group.variations|first).variationid }}" data-varprice="{{ varprice }}" class="js__shoppingcart__variationconfig input-lg" min="{{ handlemin }}" max="{{ handlemax }}" value="{{ handlemin }}">
-                <br>                
-            {% else %}
-               <input type="hidden" data-groupid="{{ group.groupid }}" data-varid="{{ (group.variations|first).variationid }}" data-varprice="{{ varprice }}" class="js__shoppingcart__variationconfig" value="{{ handlemin }}" />
-            {% endif %}            
-        {% endif %}
-        {% if group.grouprequired and (group.variations|first).freetext %}
-            <br>
-            <div class="variation-freetext">
-            <input type="text" placehoder="{{ 'SHOPPINGCART.PERSONALIZE_VARIATION_REMARK'|t|e }}" id="freetext-{{ group.groupid ~ '-' ~ (group.variations|first).variationid }}" class="js__shoppingcart__variationfreetext input-lg" value="" />
-            </div>
-        {% endif %}
-        {% if group.grouprequired and (group.variations|first).fileupload %}
-            <br>
-            <div class="variation-upload-hint">
-            {{ 'SHOPPINGCART.PERSONALIZE_VARIATION_UPLOAD_HINT'|t|e }}
-            <br>
-            </div>
-        {% endif %}
-        #}  
         </div>
         <br>
     </div>

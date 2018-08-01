@@ -351,7 +351,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 /** @todo We can enhance the whole stuff merging with data captured during checkout **/
                 $order['personalizations'] = $post;
                 if ($orderfile) {
-                    $this->savePersonalizedOrderToFilesystem($order, $orderfile);
+                    $this->saveOrder($order, $orderfile);
                 }
                 $this->grav->fireEvent('onShoppingCartAfterSavePersonalization', new Event([
                     'order'    => $order,
@@ -369,7 +369,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      * @param object $order
      * @param string $filename
      */
-    private function savePersonalizedOrderToFilesystem($order, $filename)
+    private function saveOrder($order, $filename)
     {
         $body = Yaml::dump($order);
         $file = File::instance(DATA_DIR . 'shoppingcart' . '/' . $filename);
@@ -555,7 +555,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             }
         }
         return $files;
-    }    
+    }  
+    
     /**
      * Get personalization uploads
      *
@@ -934,6 +935,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $this->order = new ShoppingCart\Order($order);
         }
         
+        $this->processStock($this->order);  
+        
         if (!isset($this->order->checkoutemail)) {
             $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_CONFIRMATION_SUBJECT');        
             $to = $this->order->__get('data')['email'];
@@ -951,6 +954,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         } 
     }
 
+    
     /**
      * Send emails after checkout if necessary
      * 
@@ -980,6 +984,26 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         }        
         
     }
+    
+    /**
+     * Create unix timestamp for storing the data into the filesystem.
+     *
+     * @param string $format
+     * @param int    $utimestamp
+     *
+     * @return string
+     */
+    private function udate($format = 'u', $utimestamp = null)
+    {
+        if (is_null($utimestamp)) {
+            $utimestamp = microtime(true);
+        }
+
+        $timestamp = floor($utimestamp);
+        $milliseconds = round(($utimestamp - $timestamp) * 1000000);
+
+        return date(preg_replace('`(?<!\\\\)u`', \sprintf('%06d', $milliseconds), $format), $timestamp);
+    }        
     
     /**
      * Load order class definition
@@ -1058,16 +1082,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 }
                 $page->modifyHeader('stock', $stock);
                 $page->modifyHeader('lastSale', $lastSale->getTimestamp());
-                $page->lastModified(true);
-                
-                // handle variation stocks
-                if (isset($page->header()->groups) && isset($page->header()->groups['variations']) && count($page->header()->groups['variations'])) {
-                    $groups = $page->header()->groups;
-                    foreach($groups as $group) {
-                        //$handle
-                    }
-                }
-                
+                $page->lastModified(true);                
+                $page = $this->processVariationStock($page, $product);
                 if (isset($page->header()->shoppingcart)) {                        
                     unset($page->header()->shoppingcart);
                 }                
@@ -1082,6 +1098,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                         if (isset($translated_page->header()->shoppingcart)) {                        
                             unset($translated_page->header()->shoppingcart);
                         }
+                        $translated_page = $this->processVariationStock($translated_page, $product);
                         $translated_page->save();
                     }
                 }
@@ -1096,7 +1113,8 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                         $translated_page->modifyHeader('lastSale', $lastSale->getTimestamp());
                         if (isset($translated_page->header()->shoppingcart)) {                        
                             unset($translated_page->header()->shoppingcart);
-                        }                        
+                        }         
+                        $translated_page = $this->processVariationStock($translated_page, $product);                        
                         $translated_page->save();                        
                     }
                 }                
@@ -1107,5 +1125,47 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $user_config = Grav::instance()['locator']->findResource('config://system.yaml');  
             touch($user_config);
         }
-    }        
+    }   
+    
+    private function processVariationStock($page, $product) {
+        // handle variation stocks
+        if (isset($product['variants']) && count($product['variants'])) {                    
+
+            //$productPrice = floatval($page->header()->price) * intval($productobj['quantity']);
+            //$orderPriceBackend = round($orderPriceBackend + $productPrice, 2);
+            foreach($product['variants'] as $variant) {
+                $varid = $variant['varid'];
+                $groupid = $variant['groupid'];
+                /** @todo we should add a check on stocks in onAdminSave as our multiplier function has implications on variation stocks
+                 * The current implementation is not logic in an obvious way, once bought product quantity is greater 1 as we need two, three times
+                 * and so on existence in the variations to fulfill the order that we have to understand as packages.
+                 * Right now we simply assume the multiplier as stock to avoid complications, this may be a solution as well
+                 * as it only requires explanation and no additional and complicated logic in all contexts: backend and frontend.
+                 */
+                $varstock = intval($variant['varmultiplier']);// * intval($productobj['quantity']);
+                if ($varstock) {
+                    $groups = $page->header()->groups;
+                    foreach($groups as $keygroup => $group) {
+                        if ($group['groupid'] == $groupid && $group['groupasinput']) {
+                            $handled = false;
+                            $handlemax = intval($group['groupmax']) ? intval($group['groupmax']) : 0;
+                            foreach($group['variations'] as $varkey => $variation) {
+                                if ($variation['variationid'] == $varid && intval($variation['varmax'])) {
+                                    $variationstock = intval($variation['varmax']) - $varstock;
+                                    $handled = true;                                            
+                                    $groups[$keygroup]['variations'][$varkey]['varmax'] = $variationstock > 0 ? $variationstock : 0;
+                                }
+                            }
+                            if (!$handled) {
+                                $variationstock = $handlemax - $varstock;
+                                $groups[$keygroup]['groupmax'] = $variationstock > 0 ? $variationstock : 0;
+                            }
+                        }
+                    }
+                    $page->modifyHeader('groups', $groups);
+                }
+            }
+        }            
+        return $page;
+    }
 }
