@@ -149,6 +149,7 @@ en:
         PERSONALIZE_EMAIL_FOOTER: " "
         PERSONALIZE_MINIMUM_ORDER_AMOUNT: Minimum order amount
         PERSONALIZE_FREE_SHIPPING_AMOUNT: Free shipping amount
+        PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT: Personalize confirmation
 
 de:
     PLUGIN_SHOPPINGCART:

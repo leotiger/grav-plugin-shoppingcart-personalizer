@@ -933,22 +933,22 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $this->requireOrder();
             $this->order = new ShoppingCart\Order($order);
         }
-        if (!isset($order['checkoutemail'])) {
-            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.NOTIFY_EMAIL_CONFIRMATION_SUBJECT');        
+        
+        if (!isset($this->order->checkoutemail)) {
+            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_CONFIRMATION_SUBJECT');        
             $to = $this->order->__get('data')['email'];
             $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
             $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
-            if ($sent) {            
-                $order['checkoutemail'] = [
+            if ($sent) {
+                $this->order->checkoutemail = [
                     'sent' => $this->udate('Ymd-His-u'),
                     'to' => $to,
                     'bcc' => $from,
                     'from' => $from
                 ];
-
-                $this->saveOrder($order, $event['order_id'] . '.yaml');
+                $this->saveOrder($this->order, $event['order_id'] . '.yaml');
             }
-        }        
+        } 
     }
 
     /**
@@ -962,20 +962,20 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $this->requireOrder();
             $this->order = new ShoppingCart\Order($order);
         }        
-        if (!isset($order['checkoutemail'])) {
-            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.NOTIFY_EMAIL_CONFIRMATION_SUBJECT');        
+        if (!isset($this->order->personalizeemail)) {
+            $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT');        
             $to = $this->order->__get('data')['email'];
             $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
             $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
             if ($sent) {            
-                $order['checkoutemail'] = [
+                $this->order->personalizeemail = [
                     'sent' => $this->udate('Ymd-His-u'),
                     'to' => $to,
                     'bcc' => $from,
                     'from' => $from
                 ];
 
-                $this->saveOrder($order, $event['order_id'] . '.yaml');
+                $this->saveOrder($this->order, $event['order_id'] . '.yaml');
             }
         }        
         
@@ -1053,9 +1053,21 @@ class ShoppingcartPersonalizerPlugin extends Plugin
             $page = $pages->get($product['path']);
             if ($page) {
                 $stock = intval($page->header()->stock) - intval($productobj['quantity']);
+                if ($stock < 0) {
+                    $stock = 0;
+                }
                 $page->modifyHeader('stock', $stock);
                 $page->modifyHeader('lastSale', $lastSale->getTimestamp());
                 $page->lastModified(true);
+                
+                // handle variation stocks
+                if (isset($page->header()->groups) && isset($page->header()->groups['variations']) && count($page->header()->groups['variations'])) {
+                    $groups = $page->header()->groups;
+                    foreach($groups as $group) {
+                        //$handle
+                    }
+                }
+                
                 if (isset($page->header()->shoppingcart)) {                        
                     unset($page->header()->shoppingcart);
                 }                
