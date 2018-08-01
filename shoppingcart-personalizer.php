@@ -355,7 +355,7 @@ class ShoppingcartPersonalizerPlugin extends Plugin
                 }
                 $this->grav->fireEvent('onShoppingCartAfterSavePersonalization', new Event([
                     'order'    => $order,
-                    'order_id' => pathinfo($filename)['filename']
+                    'order_id' => $orderfile
                 ]));
 
                 
@@ -619,6 +619,28 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         }
         return $order;
     }        
+    
+    /**
+     * Find order
+     *
+     * We need a workaround for the inconsistency bug in shoppingcart
+     * see issue #88
+     * 
+     * @param string $id order id
+     * @param string $token order token
+     * @return order
+     */
+    private function loadOrder($orderfile)
+    {        
+        $order = false;
+        if ($orderfile) {
+            $path = DATA_DIR . 'shoppingcart';
+            if (file_exists($path . DS . $orderfile)) {
+                $order = Yaml::parse(file_get_contents($path . DS . $orderfile));
+            }
+        }
+        return $order;
+    }
     
    /**
      * Get order filename
@@ -937,19 +959,25 @@ class ShoppingcartPersonalizerPlugin extends Plugin
         
         $this->processStock($this->order);  
         
-        if (!isset($this->order->checkoutemail)) {
+        // We need to load the order as an array as the order class does not provide access to essential data        
+        $processorder = $this->loadOrder($event['order_id']);
+        
+        if ($processorder && !isset($processorder['checkoutemail'])) {            
             $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_CONFIRMATION_SUBJECT');        
             $to = $this->order->__get('data')['email'];
             $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
+            if (!$from) {
+                $from = $this->config->get('plugins.email.from');
+            }
             $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
             if ($sent) {
-                $this->order->checkoutemail = [
+                $processorder['checkoutemail'] = [
                     'sent' => $this->udate('Ymd-His-u'),
                     'to' => $to,
                     'bcc' => $from,
                     'from' => $from
                 ];
-                $this->saveOrder($this->order->toArray(), $event['order_id']);
+                $this->saveOrder($processorder, $event['order_id']);
             }
         } 
     }
@@ -962,27 +990,24 @@ class ShoppingcartPersonalizerPlugin extends Plugin
      */    
     public function onShoppingCartAfterSavePersonalization($event) {
         $order = $event['order'];        
-        if (!$this->order) {
-            $this->requireOrder();
-            $this->order = new ShoppingCart\Order($order);
-        }        
-        if (!isset($this->order->personalizeemail)) {
+        if ($order && !isset($order['personalizeemail'])) {            
             $subject = $this->grav['language']->translate('PLUGIN_SHOPPINGCART.PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT');        
-            $to = $this->order->__get('data')['email'];
+            $to = $this->order['data']['email'];
             $from = $this->config->get('plugins.shoppingcart.shop.from_email');        
+            if (!$from) {
+                $from = $this->config->get('plugins.email.from');
+            }
             $sent = $this->sendEmail($subject, "", $to, $event, 'confirmation', $from);
             if ($sent) {            
-                $this->order->personalizeemail = [
+                $order['personalizeemail'] = [
                     'sent' => $this->udate('Ymd-His-u'),
                     'to' => $to,
                     'bcc' => $from,
                     'from' => $from
                 ];
-
-                $this->saveOrder($this->order->toArray(), $event['order_id'] . '.yaml');
+                $this->saveOrder($order, $event['order_id']);
             }
-        }        
-        
+        }                
     }
     
     /**
