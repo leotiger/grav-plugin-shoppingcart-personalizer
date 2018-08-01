@@ -26,6 +26,8 @@ stock management, country restriction, single product, service vs. shippable pro
 * quantity steps for products
 * minimum cart amount
 * minimum free shipping amount
+* configure dedicated store email
+* checkout email confirmation
 * support for unique products (nice for artists, etc.)
 * mark product as service product (service products need no shipping)
 * editable product id in admin
@@ -37,6 +39,7 @@ stock management, country restriction, single product, service vs. shippable pro
 * reflect configured variations and configuration in cart
 * display variation (group) image on selection of variation if configured
 * customer file uploads for products (once cart has been checked-out)
+* email notification on customer personalizations
 * display variation customizations (uploads, text) in frontend and backend
 * add details order page to administration 
 * display terms and conditions link and load in modal if bootstrapper / bootstrap support is available in the theme
@@ -55,10 +58,6 @@ stock management, country restriction, single product, service vs. shippable pro
 * improved theme integration possibilities allowing to specify the base templates that product pages shall extend (defaults to default)
 * provide product configuration in an own tab in admin
 * Compatible with existing add-ons for Shoppingcart
-
-On the road for the 1.0 release:
-
-* Additional basic features, e.g. email notifications, automatic stock updates
 
 Addtionally I've prepared a fork of the shoppingcart plugin that includes more options for the checkout
 form configuration adding support for textarea, re-captcha, etc. A Pull Request for the shoppingcart plugin, v.1.2.2 is
