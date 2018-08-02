@@ -150,6 +150,8 @@ en:
         PERSONALIZE_MINIMUM_ORDER_AMOUNT: Minimum order amount
         PERSONALIZE_FREE_SHIPPING_AMOUNT: Free shipping amount
         PERSONALIZE_EMAIL_PERSONALIZED_SUBJECT: Personalize confirmation        
+        PERSONALIZE_GALLERY_ADD_MEDIA: Add media item to product gallery
+        PERSONALIZE_PRODUCT_MEDIA_ITEM: Gallery item
 
 de:
     PLUGIN_SHOPPINGCART:

@@ -108,6 +108,19 @@ form:
                     validate:
                          type: bool
 
+                  header.product_gallery:
+                    type: list
+                    style: vertical
+                    btnLabel: PLUGIN_SHOPPINGCART.PERSONALIZE_GALLERY_ADD_MEDIA
+                    fields:
+                      .media:
+                        type: filepicker
+                        label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_MEDIA_ITEM
+                        preview_images: true
+                        validate:
+                          type: string
+                    
+
                   header.lastSale:
                     type: text
                     default: 0
