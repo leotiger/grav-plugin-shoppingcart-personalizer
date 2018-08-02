@@ -1,5 +1,5 @@
 {% set shoppingcart_image_default = page.header.default_photo ? page.header.default_photo : (page.media.images|first).uri.filename %}
-{% set shoppingcart_image = page.header.show_all_media ? false : page.media.images|first %}
+{% set shoppingcart_image = page.media.images|first %}
 {% for page_media in page.media.images if page_media.uri.filename == shoppingcart_image_file %}
     {% set shoppingcart_image = page_media %}
 {% endfor %}

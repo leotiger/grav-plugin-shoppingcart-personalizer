@@ -96,18 +96,6 @@ form:
                     label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_IMAGE_BGCOLOR
                     default: 'rgba(255, 255, 255, 0.00)'
 
-                  header.show_all_media:
-                    type: toggle
-                    label: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL
-                    help: PLUGIN_SHOPPINGCART.PERSONALIZE_PRODUCT_DETAIL_MEDIA_ALL_HELP
-                    highlight: 0
-                    default: 0
-                    options:
-                        1: Yes
-                        0: No
-                    validate:
-                         type: bool
-
                   header.product_gallery:
                     type: list
                     style: vertical
