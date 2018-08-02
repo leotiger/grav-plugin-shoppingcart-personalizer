@@ -107,7 +107,6 @@ form:
                         preview_images: true
                         validate:
                           type: string
-                    
 
                   header.lastSale:
                     type: text
