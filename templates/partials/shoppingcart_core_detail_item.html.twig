@@ -1,5 +1,5 @@
-{% set shoppingcart_image_file = page.header.default_photo ? page.header.default_photo : (page.media.images|first).uri.filename %}
-{% set shoppingcart_image = page.header.show_all_media ? false : page.media.images|first %}
+{% set shoppingcart_image_default = page.header.default_photo ? page.header.default_photo : (page.media.images|first).uri.filename %}
+{% set shoppingcart_image = page.media.images|first %}
 {% for page_media in page.media.images if page_media.uri.filename == shoppingcart_image_file %}
     {% set shoppingcart_image = page_media %}
 {% endfor %}
@@ -16,19 +16,29 @@
 <div id="shoppingcart-detail" class="shoppingcart-product-container block-group">
     
     <div class="shoppingcart-info block">
-        {% if page.media.images and page.header.show_all_media %}
-            {% for catalogue_image in page.media.images %}
+        {% if page.media.images and page.header.product_gallery and page.header.product_gallery|length %}
+            {% for catalogue_image in page.header.product_gallery if page.media[catalogue_image|last] and catalogue_image|last matches '{\.(gif|jpg|jpeg|png)$}i' %}
             {% if config.plugins.shoppingcart.ui.image_container_square %}
             <div class="shoppingcart-thumb" style="text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
             {% else %}
             <div class="shoppingcart-thumb">    
             {% endif %}    
-                <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ catalogue_image.url }}">
-                {{ catalogue_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+                <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ page.media[catalogue_image|last].url }}">
+                {{ page.media[catalogue_image|last].cropResize(image_size_product, image_size_product).html(page.header.title, page.header.product_id, 'shoppingcart-thumb-image')|raw }}
                 </a>
             </div>
             <br><br>
             {% endfor %}
+        {% elseif shoppingcart_image_default and page.media[shoppingcart_image_default] and shoppingcart_image_default matches '{\.(gif|jpg|jpeg|png)$}i' %}
+            {% if config.plugins.shoppingcart.ui.image_container_square %}
+            <div class="shoppingcart-thumb" style="text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
+            {% else %}
+            <div class="shoppingcart-thumb">    
+            {% endif %}    
+            <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ page.media[shoppingcart_image_default].url }}">
+            {{ page.media[shoppingcart_image_default].cropResize(image_size_product, image_size_product).html(page.header.title, page.header.product_id, 'shoppingcart-thumb-image')|raw }}
+            </a>
+            </div>
         {% elseif shoppingcart_image %}
             {% if config.plugins.shoppingcart.ui.image_container_square %}
             <div class="shoppingcart-thumb" style="text-align:center;width:{{ image_size_product }}px;height:{{ image_size_product }}px;background-color:{{ page.header.product_bgcolor }}">
@@ -36,10 +46,9 @@
             <div class="shoppingcart-thumb">    
             {% endif %}    
             <a {{ config.plugins.shoppingcart.ui.fancybox ? 'data-fancybox="itemgallery"' : 'target="_blank"' }} href="{{ shoppingcart_image.url }}">
-            {{ shoppingcart_image.cropResize(image_size_product, image_size_product).html(page.header.title, 'shoppingcart-thumb-image')|raw }}
+            {{ shoppingcart_image.cropResize(image_size_product, image_size_product).html(page.header.title, page.header.product_id, 'shoppingcart-thumb-image')|raw }}
             </a>
             </div>
-            
         {% else %}
             <br><br><br>
         {% endif %}

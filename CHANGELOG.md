@@ -1,3 +1,13 @@
+# v1.0.1
+## 02-08-2018
+
+1. [](#new)
+    * Add product gallery to product configuration
+    * Show product gallery in product detail page
+
+1. [](#bugfix)
+    * Fix image display and link bugs
+
 # v1.0.0
 ## 01-08-2018
 
